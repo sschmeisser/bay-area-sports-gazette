@@ -83,12 +83,12 @@ bay-area-sports-gazette/
 │   └── hs_logos/               # 20 official high school transparent PNG logos
 ├── build_calendar.py           # Master compiler & game schedule generator
 ├── calendar_template.html      # Responsive editorial layout & mobile UX logic
-├── sports_calendar.html        # Compiled standalone HTML production bundle
-├── index.html                  # Root entrypoint
 ├── team_logos.py               # Logo registry with base64 fallbacks & color palettes
 ├── serve.py                    # Lightweight local HTTP preview server
 ├── local_sports_schedule.md    # 102-team editorial directory & almanac
-├── public_url.txt              # Active CDN, shortlink, and tunnel URLs
+├── requirements.txt            # Python dependencies
+├── CONTRIBUTING.md             # Contribution guidelines
+├── LICENSE                     # MIT License
 ├── .gitignore                  # Git ignore rules
 └── README.md                   # Project documentation
 ```
@@ -96,4 +96,9 @@ bay-area-sports-gazette/
 ---
 
 ## 📜 License
-MIT License. Content curated for educational, fan community, and local sports promotion across the San Francisco Bay Area.
+
+MIT License — see [LICENSE](LICENSE) for full text.
+
+## ⚠️ Trademark Disclaimer
+
+All team names, logos, and trademarks featured on this site belong to their respective owners (NFL, NHL, NBA, MLS, NWSL, USL Championship, NCAA, and individual clubs). This project is an independent fan community resource created for non-commercial, educational, and entertainment purposes. It is not affiliated with, endorsed by, or sponsored by any professional or collegiate sports organization.

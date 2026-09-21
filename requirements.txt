@@ -1,0 +1,2 @@
+# Bay Area Sports Gazette Python dependencies
+requests>=2.28.0

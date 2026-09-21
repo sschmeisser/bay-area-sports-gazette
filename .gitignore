@@ -1,6 +1,19 @@
 __pycache__/
 *.py[cod]
 *$py.class
+*.pyc
+*.pyo
+.pytest_cache/
 .DS_Store
 .env
+.vscode/
+.idea/
+*.swp
+
+# Dev artifacts
 test_mascot.png
+public_url.txt
+
+# Generated output (rebuilt by CI from build_calendar.py)
+index.html
+sports_calendar.html

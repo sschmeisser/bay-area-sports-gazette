@@ -6,6 +6,7 @@ import threading
 import time
 import re
 import os
+import shutil
 
 PORT = 8999
 DIRECTORY = os.path.dirname(os.path.abspath(__file__))
@@ -33,7 +34,12 @@ if __name__ == "__main__":
     time.sleep(1)
 
     # Launch cloudflared quick tunnel
-    cmd = ["/tmp/cloudflared", "tunnel", "--url", f"http://localhost:{PORT}"]
+    # Find cloudflared binary
+    cloudflared_bin = shutil.which("cloudflared") or "/tmp/cloudflared"
+    if not shutil.which("cloudflared") and not os.path.exists("/tmp/cloudflared"):
+        print("ERROR: cloudflared not found. Install from https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/downloads/")
+        raise SystemExit(1)
+    cmd = [cloudflared_bin, "tunnel", "--url", f"http://localhost:{PORT}"]
     proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
 
     tunnel_url = None
