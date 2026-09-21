@@ -2190,6 +2190,50 @@
   <script>
     const ALL_GAMES = __GAMES_JSON__;
     const WEEKS_META = __WEEKS_JSON__;
+    const STANDINGS_DATA = __STANDINGS_JSON__;
+
+    function matchesTeamName(name1, name2) {
+      if (!name1 || !name2) return false;
+      const n1 = name1.toLowerCase().trim();
+      const n2 = name2.toLowerCase().trim();
+      if (n1 === n2) return true;
+      const aliases = [
+        ["49ers", "san francisco 49ers"],
+        ["sharks", "san jose sharks"],
+        ["warriors", "golden state warriors"],
+        ["earthquakes", "san jose earthquakes"],
+        ["bay fc", "bay fc"],
+        ["roots", "oakland roots sc"],
+        ["barracuda", "san jose barracuda"],
+        ["stanislaus", "stanislaus state"],
+        ["branham", "branham high bruins"],
+        ["leigh", "leigh high longhorns"],
+        ["serra", "junípero serra padres"],
+        ["saint francis", "saint francis lancers"],
+        ["de la salle", "de la salle spartans"],
+        ["bellarmine", "bellarmine college prep bells"],
+        ["mitty", "archbishop mitty monarchs"],
+        ["sjcc", "san jose city college jaguars"],
+        ["de anza", "de anza mountain lions"],
+        ["monterey peninsula", "monterey peninsula lobos"],
+        ["stanford", "stanford cardinal"],
+        ["cal", "california golden bears"],
+        ["san jose state", "san jose state spartans"],
+        ["sjsu", "san jose state spartans"],
+        ["santa clara", "santa clara broncos"]
+      ];
+      for (const [short, full] of aliases) {
+        if (n1.includes(short) && n2.includes(short)) {
+          if (n1.includes('women') !== n2.includes('women')) continue;
+          return true;
+        }
+      }
+      if (n1.includes(n2) || n2.includes(n1)) {
+        if (n1.includes('women') !== n2.includes('women')) return false;
+        return true;
+      }
+      return false;
+    }
 
     let currentWeekNum = 1; // Default to upcoming active week
     let activeSport = 'all';
@@ -2614,17 +2658,27 @@
         <p class="context-text">${game.context_reason}</p>
       `;
 
-      if (game.standings_data && game.standings_data.rows && game.standings_data.rows.length > 0) {
-        const st = game.standings_data;
+      const stKey = game.standings_key || 'nfl_nfc_west';
+      const st = (typeof STANDINGS_DATA !== 'undefined' && STANDINGS_DATA) ? STANDINGS_DATA[stKey] : null;
+
+      if (st && st.rows && st.rows.length > 0) {
         const colHeaders = st.col_headers || ['#', 'Team', 'W', 'L', 'T', 'PTS', '+/-'];
+        const homeName = game.home_team || '';
+        const awayName = game.away_team || '';
+        let homeMatched = false;
+        let awayMatched = false;
 
         let rowsHtml = '';
         st.rows.forEach(r => {
-          const isFeatured = r.is_home || r.is_away;
+          const isH = matchesTeamName(r.team, homeName);
+          const isA = matchesTeamName(r.team, awayName);
+          if (isH) homeMatched = true;
+          if (isA) awayMatched = true;
+
+          const isFeatured = isH || isA;
           const featClass = isFeatured ? 'is-featured-team' : '';
-          const tagHtml = r.highlight_tag 
-            ? `<span class="standings-tag ${r.is_home ? 'tag-home' : 'tag-away'}">${r.highlight_tag}</span>` 
-            : '';
+          const tagHtml = isH ? '<span class="standings-tag tag-home">HOME</span>' :
+                          isA ? '<span class="standings-tag tag-away">AWAY</span>' : '';
           const logoHtml = r.logo ? `<img class="standings-row-logo" src="${r.logo}" alt="" onerror="this.style.display='none'"/>` : '';
 
           rowsHtml += `
@@ -2647,25 +2701,29 @@
         });
 
         let guestHtml = '';
-        if (st.guest_notes && st.guest_notes.length > 0) {
-          guestHtml = `
-            <div class="standings-guest-section">
-              <div class="standings-guest-label">INTER-CONFERENCE OPPONENT SNAPSHOT</div>
-              ${st.guest_notes.map(g => `
-                <div class="standings-guest-row">
-                  <div class="standings-guest-team">
-                    ${g.logo ? `<img class="standings-row-logo" src="${g.logo}" alt="" onerror="this.style.display='none'"/>` : ''}
-                    <span class="standings-team-name">${g.team}</span>
-                    <span class="standings-tag ${g.role === 'HOME' ? 'tag-home' : 'tag-away'}">${g.role}</span>
-                  </div>
-                  <div class="standings-guest-meta">
-                    <span class="guest-div">${g.division}</span>
-                    <span class="guest-rec">${g.record} (${g.rank})</span>
+        const crossOpps = st.cross_division_opponents || {};
+        if (!awayMatched && awayName) {
+          for (const [k, v] of Object.entries(crossOpps)) {
+            if (matchesTeamName(k, awayName)) {
+              guestHtml += `
+                <div class="standings-guest-section">
+                  <div class="standings-guest-label">INTER-CONFERENCE OPPONENT SNAPSHOT</div>
+                  <div class="standings-guest-row">
+                    <div class="standings-guest-team">
+                      ${v.logo ? `<img class="standings-row-logo" src="${v.logo}" alt="" onerror="this.style.display='none'"/>` : ''}
+                      <span class="standings-team-name">${awayName}</span>
+                      <span class="standings-tag tag-away">AWAY</span>
+                    </div>
+                    <div class="standings-guest-meta">
+                      <span class="guest-div">${v.division}</span>
+                      <span class="guest-rec">${v.record || v.w + '-' + v.l} (${v.rank})</span>
+                    </div>
                   </div>
                 </div>
-              `).join('')}
-            </div>
-          `;
+              `;
+              break;
+            }
+          }
         }
 
         bodyHtml += `

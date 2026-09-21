@@ -32,21 +32,40 @@ def normalize_games(games):
         item["away_logo"] = team_logos.get_team_logo(item.get("away_team", ""))
         item["home_colors"] = team_logos.get_team_colors(item.get("home_team", ""))
         item["away_colors"] = team_logos.get_team_colors(item.get("away_team", ""))
-        # Attach verified league/division standings
-        item["standings_data"] = league_standings.get_standings_for_game(item)
+        # Attach verified league/division standings key
+        item["standings_key"] = league_standings.classify_game(item)
         normalized.append(item)
     return normalized
+
+def get_standings_data():
+    st_data = {}
+    for k, v in league_standings.STANDINGS_DATABASE.items():
+        v_copy = dict(v)
+        v_copy['rows'] = [dict(r) for r in v['rows']]
+        for r in v_copy['rows']:
+            r['logo'] = team_logos.get_team_logo(r['team'])
+        cross_copy = {}
+        for team, cinfo in v.get('cross_division_opponents', {}).items():
+            c_copy = dict(cinfo)
+            c_copy['logo'] = team_logos.get_team_logo(team)
+            cross_copy[team] = c_copy
+        v_copy['cross_division_opponents'] = cross_copy
+        st_data[k] = v_copy
+    return st_data
 
 def generate_html():
     normalized = normalize_games(GAMES_DATA)
     games_str = json.dumps(normalized)
     weeks_str = json.dumps(WEEKS_META)
+    standings_str = json.dumps(get_standings_data())
 
     tmpl_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "calendar_template.html")
     with open(tmpl_path, "r", encoding="utf-8") as f:
         tmpl = f.read()
 
-    rendered = tmpl.replace("__GAMES_JSON__", games_str).replace("__WEEKS_JSON__", weeks_str)
+    rendered = (tmpl.replace("__GAMES_JSON__", games_str)
+                    .replace("__WEEKS_JSON__", weeks_str)
+                    .replace("__STANDINGS_JSON__", standings_str))
 
     out_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "sports_calendar.html")
     with open(out_path, "w", encoding="utf-8") as f:
