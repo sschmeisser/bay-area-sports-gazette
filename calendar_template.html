@@ -47,7 +47,6 @@
 
     html, body {
       overflow-x: clip;
-      overflow-x: hidden;
       overscroll-behavior-x: none;
       width: 100%;
       max-width: 100%;
@@ -60,6 +59,12 @@
       color: var(--text-main);
       line-height: 1.5;
       -webkit-font-smoothing: antialiased;
+    }
+
+    :focus-visible {
+      outline: 2px solid #1a2744;
+      outline-offset: 2px;
+      border-radius: 3px;
     }
 
     .container {
@@ -1545,7 +1550,6 @@
     @media (max-width: 859px) {
       html, body {
         overflow-x: clip !important;
-        overflow-x: hidden !important;
         overscroll-behavior-x: none;
         touch-action: pan-y;
         -webkit-overflow-scrolling: touch;
@@ -1569,6 +1573,7 @@
       .calendar-grid-wrapper,
       #calendarGrid {
         touch-action: pan-y;
+        overscroll-behavior: contain;
         overscroll-behavior-x: none;
         width: 100%;
         max-width: 100%;
@@ -2045,9 +2050,9 @@
   <div class="week-nav-container">
     <div class="container week-nav-content">
       <div class="week-stepper">
-        <button class="step-btn" id="prevWeekBtn" title="Previous Week">←</button>
+        <button class="step-btn" id="prevWeekBtn" title="Previous Week" aria-label="Previous Week">←</button>
         <div class="week-pills-list" id="weekPillsList"></div>
-        <button class="step-btn" id="nextWeekBtn" title="Next Week">→</button>
+        <button class="step-btn" id="nextWeekBtn" title="Next Week" aria-label="Next Week">→</button>
       </div>
       <div class="current-week-title" id="currentWeekTitle">
         Week 1: Sep 21 – Sep 27, 2026
@@ -2094,7 +2099,7 @@
   </main>
 
   <div class="modal-backdrop" id="gameModal">
-    <div class="editorial-modal" role="dialog" aria-modal="true">
+    <div class="editorial-modal" role="dialog" aria-modal="true" aria-labelledby="modalMatchup">
       <div class="sheet-drag-pill"></div>
       <div class="modal-header">
         <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close modal">&times;</button>
@@ -2126,12 +2131,12 @@
   </div>
 
   <div class="modal-backdrop" id="myPlanModal">
-    <div class="editorial-modal plan-modal" role="dialog" aria-modal="true">
+    <div class="editorial-modal plan-modal" role="dialog" aria-modal="true" aria-labelledby="planModalTitle">
       <div class="sheet-drag-pill"></div>
       <div class="modal-header">
         <button class="modal-close-btn" id="planCloseBtn" aria-label="Close modal">&times;</button>
         <div class="modal-meta">Personalized Gameday Itinerary</div>
-        <h3 class="modal-title">My Saved Games</h3>
+        <h3 class="modal-title" id="planModalTitle">My Saved Games</h3>
         <p class="modal-subtitle">Download your custom calendar feed (.ics) to sync directly with your Apple, Google, or Outlook calendar.</p>
       </div>
 
@@ -2191,6 +2196,25 @@
     const ALL_GAMES = __GAMES_JSON__;
     const WEEKS_META = __WEEKS_JSON__;
     const STANDINGS_DATA = __STANDINGS_JSON__;
+
+    function escHtml(s) {
+      if (s == null) return '';
+      return String(s)
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;').replace(/"/g,'&quot;')
+        .replace(/'/g,'&#39;');
+    }
+
+    function parseGameTime(timeStr) {
+      if (!timeStr) return { h: 19, m: 0 };
+      const match = timeStr.match(/(\d+):(\d+)\s*(AM|PM)/i);
+      if (!match) return { h: 19, m: 0 };
+      let h = parseInt(match[1]), m = parseInt(match[2]);
+      const period = match[3].toUpperCase();
+      if (period === 'PM' && h !== 12) h += 12;
+      if (period === 'AM' && h === 12) h = 0;
+      return { h, m };
+    }
 
     function matchesTeamName(name1, name2) {
       if (!name1 || !name2) return false;
@@ -2536,8 +2560,8 @@
                 </button>
                 ${timeSportHtml}
                 ${matchupHtml}
-                <div class="chip-venue">${game.venue}</div>
-                <div class="chip-badge">${game.badge.split(':')[0]}</div>
+                <div class="chip-venue">${escHtml(game.venue)}</div>
+                <div class="chip-badge">${escHtml(game.badge.split(':')[0])}</div>
               </div>
             `;
           });
@@ -2625,7 +2649,7 @@
             </svg>
             Game Recap & Key Takeaways
           </div>
-          <p class="recap-text">${game.result_summary || 'Final score recorded.'}</p>
+          <p class="recap-text">${escHtml(game.result_summary || 'Final score recorded.')}</p>
         `;
       } else {
         const awayLogoHtml = game.away_logo ? `<img class="modal-hero-logo" src="${game.away_logo}" alt="" onerror="this.style.display='none'"/>` : '';
@@ -2766,7 +2790,7 @@
           </svg>
           Gameday Importance & Historical Context
         </div>
-        <p class="context-text">${game.context_reason}</p>
+        <p class="context-text">${escHtml(game.context_reason)}</p>
       `;
 
       bodyHtml += `
@@ -2777,7 +2801,7 @@
             </svg>
             Local Insider & Fan Culture Guide
           </div>
-          <p class="insider-text">${game.insider_tips}</p>
+          <p class="insider-text">${escHtml(game.insider_tips)}</p>
         </div>
       `;
 
@@ -2799,7 +2823,15 @@
         gcalBtn.style.display = 'inline-flex';
         const parts = game.date.split('-');
         const dateStr = `${parts[0]}${parts[1]}${parts[2]}`;
-        const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(game.away_team + ' at ' + game.home_team + ' (' + game.sport + ')')}&dates=${dateStr}/${dateStr}&details=${encodeURIComponent(game.badge + ' - ' + game.context_reason + String.fromCharCode(10, 10) + 'Local Insider: ' + game.insider_tips)}&location=${encodeURIComponent(game.venue + ', ' + game.city + ', CA')}`;
+        const { h: sh, m: sm } = parseGameTime(game.time);
+        const durationHours = game.sport === 'Football' ? 3.5 : 2.5;
+        const endTotalM = sh * 60 + sm + Math.round(durationHours * 60);
+        const eh = Math.floor(endTotalM / 60) % 24;
+        const em = endTotalM % 60;
+        const pad2 = n => String(n).padStart(2, '0');
+        const startDt = `${dateStr}T${pad2(sh)}${pad2(sm)}00`;
+        const endDt = `${dateStr}T${pad2(eh)}${pad2(em)}00`;
+        const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(game.away_team + ' at ' + game.home_team + ' (' + game.sport + ')')}&dates=${startDt}/${endDt}&details=${encodeURIComponent(game.badge + ' - ' + game.context_reason + String.fromCharCode(10, 10) + 'Local Insider: ' + game.insider_tips)}&location=${encodeURIComponent(game.venue + ', ' + game.city + ', CA')}`;
         gcalBtn.href = gcalUrl;
       }
 
@@ -3132,7 +3164,47 @@ Link: ${game.recap_url || game.ticket_url}`;
     enableSheetDismiss(gameModal);
     enableSheetDismiss(myPlanModal);
     updatePlanCounter();
-    setWeek(1); // Default to upcoming week 1
+    // Auto-select current week: find week containing today, first upcoming, or last week
+    (function() {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      // Try to find a week whose date range contains today or is the first upcoming week
+      let bestWeek = WEEKS_META[WEEKS_META.length - 1].num; // fallback: last week
+      // First pass: find week containing today
+      for (const w of WEEKS_META) {
+        if (w.start_date && w.end_date) {
+          const start = new Date(w.start_date + 'T00:00:00');
+          const end = new Date(w.end_date + 'T00:00:00');
+          if (today >= start && today <= end) {
+            bestWeek = w.num;
+            break;
+          }
+        }
+      }
+      // Second pass: if today is past all weeks, use last upcoming or week 1
+      // Find first week that hasn't ended yet
+      let foundUpcoming = false;
+      for (const w of WEEKS_META) {
+        if (w.num >= 1) {
+          if (w.end_date) {
+            const end = new Date(w.end_date + 'T00:00:00');
+            if (end >= today) {
+              bestWeek = w.num;
+              foundUpcoming = true;
+              break;
+            }
+          } else {
+            bestWeek = w.num;
+            foundUpcoming = true;
+            break;
+          }
+        }
+      }
+      if (!foundUpcoming && WEEKS_META.some(w => w.num === 1)) {
+        bestWeek = 1;
+      }
+      setWeek(bestWeek);
+    })();
   </script>
 </body>
 </html>

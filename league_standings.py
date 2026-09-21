@@ -393,6 +393,12 @@ def classify_game(game):
     elif sport == "Volleyball":
         return "ncaa_acc_volleyball"
 
+    import warnings
+    warnings.warn(
+        f"classify_game: unrecognized sport/level combination for game id={game.get('id', '?')}: "
+        f"sport={game.get('sport', '?')}, level={game.get('level', '?')} — defaulting to nfl_nfc_west",
+        stacklevel=2
+    )
     return "nfl_nfc_west"
 
 
