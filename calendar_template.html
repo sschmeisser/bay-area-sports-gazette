@@ -1026,6 +1026,313 @@
       line-height: 1.55;
     }
 
+    /* Modal Section Titles & Cards */
+    .modal-section-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 4px;
+      margin-bottom: -6px;
+    }
+
+    .modal-section-title svg {
+      color: var(--ink-teal);
+      flex-shrink: 0;
+    }
+
+    .context-text {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 1.02rem;
+      color: var(--text-main);
+      line-height: 1.5;
+    }
+
+    .insider-card {
+      background: #ffffff;
+      border: 1px solid var(--border-line);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    }
+
+    .insider-card-header {
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--ink-crimson);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 8px;
+    }
+
+    .insider-card-header svg {
+      color: var(--ink-crimson);
+      flex-shrink: 0;
+    }
+
+    /* Modal Standings Card & Table */
+    .modal-standings-card {
+      background: #ffffff;
+      border: 1px solid var(--border-line);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      margin: 4px 0;
+    }
+
+    .modal-standings-header {
+      background: #f8fafc;
+      border-bottom: 1px solid var(--border-line);
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .modal-standings-title-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .modal-standings-title {
+      font-size: 0.84rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .modal-standings-title svg {
+      color: #b37400;
+      flex-shrink: 0;
+    }
+
+    .modal-standings-subtitle {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .modal-standings-legend {
+      display: flex;
+      gap: 6px;
+    }
+
+    .legend-badge {
+      font-size: 0.62rem;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 3px;
+      letter-spacing: 0.05em;
+    }
+
+    .legend-home {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+    }
+
+    .legend-away {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+    }
+
+    .standings-table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .standings-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+      font-variant-numeric: tabular-nums;
+      line-height: 1.25;
+      text-align: left;
+    }
+
+    .standings-table thead th {
+      background: #f1f5f9;
+      color: #475569;
+      font-size: 0.68rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--border-line);
+      white-space: nowrap;
+    }
+
+    .standings-table tbody td {
+      padding: 8px 10px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #334155;
+      white-space: nowrap;
+      vertical-align: middle;
+    }
+
+    .standings-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .standings-table .th-rank,
+    .standings-table .col-rank {
+      width: 28px;
+      text-align: center;
+      color: #94a3b8;
+      font-weight: 700;
+    }
+
+    .standings-table .th-team,
+    .standings-table .col-team {
+      text-align: left;
+      min-width: 150px;
+    }
+
+    .standings-team-cell {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .standings-row-logo {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+      flex-shrink: 0;
+      border-radius: 2px;
+    }
+
+    .standings-team-name {
+      font-weight: 600;
+      color: #1e293b;
+      font-size: 0.82rem;
+    }
+
+    .standings-table .th-stat,
+    .standings-table .col-stat {
+      text-align: right;
+      padding-left: 6px;
+      padding-right: 6px;
+    }
+
+    .standings-table .th-primary,
+    .standings-table .col-primary {
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    .standings-table .col-extra {
+      color: #64748b;
+      font-size: 0.76rem;
+    }
+
+    /* Highlighted Matchup Rows */
+    .standings-row.is-featured-team {
+      background: rgba(179, 116, 0, 0.07);
+    }
+
+    .standings-row.is-featured-team td {
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .standings-row.is-featured-team .col-rank {
+      color: #b37400;
+      font-weight: 800;
+    }
+
+    .standings-row.is-featured-team .standings-team-name {
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    .standings-tag {
+      font-size: 0.6rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      padding: 2px 5px;
+      border-radius: 3px;
+      display: inline-block;
+      margin-left: 4px;
+      vertical-align: middle;
+      line-height: 1;
+    }
+
+    .tag-home {
+      background: #dbeafe;
+      color: #1e40af;
+      border: 1px solid #93c5fd;
+    }
+
+    .tag-away {
+      background: #e2e8f0;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+    }
+
+    .standings-guest-section {
+      background: #f8fafc;
+      border-top: 1px solid var(--border-line);
+      padding: 10px 14px;
+    }
+
+    .standings-guest-label {
+      font-size: 0.64rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: #64748b;
+      margin-bottom: 6px;
+    }
+
+    .standings-guest-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+    }
+
+    .standings-guest-team {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .standings-guest-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.76rem;
+      color: #475569;
+    }
+
+    .guest-div {
+      color: #64748b;
+      font-size: 0.72rem;
+    }
+
+    .guest-rec {
+      font-weight: 700;
+      color: #0f172a;
+    }
+
     .modal-actions {
       padding: 16px 26px 22px 26px;
       border-top: 1px solid var(--border-line);
@@ -2305,7 +2612,106 @@
           Gameday Importance & Historical Context
         </div>
         <p class="context-text">${game.context_reason}</p>
+      `;
 
+      if (game.standings_data && game.standings_data.rows && game.standings_data.rows.length > 0) {
+        const st = game.standings_data;
+        const colHeaders = st.col_headers || ['#', 'Team', 'W', 'L', 'T', 'PTS', '+/-'];
+
+        let rowsHtml = '';
+        st.rows.forEach(r => {
+          const isFeatured = r.is_home || r.is_away;
+          const featClass = isFeatured ? 'is-featured-team' : '';
+          const tagHtml = r.highlight_tag 
+            ? `<span class="standings-tag ${r.is_home ? 'tag-home' : 'tag-away'}">${r.highlight_tag}</span>` 
+            : '';
+          const logoHtml = r.logo ? `<img class="standings-row-logo" src="${r.logo}" alt="" onerror="this.style.display='none'"/>` : '';
+
+          rowsHtml += `
+            <tr class="standings-row ${featClass}">
+              <td class="col-rank">${r.rank}</td>
+              <td class="col-team">
+                <div class="standings-team-cell">
+                  ${logoHtml}
+                  <span class="standings-team-name">${r.team}</span>
+                  ${tagHtml}
+                </div>
+              </td>
+              <td class="col-stat">${r.w}</td>
+              <td class="col-stat">${r.l}</td>
+              <td class="col-stat">${r.col3}</td>
+              <td class="col-stat col-primary">${r.col4}</td>
+              <td class="col-stat col-extra">${r.col5}</td>
+            </tr>
+          `;
+        });
+
+        let guestHtml = '';
+        if (st.guest_notes && st.guest_notes.length > 0) {
+          guestHtml = `
+            <div class="standings-guest-section">
+              <div class="standings-guest-label">INTER-CONFERENCE OPPONENT SNAPSHOT</div>
+              ${st.guest_notes.map(g => `
+                <div class="standings-guest-row">
+                  <div class="standings-guest-team">
+                    ${g.logo ? `<img class="standings-row-logo" src="${g.logo}" alt="" onerror="this.style.display='none'"/>` : ''}
+                    <span class="standings-team-name">${g.team}</span>
+                    <span class="standings-tag ${g.role === 'HOME' ? 'tag-home' : 'tag-away'}">${g.role}</span>
+                  </div>
+                  <div class="standings-guest-meta">
+                    <span class="guest-div">${g.division}</span>
+                    <span class="guest-rec">${g.record} (${g.rank})</span>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          `;
+        }
+
+        bodyHtml += `
+          <div class="modal-standings-card">
+            <div class="modal-standings-header">
+              <div class="modal-standings-title-wrap">
+                <div class="modal-standings-title">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="20" x2="18" y2="10"></line>
+                    <line x1="12" y1="20" x2="12" y2="4"></line>
+                    <line x1="6" y1="20" x2="6" y2="14"></line>
+                  </svg>
+                  <span>${st.title}</span>
+                </div>
+                <div class="modal-standings-subtitle">${st.subtitle}</div>
+              </div>
+              <div class="modal-standings-legend">
+                <span class="legend-badge legend-home">HOME</span>
+                <span class="legend-badge legend-away">AWAY</span>
+              </div>
+            </div>
+
+            <div class="standings-table-wrap">
+              <table class="standings-table">
+                <thead>
+                  <tr>
+                    <th class="th-rank">${colHeaders[0]}</th>
+                    <th class="th-team">${colHeaders[1]}</th>
+                    <th class="th-stat">${colHeaders[2]}</th>
+                    <th class="th-stat">${colHeaders[3]}</th>
+                    <th class="th-stat">${colHeaders[4]}</th>
+                    <th class="th-stat th-primary">${colHeaders[5]}</th>
+                    <th class="th-stat th-extra">${colHeaders[6] || ''}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${rowsHtml}
+                </tbody>
+              </table>
+            </div>
+            ${guestHtml}
+          </div>
+        `;
+      }
+
+      bodyHtml += `
         <div class="insider-card">
           <div class="insider-card-header">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
