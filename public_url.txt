@@ -1,13 +1,16 @@
-# GitHub Repository:
-https://github.com/sschmeisser/bay-area-sports-gazette
+================================================================================
+THE PERMANENT PRODUCTION URL (NEVER CHANGES):
+================================================================================
+Official GitHub Pages:  https://sschmeisser.github.io/bay-area-sports-gazette/
+Permanent Shortlink:    https://tinyurl.com/bay-sports-gazette
+Shortlink Mirror:       https://tinyurl.com/24llu5j7
 
-# Custom Easy-to-Type Short URLs:
-Primary:    https://tinyurl.com/bay-sports-preview
-Alternate:  https://tinyurl.com/bay-sports-hq
-Clean:      https://tinyurl.com/2dn3srkp
+Source Repository:      https://github.com/sschmeisser/bay-area-sports-gazette
 
-# Direct Cloud-Hosted Production Endpoint (Cloudflare / here.now CDN):
-https://bold-pickle-7vcz.here.now/
-
-# Direct Local Daemon Tunnel (Cloudflare Quick Tunnel):
-https://deutschland-nav-saints-pools.trycloudflare.com
+================================================================================
+HOW THIS WORKS (UNDERNEATH):
+================================================================================
+The URL above is permanent and will NEVER change.
+Whenever code or scores are updated and pushed to git, GitHub Pages
+automatically compiles and updates the live site within 30 seconds.
+You can safely print, share, or bookmark this URL forever.
