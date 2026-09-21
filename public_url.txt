@@ -2,12 +2,12 @@
 https://github.com/sschmeisser/bay-area-sports-gazette
 
 # Custom Easy-to-Type Short URLs:
-Primary:    https://tinyurl.com/bay-sports-standings
-Alternate:  https://tinyurl.com/bay-sports-table
-Clean:      https://tinyurl.com/23rkz37t
+Primary:    https://tinyurl.com/bay-sports-preview
+Alternate:  https://tinyurl.com/bay-sports-hq
+Clean:      https://tinyurl.com/2dn3srkp
 
 # Direct Cloud-Hosted Production Endpoint (Cloudflare / here.now CDN):
-https://sunny-scroll-yd37.here.now/
+https://bold-pickle-7vcz.here.now/
 
 # Direct Local Daemon Tunnel (Cloudflare Quick Tunnel):
 https://deutschland-nav-saints-pools.trycloudflare.com
