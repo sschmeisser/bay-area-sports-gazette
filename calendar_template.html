@@ -1,0 +1,2674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0" />
+  <title>The Bay Area Sports Gazette — Weekly Calendar & Scores</title>
+  <meta name="description" content="Editorial 7-day sports calendar and scores for San Jose, Santa Clara, Peninsula, East Bay, and Monterey." />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-page: #f8f9fa;
+      --bg-surface: #ffffff;
+      --bg-card: #ffffff;
+      --bg-subtle: #f1f3f5;
+      --bg-highlight: #fdf8eb;
+      
+      --text-main: #121417;
+      --text-muted: #5c6574;
+      --text-light: #8993a4;
+
+      --border-ink: #121417;
+      --border-line: #e3e6eb;
+      --border-subtle: #eceff3;
+
+      --ink-crimson: #a61c1c;
+      --ink-teal: #027a74;
+      --ink-navy: #0e3b66;
+      --ink-gold: #b37400;
+      --ink-forest: #166534;
+      --ink-emerald-light: #f0fdf4;
+
+      --shadow-subtle: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03);
+      --shadow-float: 0 12px 28px rgba(0,0,0,0.08), 0 4px 10px rgba(0,0,0,0.04);
+      --radius-sm: 4px;
+      --radius-md: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      overflow-x: clip;
+      overflow-x: hidden;
+      overscroll-behavior-x: none;
+      width: 100%;
+      max-width: 100%;
+      position: relative;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 0 20px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    /* Desktop Masthead */
+    .masthead {
+      background: var(--bg-surface);
+      border-bottom: 3px double var(--border-ink);
+      padding: 22px 0 16px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: all 0.2s ease;
+    }
+
+    .masthead-meta-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-line);
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+    }
+
+    .masthead-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    @media (min-width: 860px) {
+      .masthead-inner {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
+    }
+
+    .publication-title {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: clamp(2.0rem, 3.8vw, 3.1rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      color: var(--text-main);
+    }
+
+    .publication-tagline {
+      font-family: 'Newsreader', Georgia, serif;
+      font-style: italic;
+      color: var(--text-muted);
+      font-size: 1.02rem;
+      margin-top: 4px;
+    }
+
+    .masthead-tools {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .search-wrapper {
+      position: relative;
+      min-width: 220px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 8px 12px 8px 32px;
+      font-size: 0.85rem;
+      border: 1px solid var(--border-line);
+      border-radius: var(--radius-sm);
+      outline: none;
+      background: var(--bg-subtle);
+      transition: all 0.2s ease;
+    }
+
+    .search-input:focus {
+      border-color: var(--text-main);
+      background: #ffffff;
+      box-shadow: 0 0 0 2px rgba(18, 20, 23, 0.1);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-light);
+      pointer-events: none;
+    }
+
+    .my-plan-btn {
+      background: var(--text-main);
+      color: #ffffff;
+      border: 1px solid var(--text-main);
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .my-plan-btn:hover {
+      background: #2a313d;
+    }
+
+    .plan-counter {
+      background: rgba(255,255,255,0.2);
+      padding: 1px 7px;
+      border-radius: 10px;
+      font-size: 0.72rem;
+    }
+
+    /* Week Navigation Strip */
+    .week-nav-container {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-line);
+      padding: 10px 0;
+    }
+
+    .week-nav-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .week-stepper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .step-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-line);
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.15s ease;
+      color: var(--text-main);
+    }
+
+    .step-btn:hover {
+      background: var(--bg-subtle);
+      border-color: var(--text-main);
+    }
+
+    .week-pills-list {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: none;
+    }
+
+    .week-pills-list::-webkit-scrollbar {
+      display: none;
+    }
+
+    .week-pill {
+      background: transparent;
+      border: 1px solid transparent;
+      padding: 6px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+
+    .week-pill:hover {
+      color: var(--text-main);
+      background: var(--bg-subtle);
+    }
+
+    .week-pill.active {
+      background: var(--bg-subtle);
+      border-color: var(--text-main);
+      color: var(--text-main);
+    }
+
+    /* Special style for Past/Scores Week Pill */
+    .week-pill.week-pill-past {
+      border: 1px solid #d1d5db;
+      background: #f8fafc;
+      color: #334155;
+    }
+
+    .week-pill.week-pill-past:hover {
+      background: #e2e8f0;
+      color: var(--text-main);
+    }
+
+    .week-pill.week-pill-past.active {
+      background: var(--ink-forest);
+      border-color: var(--ink-forest);
+      color: #ffffff;
+    }
+
+    .current-week-title {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    /* Filter Bar */
+    .filter-bar {
+      padding: 12px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 0.8rem;
+    }
+
+    .filter-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-line);
+      padding: 5px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.15s ease;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--text-main);
+      color: var(--text-main);
+    }
+
+    .filter-btn.active {
+      background: var(--text-main);
+      color: #ffffff;
+      border-color: var(--text-main);
+    }
+
+    .filter-btn.final-filter {
+      border-color: #cbd5e1;
+      color: #0f5132;
+    }
+
+    .filter-btn.final-filter.active {
+      background: var(--ink-forest);
+      border-color: var(--ink-forest);
+      color: #ffffff;
+    }
+
+    .filter-btn.marquee-filter.active {
+      background: var(--ink-crimson);
+      border-color: var(--ink-crimson);
+      color: #ffffff;
+    }
+
+    /* Mobile Day Picker */
+    .mobile-day-picker {
+      display: none;
+      gap: 4px;
+      overflow-x: auto;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border-line);
+      background: var(--bg-surface);
+    }
+
+    @media (max-width: 1023px) {
+      .mobile-day-picker {
+        display: flex;
+      }
+    }
+
+    .mobile-day-chip {
+      padding: 6px 10px;
+      border: 1px solid var(--border-line);
+      border-radius: var(--radius-sm);
+      background: var(--bg-surface);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 60px;
+    }
+
+    .mobile-day-chip.active {
+      border-color: var(--text-main);
+      background: var(--text-main);
+      color: #ffffff;
+    }
+
+    .calendar-grid-wrapper {
+      margin: 20px 0 60px 0;
+    }
+
+    .week-headline-banner {
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--border-ink);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .week-headline-text {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .week-date-span {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    /* 7-Day Traditional Grid */
+    .calendar-7day-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      background: var(--border-line);
+      gap: 1px;
+      border: 1px solid var(--border-line);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+
+    @media (max-width: 1023px) {
+      .calendar-7day-grid {
+        display: flex;
+        flex-direction: column;
+        background: transparent;
+        border: none;
+        gap: 16px;
+      }
+    }
+
+    .day-column {
+      background: var(--bg-surface);
+      min-height: 480px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .day-col-header {
+      padding: 10px 8px;
+      border-bottom: 1px solid var(--border-line);
+      background: #fafbfc;
+      text-align: center;
+    }
+
+    .day-col-header.is-weekend {
+      background: #f4f6f9;
+    }
+
+    .day-col-header.is-friday {
+      background: #fcf6e9;
+    }
+
+    .day-name-label {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+    }
+
+    .day-num-label {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-top: 2px;
+    }
+
+    .day-events-list {
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex-grow: 1;
+    }
+
+    .day-no-events {
+      padding: 24px 8px;
+      text-align: center;
+      color: var(--text-light);
+      font-size: 0.75rem;
+      font-style: italic;
+    }
+
+    /* Event Chips */
+    .event-chip {
+      background: #ffffff;
+      border: 1px solid var(--border-line);
+      border-left: 3px solid var(--text-muted);
+      border-radius: var(--radius-sm);
+      padding: 8px 9px;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.15s ease;
+      box-shadow: var(--shadow-subtle);
+    }
+
+    .event-chip:hover {
+      border-color: var(--border-ink);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    }
+
+    .event-chip.is-marquee {
+      border-left: 4px solid var(--ink-crimson);
+      background: var(--bg-highlight);
+    }
+
+    .event-chip.is-final {
+      border-left: 4px solid var(--ink-forest);
+      background: #fafcfb;
+    }
+
+    .event-chip.is-final:hover {
+      border-left-color: #0b4619;
+    }
+
+    .event-chip.is-football {
+      border-left-color: var(--ink-crimson);
+    }
+    .event-chip.is-hockey {
+      border-left-color: var(--ink-teal);
+    }
+    .event-chip.is-soccer {
+      border-left-color: var(--ink-forest);
+    }
+    .event-chip.is-basketball {
+      border-left-color: var(--ink-gold);
+    }
+
+    .chip-time-sport {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding-right: 32px;
+    }
+
+    .badge-final {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: #ffffff;
+      background: var(--ink-forest);
+      padding: 1px 5px;
+      border-radius: 3px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .chip-matchup {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.3;
+      margin-bottom: 4px;
+    }
+
+    /* Scoreboard line inside Chip */
+    .chip-team-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+      padding: 1px 0;
+    }
+
+    .chip-team-line.is-winner {
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .chip-team-line.is-loser {
+      font-weight: 500;
+      color: var(--text-muted);
+      opacity: 0.85;
+    }
+
+    .chip-team-line .team-score {
+      font-family: 'Plus Jakarta Sans', monospace;
+      font-size: 0.88rem;
+      font-weight: 800;
+      min-width: 20px;
+      text-align: right;
+    }
+
+    .chip-team-line.is-winner .team-score {
+      color: var(--text-main);
+      background: #eef2f6;
+      padding: 0 4px;
+      border-radius: 2px;
+    }
+
+    .chip-team-line.is-winner .team-name::after {
+      content: " ✓";
+      font-size: 0.72rem;
+      color: var(--ink-forest);
+      font-weight: 800;
+    }
+
+    /* Team Logos & Elevated Matchup Cards */
+    .chip-matchup-fixtures {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      margin-bottom: 5px;
+    }
+    .matchup-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+    .team-logo-inline,
+    .team-logo-name-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      min-width: 0;
+      flex: 1;
+    }
+    .team-logo-img {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      object-fit: contain;
+      flex-shrink: 0;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.15));
+      vertical-align: middle;
+    }
+    .team-logo-img.winner-glow {
+      filter: drop-shadow(0 0 3px rgba(245, 158, 11, 0.65)) drop-shadow(0 1px 2px rgba(0,0,0,0.2));
+    }
+    .team-name-text {
+      font-size: 0.82rem;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: var(--text-main);
+    }
+    .matchup-row.is-home .team-name-text {
+      font-weight: 800;
+    }
+    .matchup-vs-indicator {
+      font-size: 0.62rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding-left: 26px;
+      line-height: 1;
+      margin: -1px 0;
+    }
+
+    /* Modal Scoreboard Logos & Hero Matchup */
+    .scoreboard-logo {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+      margin-bottom: 6px;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
+    }
+    .modal-matchup-hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 14px 16px;
+      background: linear-gradient(135deg, #182230 0%, #0f172a 100%);
+      border-radius: 12px;
+      margin-bottom: 16px;
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+    }
+    .modal-hero-team {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 44%;
+      gap: 6px;
+    }
+    .modal-hero-logo {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      filter: drop-shadow(0 3px 8px rgba(0,0,0,0.35));
+    }
+    .modal-hero-name {
+      font-size: 0.88rem;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #f1f5f9;
+    }
+    .modal-hero-vs {
+      font-size: 0.80rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      color: #94a3b8;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 4px 10px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .plan-team-logo {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+    .plan-matchup-logos {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+
+    .chip-venue {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 4px;
+    }
+
+    .chip-badge {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--ink-crimson);
+      background: rgba(166, 28, 28, 0.08);
+      padding: 2px 6px;
+      border-radius: 2px;
+      line-height: 1.2;
+    }
+
+    .event-chip.is-final .chip-badge {
+      color: var(--ink-forest);
+      background: rgba(22, 101, 52, 0.09);
+    }
+
+    .chip-star-indicator {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      color: #e2a000;
+      font-size: 0.8rem;
+    }
+
+    /* Modal Backdrop & Drawer */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(18, 20, 23, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .editorial-modal {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-ink);
+      border-radius: var(--radius-sm);
+      max-width: 640px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow-float);
+      position: relative;
+    }
+
+    .modal-header {
+      padding: 22px 26px 14px 26px;
+      border-bottom: 1px solid var(--border-line);
+      position: relative;
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      line-height: 1;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    .modal-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .modal-title {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .modal-subtitle {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .modal-body {
+      padding: 22px 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    /* Modal Scoreboard Banner */
+    .modal-scoreboard-banner {
+      background: linear-gradient(135deg, #18202c 0%, #0e131b 100%);
+      color: #ffffff;
+      padding: 16px 20px;
+      border-radius: var(--radius-sm);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+
+    .scoreboard-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #9aa5b6;
+    }
+
+    .scoreboard-final-pill {
+      background: var(--ink-forest);
+      color: #ffffff;
+      padding: 2px 8px;
+      border-radius: 3px;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+    }
+
+    .scoreboard-matchup {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .scoreboard-team {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .scoreboard-team.winner .scoreboard-team-name {
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .scoreboard-team-name {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #c9d2de;
+      margin-bottom: 4px;
+      line-height: 1.2;
+    }
+
+    .scoreboard-score {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 2.3rem;
+      font-weight: 700;
+      line-height: 1;
+      color: #ffffff;
+    }
+
+    .scoreboard-team.winner .scoreboard-score {
+      color: #f7d268;
+    }
+
+    .scoreboard-winner-badge {
+      margin-top: 4px;
+      font-size: 0.65rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #f7d268;
+      background: rgba(247, 210, 104, 0.15);
+      padding: 1px 6px;
+      border-radius: 2px;
+    }
+
+    .scoreboard-divider {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* Modal Recap Box */
+    .modal-recap-box {
+      background: #f0f7f2;
+      border-left: 3px solid var(--ink-forest);
+      padding: 14px 18px;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+
+    .recap-badge-title {
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--ink-forest);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .recap-text {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 1.05rem;
+      color: var(--text-main);
+      line-height: 1.45;
+    }
+
+    .btn-boxscore {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--ink-forest);
+      text-decoration: underline;
+    }
+    .btn-boxscore:hover {
+      color: #0b3d11;
+    }
+
+    .editorial-quote-box {
+      background: var(--bg-subtle);
+      border-left: 3px solid var(--ink-crimson);
+      padding: 14px 18px;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+
+    .quote-badge-title {
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--ink-crimson);
+      margin-bottom: 4px;
+    }
+
+    .quote-text {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 1.05rem;
+      color: var(--text-main);
+      line-height: 1.45;
+    }
+
+    .insider-section {
+      background: #ffffff;
+      border: 1px solid var(--border-line);
+      padding: 16px 18px;
+      border-radius: var(--radius-sm);
+    }
+
+    .insider-title {
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--ink-teal);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .insider-text {
+      font-size: 0.88rem;
+      color: #333a44;
+      line-height: 1.55;
+    }
+
+    .modal-actions {
+      padding: 16px 26px 22px 26px;
+      border-top: 1px solid var(--border-line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .modal-btn-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-ticket {
+      background: var(--text-main);
+      color: #ffffff;
+      padding: 9px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-ticket:hover {
+      background: #2a313d;
+    }
+
+    .btn-star {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-line);
+      padding: 9px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .btn-star:hover {
+      border-color: var(--text-main);
+    }
+
+    .btn-star.starred {
+      background: #fdf6e7;
+      border-color: #dca326;
+      color: #8c6200;
+    }
+
+    .btn-gcal {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: underline;
+    }
+
+    .plan-modal {
+      max-width: 680px;
+    }
+
+    .plan-empty-msg {
+      padding: 40px 20px;
+      text-align: center;
+      color: var(--text-muted);
+    }
+
+    .plan-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .plan-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 14px;
+      border: 1px solid var(--border-line);
+      border-radius: var(--radius-sm);
+      background: #ffffff;
+    }
+
+    .plan-item-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .plan-item-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text-main);
+    }
+
+    .plan-item-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .plan-remove-btn {
+      background: none;
+      border: none;
+      color: var(--ink-crimson);
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .btn-ics-download {
+      background: var(--ink-teal);
+      color: #ffffff;
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      border: none;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-ics-download:hover {
+      background: #02635e;
+    }
+
+    footer {
+      border-top: 1px solid var(--border-line);
+      padding: 36px 0;
+      background: var(--bg-surface);
+      margin-top: 60px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+    }
+
+    .footer-directory-link {
+      color: var(--text-main);
+      font-weight: 700;
+      text-decoration: underline;
+    }
+
+        /* =============================================================
+       MOBILE LAYOUT & ERGONOMIC TOUCH UX (< 860px)
+       Adhering to Apple HIG, Material 3, and Nielsen Norman Group:
+       - Ultra-slim header (< 52px)
+       - Sticky scroll-snap date carousel with live event indicators
+       - Thumb-zone bottom dock (Schedule, Agenda toggle, Filters, My Plan)
+       - Native slide-up bottom sheets with swipe-down dismissal
+       - Direct 1-tap quick bookmarking on cards
+       - Continuous Agenda Stream mode
+       ============================================================= */
+    body {
+      padding-bottom: 0;
+    }
+
+    /* General Quick-Star Button on Event Chips */
+    .event-chip {
+      position: relative;
+      touch-action: manipulation;
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+    }
+    .chip-quick-star {
+      position: absolute;
+      top: 4px;
+      right: 6px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      color: #94a3b8;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      z-index: 10;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.15s ease;
+    }
+    .chip-quick-star:active {
+      transform: scale(1.3);
+    }
+    .chip-quick-star.starred {
+      color: #f59e0b;
+      text-shadow: 0 1px 3px rgba(245, 158, 11, 0.4);
+    }
+
+    /* Bottom Sheet Drag Pill */
+    .sheet-drag-pill {
+      display: none;
+    }
+
+    /* Mobile Bottom Nav (Desktop: hidden) */
+    .mobile-bottom-nav {
+      display: none;
+    }
+
+    @media (max-width: 859px) {
+      html, body {
+        overflow-x: clip !important;
+        overflow-x: hidden !important;
+        overscroll-behavior-x: none;
+        touch-action: pan-y;
+        -webkit-overflow-scrolling: touch;
+        width: 100% !important;
+        max-width: 100vw !important;
+      }
+
+      body {
+        padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+        position: relative;
+      }
+
+      .container {
+        padding: 0 12px;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+
+      .calendar-container,
+      .calendar-grid-wrapper,
+      #calendarGrid {
+        touch-action: pan-y;
+        overscroll-behavior-x: none;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+
+      /* Single-Day Slide Animations */
+      @keyframes daySlideFromRight {
+        0% { opacity: 0; transform: translateX(24px); }
+        100% { opacity: 1; transform: translateX(0); }
+      }
+      @keyframes daySlideFromLeft {
+        0% { opacity: 0; transform: translateX(-24px); }
+        100% { opacity: 1; transform: translateX(0); }
+      }
+      .day-column.slide-from-right {
+        animation: daySlideFromRight 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+      .day-column.slide-from-left {
+        animation: daySlideFromLeft 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      /* Ultra-compact top masthead - 100% contained */
+      .masthead {
+        position: relative;
+        padding: 8px 0;
+        border-bottom: 2px solid var(--border-ink);
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+      .masthead-meta-bar, .publication-tagline {
+        display: none !important;
+      }
+      .masthead-inner {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        flex-wrap: nowrap;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+      }
+      .masthead-brand {
+        flex: 1 1 auto;
+        min-width: 0;
+        overflow: hidden;
+      }
+      .publication-title {
+        font-size: 1.15rem;
+        line-height: 1.2;
+        letter-spacing: -0.01em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: block;
+        margin: 0;
+      }
+      .masthead-tools {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-wrap: nowrap;
+        flex-shrink: 0;
+      }
+      .search-wrapper {
+        flex: 0 1 130px;
+        min-width: 80px;
+        max-width: 135px;
+      }
+      .search-input {
+        padding: 4px 8px 4px 24px;
+        font-size: 0.75rem;
+        height: 32px;
+      }
+      .search-icon {
+        left: 7px;
+        width: 12px;
+        height: 12px;
+      }
+      /* On mobile, bottom dock already has the primary, thumb-friendly My Plan button with counter */
+      .my-plan-btn {
+        display: none !important;
+      }
+
+      /* Compact Week Nav with Scroll-Contained Stepper */
+      .week-nav-container {
+        padding: 6px 0 8px 0;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        overflow-x: hidden;
+      }
+      .week-nav-content {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+        gap: 4px;
+        overflow: hidden;
+      }
+      .week-stepper {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        gap: 4px;
+      }
+      .step-btn {
+        flex-shrink: 0;
+        width: 32px;
+        height: 32px;
+        font-size: 0.95rem;
+      }
+      .week-pills-list {
+        flex: 1 1 0;
+        min-width: 0;
+        display: flex;
+        gap: 6px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        scroll-snap-type: x proximity;
+        padding: 2px 0;
+      }
+      .week-pills-list::-webkit-scrollbar {
+        display: none;
+      }
+      .week-pill {
+        flex-shrink: 0;
+        padding: 6px 12px;
+        font-size: 0.78rem;
+        min-height: 32px;
+        scroll-snap-align: center;
+      }
+      .current-week-title {
+        font-size: 0.78rem;
+        font-weight: 600;
+        text-align: center;
+        width: 100%;
+        max-width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: var(--text-muted);
+      }
+
+      /* Filter Bar on Mobile - Horizontal single-row scroll */
+      .filter-bar {
+        padding: 6px 0 8px 0;
+        gap: 6px;
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+      .filter-bar::-webkit-scrollbar { display: none; }
+      .filter-bar span {
+        flex-shrink: 0;
+      }
+      .filter-btn {
+        flex-shrink: 0;
+        padding: 6px 10px;
+        font-size: 0.75rem;
+        min-height: 32px;
+        white-space: nowrap;
+      }
+      .filter-btn.final-filter {
+        margin-left: 0 !important;
+      }
+
+      /* Sticky Scroll-Snapping Horizontal Date Carousel */
+      .mobile-day-picker {
+        display: flex !important;
+        position: sticky;
+        top: 0;
+        z-index: 90;
+        padding: 8px 12px;
+        gap: 8px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        background: rgba(255, 255, 255, 0.96);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border-line);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        scrollbar-width: none;
+      }
+      .mobile-day-picker::-webkit-scrollbar {
+        display: none;
+      }
+
+      .mobile-day-chip {
+        scroll-snap-align: center;
+        flex: 0 0 calc((100% - 32px) / 4.4);
+        min-width: 66px;
+        min-height: 58px;
+        padding: 6px 4px;
+        border-radius: 12px;
+        border: 1.5px solid var(--border-line);
+        background: var(--bg-surface);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .mobile-day-chip:active {
+        transform: scale(0.94);
+      }
+      .mobile-day-chip.active {
+        border-color: var(--text-main);
+        background: var(--text-main);
+        color: #ffffff;
+        box-shadow: 0 4px 12px rgba(18, 20, 23, 0.18);
+      }
+      .day-chip-name {
+        font-size: 0.68rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+      .day-chip-num {
+        font-size: 1.05rem;
+        font-weight: 800;
+        line-height: 1.1;
+      }
+      .day-chip-indicator {
+        display: flex;
+        align-items: center;
+        gap: 3px;
+        height: 6px;
+        margin-top: 2px;
+      }
+      .day-chip-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--ink-teal);
+      }
+      .mobile-day-chip.active .day-chip-dot {
+        background: #ffffff;
+      }
+      .day-chip-dot.is-marquee {
+        background: var(--ink-crimson);
+      }
+      .mobile-day-chip.active .day-chip-dot.is-marquee {
+        background: #f87171;
+      }
+      .day-chip-dot.is-final {
+        background: var(--ink-forest);
+      }
+      .mobile-day-chip.active .day-chip-dot.is-final {
+        background: #4ade80;
+      }
+
+      /* Event Chips */
+      .event-chip {
+        padding: 12px 14px;
+        border-radius: 10px;
+        border-left-width: 5px;
+        margin-bottom: 10px;
+      }
+      .event-chip:active {
+        transform: scale(0.985);
+      }
+
+      /* Continuous Agenda Mode */
+      .calendar-7day-grid.agenda-mode .day-column {
+        display: flex !important;
+        margin-bottom: 24px;
+      }
+      .calendar-7day-grid.agenda-mode .day-col-header {
+        position: sticky;
+        top: 48px;
+        z-index: 80;
+        backdrop-filter: blur(10px);
+        background: rgba(250, 251, 252, 0.95);
+        border-radius: 8px;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 14px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        border: 1px solid var(--border-line);
+      }
+
+      /* Native Slide-Up Bottom Sheet for Modals */
+      .modal-backdrop {
+        align-items: flex-end !important;
+        padding: 0 !important;
+        background: rgba(15, 23, 42, 0.65);
+        backdrop-filter: blur(8px);
+      }
+      .editorial-modal {
+        border-radius: 20px 20px 0 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        max-height: 86vh !important;
+        border: none !important;
+        box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.25) !important;
+        animation: slideUpSheet 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        padding-bottom: env(safe-area-inset-bottom, 16px);
+        display: flex;
+        flex-direction: column;
+        overscroll-behavior: contain;
+      }
+      @keyframes slideUpSheet {
+        from { transform: translateY(100%); }
+        to { transform: translateY(0); }
+      }
+      .sheet-drag-pill {
+        display: block !important;
+        width: 38px;
+        height: 5px;
+        background: #cbd5e1;
+        border-radius: 3px;
+        margin: 10px auto 4px auto;
+        flex-shrink: 0;
+      }
+      .modal-actions {
+        position: sticky;
+        bottom: 0;
+        background: #ffffff;
+        border-top: 1px solid var(--border-line);
+        padding: 12px 16px max(14px, env(safe-area-inset-bottom, 14px)) 16px;
+        box-shadow: 0 -4px 14px rgba(0, 0, 0, 0.06);
+        z-index: 20;
+      }
+
+      /* Ergonomic Bottom Navigation Bar */
+      .mobile-bottom-nav {
+        display: flex !important;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: calc(56px + env(safe-area-inset-bottom, 0px));
+        background: rgba(255, 255, 255, 0.96);
+        backdrop-filter: blur(16px);
+        border-top: 1px solid var(--border-line);
+        z-index: 150;
+        box-shadow: 0 -2px 14px rgba(0, 0, 0, 0.08);
+      }
+      .bottom-nav-inner {
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        height: 56px;
+      }
+      .bottom-nav-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border: none;
+        color: var(--text-muted);
+        font-size: 0.68rem;
+        font-weight: 700;
+        gap: 2px;
+        position: relative;
+        cursor: pointer;
+        touch-action: manipulation;
+        transition: color 0.15s ease;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .bottom-nav-btn:active {
+        transform: scale(0.92);
+      }
+      .bottom-nav-btn.active {
+        color: var(--text-main);
+      }
+      .bottom-nav-btn.active .nav-icon {
+        transform: scale(1.1);
+      }
+      .nav-icon {
+        font-size: 1.22rem;
+        line-height: 1;
+        transition: transform 0.15s ease;
+      }
+      .bottom-nav-counter {
+        position: absolute;
+        top: 6px;
+        right: calc(50% - 18px);
+        background: var(--ink-crimson);
+        color: #ffffff;
+        font-size: 0.65rem;
+        font-weight: 800;
+        border-radius: 10px;
+        padding: 1px 5px;
+        min-width: 16px;
+        text-align: center;
+        line-height: 1.2;
+      }
+      .filter-indicator-badge {
+        position: absolute;
+        top: 6px;
+        right: calc(50% - 16px);
+        color: var(--ink-forest);
+        font-size: 1.1rem;
+        line-height: 0.5;
+        font-weight: 900;
+      }
+
+      .calendar-grid-wrapper {
+        margin: 8px 0 24px 0;
+      }
+      .week-headline-banner {
+        margin-bottom: 8px;
+        padding-bottom: 4px;
+      }
+      .week-headline-text {
+        font-size: 1.15rem;
+      }
+      .week-date-span {
+        font-size: 0.75rem;
+      }
+      .day-column {
+        min-height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="masthead">
+    <div class="container">
+      <div class="masthead-meta-bar">
+        <span>San Jose, Santa Clara, Peninsula, East Bay & Monterey Edition</span>
+        <span>Autumn 2026 • Weekly Almanac & Scores</span>
+        <span>Local Sports Gazette</span>
+      </div>
+      <div class="masthead-inner">
+        <div class="masthead-brand">
+          <h1 class="publication-title">The Bay Area Sports Gazette</h1>
+          <p class="publication-tagline">A curated 7-day weekly planner and results archive of professional, collegiate, junior college, and high school sports.</p>
+        </div>
+        <div class="masthead-tools">
+          <div class="search-wrapper">
+            <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" id="searchInput" class="search-input" placeholder="Search teams, venues..." autocomplete="off" />
+          </div>
+          <button class="my-plan-btn" id="myPlanBtn" aria-label="Open My Plan">
+            <span>⭐ My Plan</span>
+            <span class="plan-counter" id="planCounter">0</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="week-nav-container">
+    <div class="container week-nav-content">
+      <div class="week-stepper">
+        <button class="step-btn" id="prevWeekBtn" title="Previous Week">←</button>
+        <div class="week-pills-list" id="weekPillsList"></div>
+        <button class="step-btn" id="nextWeekBtn" title="Next Week">→</button>
+      </div>
+      <div class="current-week-title" id="currentWeekTitle">
+        Week 1: Sep 21 – Sep 27, 2026
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+    <div class="filter-bar">
+      <span style="font-weight: 700; color: var(--text-muted); text-transform: uppercase; font-size: 0.72rem; margin-right: 4px;">Sport:</span>
+      <button class="filter-btn active" data-filter-type="sport" data-filter-val="all">All</button>
+      <button class="filter-btn" data-filter-type="sport" data-filter-val="Football">🏈 Football</button>
+      <button class="filter-btn" data-filter-type="sport" data-filter-val="Hockey">🏒 Hockey</button>
+      <button class="filter-btn" data-filter-type="sport" data-filter-val="Soccer">⚽ Soccer</button>
+      <button class="filter-btn" data-filter-type="sport" data-filter-val="Basketball">🏀 Basketball</button>
+      <button class="filter-btn" data-filter-type="sport" data-filter-val="Water Polo">🤽 Water Polo</button>
+      <button class="filter-btn" data-filter-type="sport" data-filter-val="Volleyball">🏐 Volleyball</button>
+
+      <span style="font-weight: 700; color: var(--text-muted); text-transform: uppercase; font-size: 0.72rem; margin: 0 4px 0 10px;">Level:</span>
+      <button class="filter-btn active" data-filter-type="level" data-filter-val="all">All</button>
+      <button class="filter-btn" data-filter-type="level" data-filter-val="High School">High School</button>
+      <button class="filter-btn" data-filter-type="level" data-filter-val="College">College D1</button>
+      <button class="filter-btn" data-filter-type="level" data-filter-val="Junior College">Junior College</button>
+      <button class="filter-btn" data-filter-type="level" data-filter-val="Pro">Pro / Minor</button>
+
+      <button class="filter-btn final-filter" data-filter-type="status" data-filter-val="final" style="margin-left: auto;">
+        ✅ Final Scores Only
+      </button>
+      <button class="filter-btn marquee-filter" data-filter-type="importance" data-filter-val="marquee">
+        🔥 Marquee Only
+      </button>
+    </div>
+
+    <div class="mobile-day-picker" id="mobileDayPicker"></div>
+
+    <div class="calendar-grid-wrapper">
+      <div class="week-headline-banner">
+        <h2 class="week-headline-text" id="weekHeadlineText">Week 1: Fall Kickoff & The Campbell District Derby</h2>
+        <span class="week-date-span" id="weekDateSpan">Sep 21 – Sep 27, 2026</span>
+      </div>
+
+      <div class="calendar-7day-grid" id="calendarGrid"></div>
+    </div>
+  </main>
+
+  <div class="modal-backdrop" id="gameModal">
+    <div class="editorial-modal" role="dialog" aria-modal="true">
+      <div class="sheet-drag-pill"></div>
+      <div class="modal-header">
+        <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close modal">&times;</button>
+        <div class="modal-meta">
+          <span id="modalSportTag">⚽ Soccer</span> • <span id="modalLeagueTag">NCAA D1</span> • <span id="modalDateTime">Mon, Sep 21 • 7:00 PM</span>
+        </div>
+        <h3 class="modal-title" id="modalMatchup">Stanford Cardinal at Santa Clara Broncos</h3>
+        <div class="modal-subtitle">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          <span id="modalVenue">Stevens Stadium • Santa Clara</span>
+        </div>
+      </div>
+
+      <div class="modal-body" id="modalBodyDynamic">
+        <!-- Dynamically rendered scoreboard, recap, context, insider guide -->
+      </div>
+
+      <div class="modal-actions">
+        <div class="modal-btn-group">
+          <a href="#" target="_blank" rel="noopener" class="btn-ticket" id="modalTicketBtn">Tickets & Admission ↗</a>
+          <button class="btn-star" id="modalStarBtn">⭐ Add to My Plan</button>
+        </div>
+        <a href="#" target="_blank" rel="noopener" class="btn-gcal" id="modalGcalBtn">+ Google Calendar</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="myPlanModal">
+    <div class="editorial-modal plan-modal" role="dialog" aria-modal="true">
+      <div class="sheet-drag-pill"></div>
+      <div class="modal-header">
+        <button class="modal-close-btn" id="planCloseBtn" aria-label="Close modal">&times;</button>
+        <div class="modal-meta">Personalized Gameday Itinerary</div>
+        <h3 class="modal-title">My Saved Games</h3>
+        <p class="modal-subtitle">Download your custom calendar feed (.ics) to sync directly with your Apple, Google, or Outlook calendar.</p>
+      </div>
+
+      <div class="modal-body">
+        <div id="planItemsContainer"></div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn-ics-download" id="downloadIcsBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Download Calendar File (.ics)
+        </button>
+        <button class="filter-btn" id="clearPlanBtn" style="color: var(--ink-crimson);">Clear All</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Mobile Ergonomic Bottom Navigation Bar -->
+  <nav class="mobile-bottom-nav" id="mobileBottomNav" aria-label="Mobile Navigation">
+    <div class="bottom-nav-inner">
+      <button class="bottom-nav-btn active" id="btnNavSchedule" aria-label="View Schedule">
+        <span class="nav-icon">📅</span>
+        <span class="nav-label">Schedule</span>
+      </button>
+      <button class="bottom-nav-btn" id="btnNavViewToggle" aria-label="Toggle View Mode">
+        <span class="nav-icon" id="viewToggleIcon">📑</span>
+        <span class="nav-label" id="viewToggleLabel">Agenda</span>
+      </button>
+      <button class="bottom-nav-btn" id="btnNavFilters" aria-label="Open Filters">
+        <span class="nav-icon">⚡</span>
+        <span class="nav-label">Filters</span>
+        <span class="filter-indicator-badge" id="filterIndicatorBadge" style="display:none;">•</span>
+      </button>
+      <button class="bottom-nav-btn" id="btnNavPlan" aria-label="Open My Plan">
+        <span class="nav-icon">⭐</span>
+        <span class="nav-label">My Plan</span>
+        <span class="bottom-nav-counter" id="bottomPlanCounter">0</span>
+      </button>
+    </div>
+  </nav>
+
+  <footer>
+    <div class="container">
+      <p>The Bay Area Sports Gazette • High School, College, and Professional Sports across San Jose & Beyond</p>
+      <p style="margin-top: 6px;">
+        <a href="local_sports_schedule.md" class="footer-directory-link">View Full 102-Team Markdown Directory</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    const ALL_GAMES = __GAMES_JSON__;
+    const WEEKS_META = __WEEKS_JSON__;
+
+    let currentWeekNum = 1; // Default to upcoming active week
+    let activeSport = 'all';
+    let activeLevel = 'all';
+    let activeImportance = 'all';
+    let activeStatus = 'all'; // 'all' or 'final'
+    let searchQuery = '';
+    let selectedGame = null;
+    let activeMobileDay = null;
+
+    let myPlanIds = [];
+    try {
+      const saved = localStorage.getItem('bay_sports_my_plan');
+      if (saved) myPlanIds = JSON.parse(saved);
+    } catch(e) {
+      myPlanIds = [];
+    }
+
+    function savePlan() {
+      try {
+        localStorage.setItem('bay_sports_my_plan', JSON.stringify(myPlanIds));
+      } catch(e) {}
+      updatePlanCounter();
+    }
+
+    function updatePlanCounter() {
+      const counter = document.getElementById('planCounter');
+      counter.textContent = myPlanIds.length;
+    }
+
+    const weekPillsList = document.getElementById('weekPillsList');
+    WEEKS_META.forEach(w => {
+      const pill = document.createElement('button');
+      const isPast = w.num === 0 || w.is_past;
+      pill.className = `week-pill ${w.num === currentWeekNum ? 'active' : ''} ${isPast ? 'week-pill-past' : ''}`;
+      pill.dataset.week = w.num;
+      pill.textContent = w.label;
+      pill.addEventListener('click', () => {
+        setWeek(w.num);
+      });
+      weekPillsList.appendChild(pill);
+    });
+
+    const minWeekNum = WEEKS_META[0].num;
+    const maxWeekNum = WEEKS_META[WEEKS_META.length - 1].num;
+
+    document.getElementById('prevWeekBtn').addEventListener('click', () => {
+      if (currentWeekNum > minWeekNum) setWeek(currentWeekNum - 1);
+    });
+    document.getElementById('nextWeekBtn').addEventListener('click', () => {
+      if (currentWeekNum < maxWeekNum) setWeek(currentWeekNum + 1);
+    });
+
+    function setWeek(num) {
+      currentWeekNum = num;
+      document.querySelectorAll('.week-pill').forEach(p => {
+        p.classList.toggle('active', parseInt(p.dataset.week) === currentWeekNum);
+      });
+      const meta = WEEKS_META.find(w => w.num === currentWeekNum);
+      document.getElementById('currentWeekTitle').textContent = `${meta.label}: ${meta.dates}`;
+      document.getElementById('weekHeadlineText').textContent = `${meta.label}: ${meta.title}`;
+      document.getElementById('weekDateSpan').textContent = meta.dates;
+      activeMobileDay = meta.days[0].date;
+
+      document.getElementById('prevWeekBtn').style.opacity = currentWeekNum <= minWeekNum ? '0.35' : '1';
+      document.getElementById('nextWeekBtn').style.opacity = currentWeekNum >= maxWeekNum ? '0.35' : '1';
+
+      // Auto-scroll active week pill into view smoothly on mobile
+      const activePill = weekPillsList.querySelector(`.week-pill[data-week="${num}"]`);
+      if (activePill) {
+        activePill.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+
+      render();
+    }
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const type = btn.dataset.filterType;
+        const val = btn.dataset.filterVal;
+
+        if (type === 'sport') {
+          document.querySelectorAll('.filter-btn[data-filter-type="sport"]').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          activeSport = val;
+        } else if (type === 'level') {
+          document.querySelectorAll('.filter-btn[data-filter-type="level"]').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          activeLevel = val;
+        } else if (type === 'importance') {
+          btn.classList.toggle('active');
+          activeImportance = btn.classList.contains('active') ? val : 'all';
+        } else if (type === 'status') {
+          btn.classList.toggle('active');
+          activeStatus = btn.classList.contains('active') ? val : 'all';
+          if (activeStatus === 'final') {
+            const hasFinalInCurrent = ALL_GAMES.some(g => g.week === currentWeekNum && g.status === 'final');
+            if (!hasFinalInCurrent) {
+              setWeek(0);
+              return;
+            }
+          }
+        }
+        render();
+      });
+    });
+
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      searchQuery = e.target.value.toLowerCase().trim();
+      render();
+    });
+
+    function filterMatches(g) {
+      if (activeSport !== 'all' && g.sport !== activeSport) return false;
+      if (activeLevel !== 'all' && g.level !== activeLevel && !(activeLevel === 'Pro' && g.level === 'Minor League')) return false;
+      if (activeImportance !== 'all' && g.importance !== activeImportance) return false;
+      if (activeStatus !== 'all' && g.status !== activeStatus) return false;
+      if (searchQuery) {
+        const text = `${g.home_team} ${g.away_team} ${g.venue} ${g.city} ${g.badge} ${g.context_reason} ${(g.result_summary || '')} ${g.tags.join(' ')}`.toLowerCase();
+        if (!text.includes(searchQuery)) return false;
+      }
+      return true;
+    }
+
+    function renderMobileDayPicker(days) {
+      const picker = document.getElementById('mobileDayPicker');
+      picker.innerHTML = '';
+      days.forEach(d => {
+        const dayGames = ALL_GAMES.filter(g => g.date === d.date && filterMatches(g));
+        const count = dayGames.length;
+        const hasMarquee = dayGames.some(g => g.importance === 'marquee');
+        const hasFinal = dayGames.some(g => g.status === 'final');
+
+        const chip = document.createElement('button');
+        chip.className = `mobile-day-chip ${d.date === activeMobileDay ? 'active' : ''}`;
+        chip.dataset.date = d.date;
+
+        const parts = d.short.split(' ');
+        let dotsHtml = '';
+        if (count > 0) {
+          dotsHtml = `<span class="day-chip-indicator">
+            <span class="day-chip-dot ${hasMarquee ? 'is-marquee' : (hasFinal ? 'is-final' : '')}"></span>
+            ${count > 1 ? '<span class="day-chip-dot"></span>' : ''}
+          </span>`;
+        } else {
+          dotsHtml = `<span class="day-chip-indicator" style="opacity:0.25; font-size:0.6rem;">–</span>`;
+        }
+
+        chip.innerHTML = `
+          <span class="day-chip-name">${parts[0]}</span>
+          <span class="day-chip-num">${parts[2]}</span>
+          ${dotsHtml}
+        `;
+
+        chip.addEventListener('click', () => {
+          activeMobileDay = d.date;
+          centerActiveMobileChip();
+          render();
+        });
+        picker.appendChild(chip);
+      });
+    }
+
+    function centerActiveMobileChip() {
+      const picker = document.getElementById('mobileDayPicker');
+      if (!picker) return;
+      const chip = picker.querySelector(`.mobile-day-chip[data-date="${activeMobileDay}"]`);
+      if (chip) {
+        chip.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+    }
+
+    function toggleGamePlan(gId) {
+      const idx = myPlanIds.indexOf(gId);
+      if (idx === -1) {
+        myPlanIds.push(gId);
+      } else {
+        myPlanIds.splice(idx, 1);
+      }
+      savePlan();
+      render();
+    }
+
+    let isAgendaMode = false;
+
+    function render(slideAnimation = '') {
+      const grid = document.getElementById('calendarGrid');
+      const weekMeta = WEEKS_META.find(w => w.num === currentWeekNum);
+      renderMobileDayPicker(weekMeta.days);
+
+      const isMobile = window.innerWidth < 1024;
+      let html = '';
+
+      weekMeta.days.forEach(dayInfo => {
+        const hideOnMobile = !isAgendaMode && isMobile && activeMobileDay && dayInfo.date !== activeMobileDay;
+        const animClass = (!hideOnMobile && dayInfo.date === activeMobileDay && slideAnimation) ? slideAnimation : '';
+        const isFriday = dayInfo.name === 'Friday';
+        const isWeekend = dayInfo.name === 'Saturday' || dayInfo.name === 'Sunday';
+
+        const dayGames = ALL_GAMES.filter(g => g.date === dayInfo.date && filterMatches(g));
+
+        html += `
+          <div class="day-column ${animClass}" style="${hideOnMobile ? 'display:none;' : ''}">
+            <div class="day-col-header ${isFriday ? 'is-friday' : ''} ${isWeekend ? 'is-weekend' : ''}">
+              <div class="day-name-label">${dayInfo.name}</div>
+              <div class="day-num-label">${dayInfo.date.split('-')[1]}/${dayInfo.date.split('-')[2]}</div>
+            </div>
+            <div class="day-events-list">
+        `;
+
+        if (dayGames.length === 0) {
+          if (activeStatus === 'final') {
+            html += `
+              <div class="day-no-events">
+                <span>No final games</span><br/>
+                <button onclick="setWeek(0)" style="margin-top:6px; background:none; border:none; color:var(--ink-forest); text-decoration:underline; font-size:0.72rem; font-weight:700; cursor:pointer;">
+                  View Last Week (Scores) →
+                </button>
+              </div>
+            `;
+          } else {
+            html += `<div class="day-no-events">No scheduled matches</div>`;
+          }
+        } else {
+          dayGames.forEach(game => {
+            const isMarquee = game.importance === 'marquee';
+            const isStarred = myPlanIds.includes(game.id);
+            const isFinal = game.status === 'final';
+            const sportClass = `is-${game.sport.toLowerCase().replace(' ', '')}`;
+
+            let timeSportHtml = '';
+            let matchupHtml = '';
+
+            const awayLogoHtml = game.away_logo ? `<img class="team-logo-img ${isFinal && parseInt(game.away_score) > parseInt(game.home_score) ? 'winner-glow' : ''}" src="${game.away_logo}" alt="" loading="lazy" onerror="this.style.display='none'"/>` : '';
+            const homeLogoHtml = game.home_logo ? `<img class="team-logo-img ${isFinal && parseInt(game.home_score) > parseInt(game.away_score) ? 'winner-glow' : ''}" src="${game.home_logo}" alt="" loading="lazy" onerror="this.style.display='none'"/>` : '';
+
+            if (isFinal) {
+              const awayScore = parseInt(game.away_score);
+              const homeScore = parseInt(game.home_score);
+              const isAwayWin = awayScore > homeScore;
+              const isHomeWin = homeScore > awayScore;
+              const isTie = awayScore === homeScore;
+
+              timeSportHtml = `
+                <div class="chip-time-sport">
+                  <span>${game.sport_icon} ${game.sport}</span>
+                  <span class="badge-final">FINAL</span>
+                </div>
+              `;
+
+              matchupHtml = `
+                <div class="chip-matchup">
+                  <div class="chip-team-line ${isAwayWin ? 'is-winner' : (isTie ? '' : 'is-loser')}">
+                    <div class="team-logo-name-wrap">
+                      ${awayLogoHtml}
+                      <span class="team-name">${game.away_team}</span>
+                    </div>
+                    <span class="team-score">${game.away_score}</span>
+                  </div>
+                  <div class="chip-team-line ${isHomeWin ? 'is-winner' : (isTie ? '' : 'is-loser')}">
+                    <div class="team-logo-name-wrap">
+                      ${homeLogoHtml}
+                      <span class="team-name">${game.home_team}</span>
+                    </div>
+                    <span class="team-score">${game.home_score}</span>
+                  </div>
+                </div>
+              `;
+            } else {
+              timeSportHtml = `
+                <div class="chip-time-sport">
+                  <span>${game.sport_icon} ${game.sport}</span>
+                  <span>${game.time}</span>
+                </div>
+              `;
+
+              matchupHtml = `
+                <div class="chip-matchup-fixtures">
+                  <div class="matchup-row">
+                    <div class="team-logo-inline">
+                      ${awayLogoHtml}
+                      <span class="team-name-text">${game.away_team}</span>
+                    </div>
+                  </div>
+                  <div class="matchup-vs-indicator">at</div>
+                  <div class="matchup-row is-home">
+                    <div class="team-logo-inline">
+                      ${homeLogoHtml}
+                      <span class="team-name-text"><strong>${game.home_team}</strong></span>
+                    </div>
+                  </div>
+                </div>
+              `;
+            }
+
+            html += `
+              <div class="event-chip ${sportClass} ${isMarquee ? 'is-marquee' : ''} ${isFinal ? 'is-final' : ''}" data-game-id="${game.id}">
+                <button class="chip-quick-star ${isStarred ? 'starred' : ''}" data-game-id="${game.id}" title="${isStarred ? 'Remove from Plan' : 'Save to Plan'}" aria-label="Toggle Star">
+                  ${isStarred ? '★' : '☆'}
+                </button>
+                ${timeSportHtml}
+                ${matchupHtml}
+                <div class="chip-venue">${game.venue}</div>
+                <div class="chip-badge">${game.badge.split(':')[0]}</div>
+              </div>
+            `;
+          });
+        }
+
+        html += `
+            </div>
+          </div>
+        `;
+      });
+
+      grid.innerHTML = html;
+
+      // Event chip tap opens modal
+      document.querySelectorAll('.event-chip').forEach(chip => {
+        chip.addEventListener('click', (e) => {
+          if (e.target.closest('.chip-quick-star')) return; // handled separately
+          const gId = chip.dataset.gameId;
+          const game = ALL_GAMES.find(g => g.id === gId);
+          if (game) openGameModal(game);
+        });
+      });
+
+      // Quick-star 1-tap delegation
+      document.querySelectorAll('.chip-quick-star').forEach(starBtn => {
+        starBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const gId = starBtn.dataset.gameId;
+          toggleGamePlan(gId);
+        });
+      });
+    }
+
+    const gameModal = document.getElementById('gameModal');
+    function openGameModal(game) {
+      selectedGame = game;
+      const isFinal = game.status === 'final';
+
+      document.getElementById('modalSportTag').textContent = `${game.sport_icon} ${game.sport}`;
+      document.getElementById('modalLeagueTag').textContent = game.league;
+      document.getElementById('modalDateTime').textContent = isFinal 
+        ? `${game.day_of_week}, ${game.date} • FINAL`
+        : `${game.day_of_week}, ${game.date} • ${game.time}`;
+      document.getElementById('modalMatchup').textContent = `${game.away_team} at ${game.home_team}`;
+      document.getElementById('modalVenue').textContent = `${game.venue} • ${game.city}`;
+
+      const modalBody = document.getElementById('modalBodyDynamic');
+      let bodyHtml = '';
+
+      if (isFinal) {
+        const awayScore = parseInt(game.away_score);
+        const homeScore = parseInt(game.home_score);
+        const isAwayWin = awayScore > homeScore;
+        const isHomeWin = homeScore > awayScore;
+
+        const awayLogoHtml = game.away_logo ? `<img class="scoreboard-logo" src="${game.away_logo}" alt="" onerror="this.style.display='none'"/>` : '';
+        const homeLogoHtml = game.home_logo ? `<img class="scoreboard-logo" src="${game.home_logo}" alt="" onerror="this.style.display='none'"/>` : '';
+
+        bodyHtml += `
+          <div class="scoreboard-banner">
+            <div class="scoreboard-team ${isAwayWin ? 'is-winner' : ''}">
+              ${awayLogoHtml}
+              <div class="score-team-name">${game.away_team}</div>
+              <div class="score-team-points">${game.away_score}</div>
+              ${isAwayWin ? '<span class="score-winner-pill">🏆 WINNER</span>' : ''}
+            </div>
+            <div class="scoreboard-divider">
+              <span class="score-final-tag">FINAL</span>
+            </div>
+            <div class="scoreboard-team ${isHomeWin ? 'is-winner' : ''}">
+              ${homeLogoHtml}
+              <div class="score-team-name">${game.home_team}</div>
+              <div class="score-team-points">${game.home_score}</div>
+              ${isHomeWin ? '<span class="score-winner-pill">🏆 WINNER</span>' : ''}
+            </div>
+          </div>
+
+          <div class="modal-section-title">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+            Game Recap & Key Takeaways
+          </div>
+          <p class="recap-text">${game.result_summary || 'Final score recorded.'}</p>
+        `;
+      } else {
+        const awayLogoHtml = game.away_logo ? `<img class="modal-hero-logo" src="${game.away_logo}" alt="" onerror="this.style.display='none'"/>` : '';
+        const homeLogoHtml = game.home_logo ? `<img class="modal-hero-logo" src="${game.home_logo}" alt="" onerror="this.style.display='none'"/>` : '';
+
+        bodyHtml += `
+          <div class="modal-matchup-hero">
+            <div class="modal-hero-team">
+              ${awayLogoHtml}
+              <div class="modal-hero-name">${game.away_team}</div>
+            </div>
+            <div class="modal-hero-vs">VS</div>
+            <div class="modal-hero-team">
+              ${homeLogoHtml}
+              <div class="modal-hero-name">${game.home_team}</div>
+            </div>
+          </div>
+        `;
+      }
+
+      bodyHtml += `
+        <div class="modal-section-title">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+          Gameday Importance & Historical Context
+        </div>
+        <p class="context-text">${game.context_reason}</p>
+
+        <div class="insider-card">
+          <div class="insider-card-header">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+            Local Insider & Fan Culture Guide
+          </div>
+          <p class="insider-text">${game.insider_tips}</p>
+        </div>
+      `;
+
+      modalBody.innerHTML = bodyHtml;
+
+      const ticketBtn = document.getElementById('modalTicketBtn');
+      if (isFinal) {
+        ticketBtn.href = game.recap_url || game.ticket_url;
+        ticketBtn.textContent = 'Official Recap / Box Score ↗';
+      } else {
+        ticketBtn.href = game.ticket_url;
+        ticketBtn.textContent = `${game.ticket_text} ↗`;
+      }
+
+      const gcalBtn = document.getElementById('modalGcalBtn');
+      if (isFinal) {
+        gcalBtn.style.display = 'none';
+      } else {
+        gcalBtn.style.display = 'inline-flex';
+        const parts = game.date.split('-');
+        const dateStr = `${parts[0]}${parts[1]}${parts[2]}`;
+        const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(game.away_team + ' at ' + game.home_team + ' (' + game.sport + ')')}&dates=${dateStr}/${dateStr}&details=${encodeURIComponent(game.badge + ' - ' + game.context_reason + String.fromCharCode(10, 10) + 'Local Insider: ' + game.insider_tips)}&location=${encodeURIComponent(game.venue + ', ' + game.city + ', CA')}`;
+        gcalBtn.href = gcalUrl;
+      }
+
+      updateModalStarBtn();
+      gameModal.classList.add('open');
+    }
+
+    function updateModalStarBtn() {
+      const starBtn = document.getElementById('modalStarBtn');
+      if (!selectedGame) return;
+      const isStarred = myPlanIds.includes(selectedGame.id);
+      if (isStarred) {
+        starBtn.classList.add('starred');
+        starBtn.textContent = '★ Saved in My Plan';
+      } else {
+        starBtn.classList.remove('starred');
+        starBtn.textContent = '☆ Add to My Plan';
+      }
+    }
+
+    document.getElementById('modalStarBtn').addEventListener('click', () => {
+      if (!selectedGame) return;
+      toggleGamePlan(selectedGame.id);
+      updateModalStarBtn();
+    });
+
+    document.getElementById('modalCloseBtn').addEventListener('click', () => {
+      gameModal.classList.remove('open');
+    });
+    gameModal.addEventListener('click', (e) => {
+      if (e.target === gameModal) gameModal.classList.remove('open');
+    });
+
+    const myPlanModal = document.getElementById('myPlanModal');
+    document.getElementById('myPlanBtn').addEventListener('click', () => {
+      openMyPlanModal();
+    });
+    document.getElementById('planCloseBtn').addEventListener('click', () => {
+      myPlanModal.classList.remove('open');
+    });
+    myPlanModal.addEventListener('click', (e) => {
+      if (e.target === myPlanModal) myPlanModal.classList.remove('open');
+    });
+
+    function openMyPlanModal() {
+      const container = document.getElementById('planItemsContainer');
+      const savedGames = ALL_GAMES.filter(g => myPlanIds.includes(g.id));
+
+      if (savedGames.length === 0) {
+        container.innerHTML = `
+          <div class="plan-empty-msg">
+            <p style="font-size:1.1rem; font-weight:700; color:var(--text-main); margin-bottom:4px;">No games bookmarked yet</p>
+            <p style="font-size:0.85rem;">Click on any event chip or tap the star to save games and generate a personal .ics calendar.</p>
+          </div>
+        `;
+      } else {
+        let listHtml = '<div class="plan-list">';
+        savedGames.forEach(game => {
+          const scoreSub = game.status === 'final' ? ` • FINAL: ${game.away_score}-${game.home_score}` : '';
+            const awayLogoHtml = game.away_logo ? `<img class="plan-team-logo" src="${game.away_logo}" alt="" onerror="this.style.display='none'"/>` : '';
+            const homeLogoHtml = game.home_logo ? `<img class="plan-team-logo" src="${game.home_logo}" alt="" onerror="this.style.display='none'"/>` : '';
+            listHtml += `
+              <div class="plan-item">
+                <div class="plan-item-info">
+                  <div class="plan-item-header-wrap">
+                    <span class="plan-matchup-logos">${awayLogoHtml} ${homeLogoHtml}</span>
+                    <span class="plan-item-title">${game.sport_icon} ${game.away_team} at ${game.home_team}</span>
+                  </div>
+                  <span class="plan-item-sub">${game.day_of_week}, ${game.date} • ${game.time}${scoreSub} • ${game.venue}</span>
+                </div>
+                <button class="plan-remove-btn" data-remove-id="${game.id}">Remove</button>
+              </div>
+            `;
+        });
+        listHtml += '</div>';
+        container.innerHTML = listHtml;
+
+        container.querySelectorAll('.plan-remove-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const id = btn.dataset.removeId;
+            myPlanIds = myPlanIds.filter(x => x !== id);
+            savePlan();
+            openMyPlanModal();
+            render();
+          });
+        });
+      }
+
+      myPlanModal.classList.add('open');
+    }
+
+    document.getElementById('clearPlanBtn').addEventListener('click', () => {
+      if (confirm('Clear all saved games from your plan?')) {
+        myPlanIds = [];
+        savePlan();
+        openMyPlanModal();
+        render();
+      }
+    });
+
+    document.getElementById('downloadIcsBtn').addEventListener('click', () => {
+      const savedGames = ALL_GAMES.filter(g => myPlanIds.includes(g.id));
+      if (savedGames.length === 0) {
+        alert('Please add at least one game to your plan before downloading.');
+        return;
+      }
+
+      let icsContent = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//Bay Area Sports Gazette//EN',
+        'CALSCALE:GREGORIAN',
+        'METHOD:PUBLISH',
+        'X-WR-CALNAME:Bay Area Sports Gameday Plan',
+        'X-WR-TIMEZONE:America/Los_Angeles'
+      ];
+
+      savedGames.forEach(game => {
+        const parts = game.date.split('-');
+        const y = parts[0];
+        const m = parts[1];
+        const d = parts[2];
+
+        let hour = 19;
+        let min = 0;
+        if (game.time && game.time.includes('PM')) {
+          const tParts = game.time.replace(' PM', '').split(':');
+          let h = parseInt(tParts[0]);
+          if (h !== 12) h += 12;
+          hour = h;
+          min = parseInt(tParts[1] || '0');
+        } else if (game.time && game.time.includes('AM')) {
+          const tParts = game.time.replace(' AM', '').split(':');
+          hour = parseInt(tParts[0]);
+          min = parseInt(tParts[1] || '0');
+        }
+
+        const pad = (n) => (n < 10 ? '0' + n : '' + n);
+        const dtStart = `${y}${m}${d}T${pad(hour)}${pad(min)}00`;
+        const dtEnd = `${y}${m}${d}T${pad(hour + 3)}${pad(min)}00`;
+
+        const statusPrefix = game.status === 'final' ? `[FINAL ${game.away_score}-${game.home_score}] ` : '';
+        const summary = `${statusPrefix}${game.away_team} at ${game.home_team} (${game.sport})`;
+        const recapText = game.result_summary ? `
+
+FINAL RECAP:
+${game.result_summary}` : '';
+        const desc = `${game.badge}
+
+${game.context_reason}${recapText}
+
+LOCAL INSIDER GUIDE:
+${game.insider_tips}
+
+Link: ${game.recap_url || game.ticket_url}`;
+        const loc = `${game.venue}, ${game.city}, CA`;
+
+        icsContent.push('BEGIN:VEVENT');
+        icsContent.push(`UID:${game.id}-bayareasports@gazette`);
+        icsContent.push(`DTSTAMP:${y}${m}${d}T000000Z`);
+        icsContent.push(`DTSTART:${dtStart}`);
+        icsContent.push(`DTEND:${dtEnd}`);
+        icsContent.push(`SUMMARY:${summary}`);
+        icsContent.push(`DESCRIPTION:${desc.replace(/,/g, '\,')}`);
+        icsContent.push(`LOCATION:${loc.replace(/,/g, '\,')}`);
+        icsContent.push('STATUS:CONFIRMED');
+        icsContent.push('END:VEVENT');
+      });
+
+      icsContent.push('END:VCALENDAR');
+
+      const blob = new Blob([icsContent.join(String.fromCharCode(13, 10))], { type: 'text/calendar;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'bay_area_sports_plan.ics';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+
+    // Mobile Bottom Navigation Bar Interactions
+    const btnNavSchedule = document.getElementById('btnNavSchedule');
+    const btnNavViewToggle = document.getElementById('btnNavViewToggle');
+    const btnNavFilters = document.getElementById('btnNavFilters');
+    const btnNavPlan = document.getElementById('btnNavPlan');
+
+    if (btnNavSchedule) {
+      btnNavSchedule.addEventListener('click', () => {
+        isAgendaMode = false;
+        document.getElementById('calendarGrid').classList.remove('agenda-mode');
+        document.getElementById('viewToggleLabel').textContent = 'Agenda';
+        document.getElementById('viewToggleIcon').textContent = '📑';
+        document.getElementById('mobileDayPicker').style.display = 'flex';
+        btnNavSchedule.classList.add('active');
+        btnNavViewToggle.classList.remove('active');
+        render();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    if (btnNavViewToggle) {
+      btnNavViewToggle.addEventListener('click', () => {
+        isAgendaMode = !isAgendaMode;
+        document.getElementById('calendarGrid').classList.toggle('agenda-mode', isAgendaMode);
+        document.getElementById('viewToggleLabel').textContent = isAgendaMode ? 'Day View' : 'Agenda';
+        document.getElementById('viewToggleIcon').textContent = isAgendaMode ? '📆' : '📑';
+        document.getElementById('mobileDayPicker').style.display = isAgendaMode ? 'none' : 'flex';
+        btnNavViewToggle.classList.toggle('active', isAgendaMode);
+        btnNavSchedule.classList.toggle('active', !isAgendaMode);
+        render();
+        if (isAgendaMode) {
+          window.scrollTo({ top: 90, behavior: 'smooth' });
+        }
+      });
+    }
+
+    if (btnNavFilters) {
+      btnNavFilters.addEventListener('click', () => {
+        const fb = document.querySelector('.filter-bar');
+        if (fb) {
+          fb.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      });
+    }
+
+    if (btnNavPlan) {
+      btnNavPlan.addEventListener('click', () => {
+        openMyPlanModal();
+      });
+    }
+
+    // Touch Swipe-to-Navigate Days (Passive Touch Listeners with Debounce Lock & Gesture Isolation)
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchStartTime = 0;
+    let swipeCooldown = false;
+    let isVerticalPanning = false;
+    const gridEl = document.getElementById('calendarGrid');
+
+    gridEl.addEventListener('touchstart', (e) => {
+      if (e.touches && e.touches.length === 1) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        touchStartTime = Date.now();
+        isVerticalPanning = false;
+      }
+    }, { passive: true });
+
+    gridEl.addEventListener('touchmove', (e) => {
+      if (!e.touches || e.touches.length !== 1 || isVerticalPanning) return;
+      const curX = e.touches[0].clientX;
+      const curY = e.touches[0].clientY;
+      const deltaX = Math.abs(curX - touchStartX);
+      const deltaY = Math.abs(curY - touchStartY);
+      // If user starts scrolling vertically, lock out horizontal swipe navigation for this gesture
+      if (deltaY > 18 && deltaY > deltaX * 1.2) {
+        isVerticalPanning = true;
+      }
+    }, { passive: true });
+
+    gridEl.addEventListener('touchend', (e) => {
+      if (isAgendaMode || isVerticalPanning || swipeCooldown || !e.changedTouches || e.changedTouches.length === 0) return;
+      if (document.querySelector('.modal-backdrop.open')) return;
+
+      const diffX = e.changedTouches[0].clientX - touchStartX;
+      const diffY = e.changedTouches[0].clientY - touchStartY;
+      const duration = Date.now() - touchStartTime;
+
+      // Intentional swipe gesture check: flick under 650ms, strong horizontal dominance
+      if (duration < 650 && Math.abs(diffX) > 46 && Math.abs(diffX) > Math.abs(diffY) * 1.5) {
+        const meta = WEEKS_META.find(w => w.num === currentWeekNum);
+        if (!meta) return;
+        const currentIndex = meta.days.findIndex(d => d.date === activeMobileDay);
+        if (currentIndex === -1) return;
+
+        if (diffX < 0 && currentIndex < meta.days.length - 1) {
+          // Swipe left -> advance strictly by 1 day
+          swipeCooldown = true;
+          activeMobileDay = meta.days[currentIndex + 1].date;
+          render('slide-from-right');
+          centerActiveMobileChip();
+          setTimeout(() => { swipeCooldown = false; }, 320);
+        } else if (diffX > 0 && currentIndex > 0) {
+          // Swipe right -> rewind strictly by 1 day
+          swipeCooldown = true;
+          activeMobileDay = meta.days[currentIndex - 1].date;
+          render('slide-from-left');
+          centerActiveMobileChip();
+          setTimeout(() => { swipeCooldown = false; }, 320);
+        }
+      }
+    }, { passive: true });
+
+    // Native Bottom Sheet Swipe-Down Dismiss
+    function enableSheetDismiss(modalEl) {
+      const drawer = modalEl.querySelector('.editorial-modal');
+      if (!drawer) return;
+      let startY = 0;
+      let currentY = 0;
+
+      drawer.addEventListener('touchstart', (e) => {
+        if (drawer.scrollTop <= 2 && e.touches.length === 1) {
+          startY = e.touches[0].clientY;
+        } else {
+          startY = 0;
+        }
+      }, { passive: true });
+
+      drawer.addEventListener('touchmove', (e) => {
+        if (startY === 0) return;
+        currentY = e.touches[0].clientY;
+        const diff = currentY - startY;
+        if (diff > 0) {
+          drawer.style.transform = `translateY(${diff}px)`;
+        }
+      }, { passive: true });
+
+      drawer.addEventListener('touchend', () => {
+        const diff = currentY - startY;
+        drawer.style.transform = '';
+        if (startY > 0 && diff > 90) {
+          modalEl.classList.remove('open');
+        }
+        startY = 0;
+        currentY = 0;
+      }, { passive: true });
+    }
+    enableSheetDismiss(gameModal);
+    enableSheetDismiss(myPlanModal);
+    updatePlanCounter();
+    setWeek(1); // Default to upcoming week 1
+  </script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+# Custom Easy-to-Type Short URLs:
+Primary:    https://tinyurl.com/bay-sports-live
+Alternate:  https://tinyurl.com/bay-sports-hub
+Alternate:  https://tinyurl.com/bay-sports-scores
+South Bay:  https://tinyurl.com/sj-sports-today
+Backup:     https://tinyurl.com/bay-sports-cal
+
+# Direct Cloud-Hosted Production Endpoint (Cloudflare / here.now CDN):
+https://azure-sorbet-3br8.here.now/
+
+# Direct Local Daemon Tunnel (Cloudflare Quick Tunnel):
+https://jeans-field-webpage-ratings.trycloudflare.com
