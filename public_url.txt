@@ -2,13 +2,13 @@
 https://github.com/sschmeisser/bay-area-sports-gazette
 
 # Custom Easy-to-Type Short URLs:
-Primary:    https://tinyurl.com/bay-sports-live
-Alternate:  https://tinyurl.com/bay-sports-hub
-Alternate:  https://tinyurl.com/bay-sports-scores
-South Bay:  https://tinyurl.com/sj-sports-today
+Primary:    https://tinyurl.com/bay-sports-now
+Alternate:  https://tinyurl.com/bay-sports-almanac
+Alternate:  https://tinyurl.com/bay-area-sports-now
+Clean:      https://tinyurl.com/232c4rut
 
 # Direct Cloud-Hosted Production Endpoint (Cloudflare / here.now CDN):
-https://azure-sorbet-3br8.here.now/
+https://ivory-soul-c4ya.here.now/
 
 # Direct Local Daemon Tunnel (Cloudflare Quick Tunnel):
 https://deutschland-nav-saints-pools.trycloudflare.com
