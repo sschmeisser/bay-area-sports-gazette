@@ -374,18 +374,6 @@ When planning your sporting week around San Jose:
 
 ---
 
-### MLS NEXT Elite Academies (U13–U19 Elite Youth Development)
-| ID | Academy Name | Division | Home Pitch / Venue | City / Region | Program & Schedule Portal |
-| :---: | :--- | :--- | :--- | :--- | :--- |
-| **26a** | **De Anza Force** | MLS NEXT NorCal | De Anza College Stadium / Creekside | Cupertino (South Bay) | [deanzaforce.org](https://www.deanzaforce.org) |
-| **26b** | **San Jose Earthquakes Academy** | MLS NEXT Pro Academy | Quakes Training Facility / PAL Stadium | San Jose (South Bay) | [sjearthquakes.com/academy](https://www.sjearthquakes.com/academy) |
-| **26c** | **Silicon Valley SA (SVSA)** | MLS NEXT NorCal | Red Morton Park / Woodside HS | Redwood City (Peninsula) | [siliconvalleysocceracademy.com](https://www.siliconvalleysocceracademy.com) |
-| **26d** | **SF Glens Academy** | MLS NEXT NorCal | Skyline College / Treasure Island | San Francisco / Daly City | [sfglens.com](https://www.sfglens.com) |
-| **26e** | **Breakers FC** | MLS NEXT NorCal | Cabrillo College Stadium | Aptos (Santa Cruz / Monterey) | [breakersfc.com](https://www.breakersfc.com) |
-| **26f** | **Ballistic United SC** | MLS NEXT NorCal | Patelco Sports Complex | Pleasanton (East Bay) | [busc.org](https://www.busc.org) |
-
----
-
 ### College: San Jose State University (SJSU Spartans)
 *Division: NCAA Division I — Mountain West Conference*
 | ID | Team Name | Sport | Home Venue | Address / City | Official Schedule Tracker |

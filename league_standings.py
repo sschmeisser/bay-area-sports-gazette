@@ -401,8 +401,6 @@ def classify_game(game):
     elif sport == "Soccer":
         if "mls next pro" in league_lower or "the town fc" in teams_str:
             return "mls_next_pro_west"
-        elif "mls next" in league_lower or level in ("Youth Academy", "Academy"):
-            return "mls_next_norcal"
         elif level == "Pro":
             if league == "NWSL":
                 return "nwsl"
