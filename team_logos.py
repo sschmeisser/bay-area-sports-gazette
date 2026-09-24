@@ -437,6 +437,121 @@ CREST_CONFIGS = {
         "border_color": "#C5B358",
         "subtitle": "RAMS",
     },
+    # MLS NEXT Pro (Tier 3 Pro)
+    "The Town FC": {
+        "letters": "TOWN",
+        "primary": "#111111",       # Town Black
+        "secondary": "#D4AF37",     # Gold
+        "border_color": "#D4AF37",
+        "subtitle": "THE TOWN",
+    },
+    "Ventura County FC": {
+        "letters": "VCFC",
+        "primary": "#00245D",       # Galaxy Navy
+        "secondary": "#FFD100",     # Gold
+        "border_color": "#00245D",
+        "subtitle": "VENTURA",
+    },
+    "Austin FC II": {
+        "letters": "ATX",
+        "primary": "#00B140",       # Verde
+        "secondary": "#111111",     # Black
+        "border_color": "#00B140",
+        "subtitle": "AUSTIN",
+    },
+    "Tacoma Defiance": {
+        "letters": "TAC",
+        "primary": "#0C2340",       # Defiance Navy
+        "secondary": "#59CBE8",     # Sounders Cyan
+        "border_color": "#59CBE8",
+        "subtitle": "TACOMA",
+    },
+    "North Texas SC": {
+        "letters": "NTX",
+        "primary": "#BF0D3E",       # Red
+        "secondary": "#00205B",     # Navy
+        "border_color": "#BF0D3E",
+        "subtitle": "NORTH TEXAS",
+    },
+    "St. Louis CITY 2": {
+        "letters": "STL",
+        "primary": "#E71D36",       # City Red
+        "secondary": "#041E42",     # River Blue
+        "border_color": "#E71D36",
+        "subtitle": "ST. LOUIS",
+    },
+    "Whitecaps FC 2": {
+        "letters": "WFC",
+        "primary": "#00245E",       # Deep Sea
+        "secondary": "#9BCBEB",     # Wave Blue
+        "border_color": "#9BCBEB",
+        "subtitle": "VANCOUVER",
+    },
+    "Colorado Rapids 2": {
+        "letters": "COL",
+        "primary": "#862633",       # Burgundy
+        "secondary": "#8BB8E8",     # Sky Blue
+        "border_color": "#862633",
+        "subtitle": "RAPIDS 2",
+    },
+    # MLS NEXT Elite Youth Academies
+    "De Anza Force": {
+        "letters": "FORCE",
+        "primary": "#003882",       # Force Royal Navy
+        "secondary": "#FFD100",     # Force Gold
+        "border_color": "#FFD100",
+        "star_count": 1,
+        "subtitle": "DE ANZA",
+    },
+    "San Jose Earthquakes Academy": {
+        "letters": "SJEQ",
+        "primary": "#0051BA",       # Quakes Blue
+        "secondary": "#111111",     # Quakes Black
+        "border_color": "#0051BA",
+        "subtitle": "ACADEMY",
+    },
+    "Silicon Valley SA": {
+        "letters": "SVSA",
+        "primary": "#0A2540",       # Navy
+        "secondary": "#E5A823",     # Silicon Gold
+        "border_color": "#E5A823",
+        "subtitle": "SILICON VLY",
+    },
+    "SF Glens Academy": {
+        "letters": "GLENS",
+        "primary": "#006B3F",       # Glens Celtic Green
+        "secondary": "#FFFFFF",     # White
+        "border_color": "#006B3F",
+        "subtitle": "SF GLENS",
+    },
+    "Breakers FC": {
+        "letters": "BFC",
+        "primary": "#002B49",       # Deep Ocean Blue
+        "secondary": "#00A3E0",     # Surf Cyan
+        "border_color": "#00A3E0",
+        "subtitle": "BREAKERS",
+    },
+    "Ballistic United SC": {
+        "letters": "BUSC",
+        "primary": "#1A365D",       # Navy
+        "secondary": "#D97706",     # Gold Amber
+        "border_color": "#D97706",
+        "subtitle": "BALLISTIC",
+    },
+    "Sacramento Republic Academy": {
+        "letters": "SAC",
+        "primary": "#752538",       # Old Glory Red
+        "secondary": "#B4975A",     # Gold
+        "border_color": "#B4975A",
+        "subtitle": "ACADEMY",
+    },
+    "Napa United": {
+        "letters": "NAPA",
+        "primary": "#4A154B",       # Wine Plum
+        "secondary": "#E8B923",     # Harvest Gold
+        "border_color": "#E8B923",
+        "subtitle": "NAPA UTD",
+    },
 }
 
 # Generate SVG crests for all configured non-ESPN teams

@@ -1878,5 +1878,195 @@
         "note": ""
       }
     ]
+  },
+  "mls_next_pro_west": {
+    "title": "MLS NEXT Pro Western Conference Standings",
+    "subtitle": "2026 Regular Season",
+    "col_headers": [
+      "#",
+      "Club",
+      "W",
+      "L",
+      "D",
+      "PTS",
+      "GD"
+    ],
+    "rows": [
+      {
+        "rank": 1,
+        "team": "North Texas SC",
+        "w": 16,
+        "l": 4,
+        "col3": 8,
+        "col4": 62,
+        "col5": "+24",
+        "note": "Playoff Clinched"
+      },
+      {
+        "rank": 2,
+        "team": "The Town FC",
+        "w": 13,
+        "l": 6,
+        "col3": 9,
+        "col4": 52,
+        "col5": "+14",
+        "note": "Quakes Affiliate"
+      },
+      {
+        "rank": 3,
+        "team": "St. Louis CITY 2",
+        "w": 14,
+        "l": 9,
+        "col3": 5,
+        "col4": 51,
+        "col5": "+11",
+        "note": "Playoff Position"
+      },
+      {
+        "rank": 4,
+        "team": "Tacoma Defiance",
+        "w": 13,
+        "l": 10,
+        "col3": 5,
+        "col4": 46,
+        "col5": "+8",
+        "note": "Playoff Position"
+      },
+      {
+        "rank": 5,
+        "team": "Ventura County FC",
+        "w": 11,
+        "l": 9,
+        "col3": 8,
+        "col4": 45,
+        "col5": "+6",
+        "note": "LA Galaxy Affiliate"
+      },
+      {
+        "rank": 6,
+        "team": "Austin FC II",
+        "w": 10,
+        "l": 11,
+        "col3": 7,
+        "col4": 41,
+        "col5": "-2",
+        "note": ""
+      },
+      {
+        "rank": 7,
+        "team": "Whitecaps FC 2",
+        "w": 10,
+        "l": 12,
+        "col3": 6,
+        "col4": 39,
+        "col5": "-5",
+        "note": ""
+      },
+      {
+        "rank": 8,
+        "team": "Colorado Rapids 2",
+        "w": 7,
+        "l": 16,
+        "col3": 5,
+        "col4": 29,
+        "col5": "-18",
+        "note": ""
+      }
+    ]
+  },
+  "mls_next_norcal": {
+    "title": "MLS NEXT Elite Academy NorCal Division",
+    "subtitle": "2026 Fall Season (U17/U19)",
+    "col_headers": [
+      "#",
+      "Academy",
+      "W",
+      "L",
+      "D",
+      "PTS",
+      "GD"
+    ],
+    "rows": [
+      {
+        "rank": 1,
+        "team": "De Anza Force",
+        "w": 6,
+        "l": 1,
+        "col3": 1,
+        "col4": 19,
+        "col5": "+12",
+        "note": "South Bay Leader"
+      },
+      {
+        "rank": 2,
+        "team": "San Jose Earthquakes Academy",
+        "w": 5,
+        "l": 1,
+        "col3": 2,
+        "col4": 17,
+        "col5": "+10",
+        "note": "MLS Pro Academy"
+      },
+      {
+        "rank": 3,
+        "team": "Silicon Valley SA",
+        "w": 4,
+        "l": 2,
+        "col3": 2,
+        "col4": 14,
+        "col5": "+5",
+        "note": "Peninsula"
+      },
+      {
+        "rank": 4,
+        "team": "SF Glens Academy",
+        "w": 4,
+        "l": 3,
+        "col3": 1,
+        "col4": 13,
+        "col5": "+3",
+        "note": "San Francisco"
+      },
+      {
+        "rank": 5,
+        "team": "Breakers FC",
+        "w": 3,
+        "l": 4,
+        "col3": 1,
+        "col4": 10,
+        "col5": "-2",
+        "note": "Santa Cruz / Monterey"
+      },
+      {
+        "rank": 6,
+        "team": "Ballistic United SC",
+        "w": 2,
+        "l": 5,
+        "col3": 1,
+        "col4": 7,
+        "col5": "-8",
+        "note": "East Bay"
+      },
+      {
+        "rank": 7,
+        "team": "Sacramento Republic Academy",
+        "w": 2,
+        "l": 6,
+        "col3": 0,
+        "col4": 6,
+        "col5": "-9",
+        "note": "Sacramento"
+      },
+      {
+        "rank": 8,
+        "team": "Napa United",
+        "w": 1,
+        "l": 5,
+        "col3": 2,
+        "col4": 5,
+        "col5": "-11",
+        "note": "North Bay"
+      }
+    ]
   }
 }
