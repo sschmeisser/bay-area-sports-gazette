@@ -35,10 +35,16 @@ if __name__ == "__main__":
 
     # Launch cloudflared quick tunnel
     # Find cloudflared binary
-    cloudflared_bin = shutil.which("cloudflared") or "/tmp/cloudflared"
-    if not shutil.which("cloudflared") and not os.path.exists("/tmp/cloudflared"):
-        print("ERROR: cloudflared not found. Install from https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/downloads/")
-        raise SystemExit(1)
+    cloudflared_bin = shutil.which("cloudflared") or ("/tmp/cloudflared" if os.path.exists("/tmp/cloudflared") else None)
+    if not cloudflared_bin:
+        print(f"NOTICE: cloudflared not found. Server running in local-only mode at http://localhost:{PORT}")
+        print("   (To enable public sharing via Cloudflare tunnel, install cloudflared.)")
+        try:
+            while True:
+                time.sleep(1)
+        except KeyboardInterrupt:
+            print("\nStopping local server.")
+            raise SystemExit(0)
     cmd = [cloudflared_bin, "tunnel", "--url", f"http://localhost:{PORT}"]
     proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
 

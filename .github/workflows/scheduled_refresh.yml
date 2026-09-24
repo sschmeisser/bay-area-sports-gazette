@@ -1,0 +1,99 @@
+name: Autonomous Twice-Daily Scores & Standings Refresh
+
+on:
+  schedule:
+    # 6:00 AM Pacific (13:00 UTC) - Morning post-game wrap-up
+    - cron: '0 13 * * *'
+    # 10:00 PM Pacific (05:00 UTC) - Evening wrap-up for afternoon/night games
+    - cron: '0 5 * * *'
+  workflow_dispatch:
+    inputs:
+      rollover:
+        description: 'Advance calendar horizon by 1 week (Monday Rollover)'
+        required: false
+        type: boolean
+        default: false
+      target_date:
+        description: 'Target YYYY-MM-DD date for score checking (defaults to today)'
+        required: false
+        type: string
+        default: ''
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  refresh-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Autonomous Refresh Pipeline
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          OPENROUTER_MODEL: 'google/gemini-2.5-flash'
+        run: |
+          ARGS=""
+          if [ "${{ inputs.rollover }}" = "true" ]; then
+            ARGS="$ARGS --rollover"
+          fi
+          if [ -n "${{ inputs.target_date }}" ]; then
+            ARGS="$ARGS --target-date ${{ inputs.target_date }}"
+          fi
+          python3 refresh_pipeline.py $ARGS
+
+      - name: Check for Data Changes
+        id: git-check
+        run: |
+          git status --porcelain
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit and Push Updates
+        if: steps.git-check.outputs.changed == 'true'
+        run: |
+          git config user.name "Gazette Refresh Bot"
+          git config user.email "bot@bayareasportsgazette.local"
+          git add data/ index.html sports_calendar.html
+          git commit -m "chore(auto): refresh scores, standings & calendar [$(date +'%Y-%m-%d %H:%M')]"
+          git pull --rebase origin main
+          git push origin main
+
+      - name: Setup Pages
+        if: steps.git-check.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages Artifact
+        if: steps.git-check.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        if: steps.git-check.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
+        id: deployment
+        uses: actions/deploy-pages@v4

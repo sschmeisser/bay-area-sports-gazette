@@ -29,7 +29,32 @@ Provides:
     with authentic team logos and highlighted flags (`is_home`, `is_away`) for both participants.
 """
 
+import json
+import os
 import team_logos
+
+STANDINGS_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "standings.json")
+
+def load_standings_db():
+    """Load standings from data/standings.json if it exists, else use STANDINGS_DATABASE."""
+    if os.path.exists(STANDINGS_FILE):
+        try:
+            with open(STANDINGS_FILE, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception as e:
+            print(f"Warning: Failed to load {STANDINGS_FILE}: {e}")
+    return STANDINGS_DATABASE
+
+def save_standings_db(db):
+    """Save standings dictionary atomically to data/standings.json."""
+    os.makedirs(os.path.dirname(STANDINGS_FILE), exist_ok=True)
+    temp_file = STANDINGS_FILE + ".tmp"
+    with open(temp_file, "w", encoding="utf-8") as f:
+        json.dump(db, f, indent=2, ensure_ascii=False)
+    os.replace(temp_file, STANDINGS_FILE)
+
+def get_standings_db():
+    return load_standings_db()
 
 STANDINGS_DATABASE = {
     "nfl_nfc_west": {
@@ -461,7 +486,8 @@ def get_standings_for_game(game):
     Attaches authentic team logos and highlights `is_home` / `is_away`.
     """
     cat_key = classify_game(game)
-    standings_meta = STANDINGS_DATABASE.get(cat_key, STANDINGS_DATABASE["nfl_nfc_west"])
+    db = get_standings_db()
+    standings_meta = db.get(cat_key, db.get("nfl_nfc_west", STANDINGS_DATABASE["nfl_nfc_west"]))
     
     home_name = game.get("home_team", "")
     away_name = game.get("away_team", "")
