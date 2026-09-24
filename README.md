@@ -1,6 +1,6 @@
-# The Bay Area Sports Gazette
+# Cambrian Park Sports Gazette
 
-> **A curated 7-day weekly schedule, scores archive, and insider almanac covering Professional, Collegiate (NCAA D1), Junior College (3C2A), and High School athletics across San Jose, the South Bay, Peninsula, East Bay, and Monterey.**
+> **A curated 7-day weekly schedule, scores archive, and insider almanac covering Cambrian Park, San Jose, South Bay, Peninsula, East Bay, and Monterey athletics (High School, Junior College 3C2A, Collegiate NCAA D1, and Professional).**
 
 ---
 

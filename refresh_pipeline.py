@@ -113,11 +113,11 @@ class OpenRouterAgent:
         lose_score = min(h_score, a_score)
 
         system_prompt = (
-            "You are the senior beat reporter for The Bay Area Sports Gazette. "
+            "You are the senior beat reporter for the Cambrian Park Sports Gazette. "
             "Write a concise, energetic 1-to-2 sentence post-game recap. "
             "Highlight key moments, emotional weight, venue ambiance, and final score. "
             "Never use generic AI cliches like 'testament to' or 'rollercoaster of emotions'. "
-            "Be authentic to Bay Area sports culture."
+            "Be authentic to Cambrian Park and Bay Area sports culture."
         )
         user_prompt = (
             f"Game: {away} ({a_score}) at {home} ({h_score})\n"
