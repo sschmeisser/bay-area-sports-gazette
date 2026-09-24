@@ -21,19 +21,14 @@ on:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 concurrency:
-  group: "pages"
+  group: "scores-refresh"
   cancel-in-progress: false
 
 jobs:
-  refresh-and-deploy:
+  refresh-and-sync:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -73,7 +68,7 @@ jobs:
             echo "changed=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Commit and Push Updates
+      - name: Commit and Push to main & gh-pages
         if: steps.git-check.outputs.changed == 'true'
         run: |
           git config user.name "Gazette Refresh Bot"
@@ -82,18 +77,4 @@ jobs:
           git commit -m "chore(auto): refresh scores, standings & calendar [$(date +'%Y-%m-%d %H:%M')]"
           git pull --rebase origin main
           git push origin main
-
-      - name: Setup Pages
-        if: steps.git-check.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
-        uses: actions/configure-pages@v5
-
-      - name: Upload Pages Artifact
-        if: steps.git-check.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: '.'
-
-      - name: Deploy to GitHub Pages
-        if: steps.git-check.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
-        id: deployment
-        uses: actions/deploy-pages@v4
+          git push origin main:gh-pages
