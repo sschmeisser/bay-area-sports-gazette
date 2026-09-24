@@ -328,13 +328,23 @@
         "soccer",
         "college",
         "santa clara",
-        "womens sports"
+        "womens sports",
+        "south bay"
       ],
       "ticket_text": "Bronco Athletics",
       "ticket_url": "https://santaclarabroncos.com/sports/womens-soccer/schedule",
       "time": "7:00 PM",
       "venue": "Stevens Stadium (Buck Shaw Field)",
-      "week": 0
+      "week": 0,
+      "weather": {
+        "temp": "61°F",
+        "cond": "Clear Autumn Night",
+        "icon": "🌙",
+        "attire": "Light jacket advised",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": 0,
@@ -360,13 +370,23 @@
         "soccer",
         "college",
         "stanford",
-        "cagan stadium"
+        "cagan stadium",
+        "south bay"
       ],
       "ticket_text": "Cardinal Tickets",
       "ticket_url": "https://gostanford.com/sports/mens-soccer/schedule",
       "time": "7:00 PM",
       "venue": "Cagan Stadium",
-      "week": 0
+      "week": 0,
+      "weather": {
+        "temp": "62°F",
+        "cond": "Clear Autumn Night",
+        "icon": "🌙",
+        "attire": "Light jacket advised",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": 1,
@@ -392,13 +412,23 @@
         "soccer",
         "college",
         "santa clara",
-        "uc davis"
+        "uc davis",
+        "south bay"
       ],
       "ticket_text": "Bronco Athletics",
       "ticket_url": "https://santaclarabroncos.com/sports/mens-soccer/schedule",
       "time": "7:00 PM",
       "venue": "Stevens Stadium (Buck Shaw Field)",
-      "week": 0
+      "week": 0,
+      "weather": {
+        "temp": "63°F",
+        "cond": "Clear Autumn Night",
+        "icon": "🌙",
+        "attire": "Light jacket advised",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": 17,
@@ -426,13 +456,24 @@
         "branham",
         "friday night lights",
         "bval",
-        "san jose"
+        "san jose",
+        "cambrian",
+        "south bay"
       ],
       "ticket_text": "GoFan Tickets",
       "ticket_url": "https://gofan.co",
       "time": "7:00 PM",
       "venue": "Branham Stadium",
-      "week": 0
+      "week": 0,
+      "weather": {
+        "temp": "60°F",
+        "cond": "Clear Autumn Night",
+        "icon": "🌙",
+        "attire": "Light jacket advised",
+        "indoor": false
+      },
+      "is_cambrian": true,
+      "is_south_bay": true
     },
     {
       "away_score": 21,
@@ -466,7 +507,16 @@
       "ticket_url": "https://gofan.co",
       "time": "7:00 PM",
       "venue": "Brady Family Stadium",
-      "week": 0
+      "week": 0,
+      "weather": {
+        "temp": "61°F",
+        "cond": "Clear Autumn Night",
+        "icon": "🌙",
+        "attire": "Light jacket advised",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": false
     },
     {
       "away_score": 14,
@@ -493,13 +543,23 @@
         "high school",
         "saint francis",
         "mcclymonds",
-        "mountain view"
+        "mountain view",
+        "south bay"
       ],
       "ticket_text": "GoFan Tickets",
       "ticket_url": "https://gofan.co",
       "time": "7:00 PM",
       "venue": "Kevin Makley Field",
-      "week": 0
+      "week": 0,
+      "weather": {
+        "temp": "62°F",
+        "cond": "Clear Autumn Night",
+        "icon": "🌙",
+        "attire": "Light jacket advised",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": 14,
@@ -532,7 +592,16 @@
       "ticket_url": "https://gofan.co",
       "time": "7:30 PM",
       "venue": "Owen Owens Field",
-      "week": 0
+      "week": 0,
+      "weather": {
+        "temp": "63°F",
+        "cond": "Clear Autumn Night",
+        "icon": "🌙",
+        "attire": "Light jacket advised",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": false
     },
     {
       "away_score": 0,
@@ -559,13 +628,23 @@
         "college",
         "stanford",
         "washington",
-        "cagan stadium"
+        "cagan stadium",
+        "south bay"
       ],
       "ticket_text": "Cardinal Tickets",
       "ticket_url": "https://gostanford.com/sports/mens-soccer/schedule",
       "time": "7:00 PM",
       "venue": "Cagan Stadium",
-      "week": 0
+      "week": 0,
+      "weather": {
+        "temp": "60°F",
+        "cond": "Clear Autumn Night",
+        "icon": "🌙",
+        "attire": "Light jacket advised",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": 7,
@@ -599,7 +678,16 @@
       "ticket_url": "https://calbears.com/sports/football/schedule",
       "time": "1:00 PM",
       "venue": "California Memorial Stadium",
-      "week": 0
+      "week": 0,
+      "weather": {
+        "temp": "61°F",
+        "cond": "East Bay Breeze",
+        "icon": "🌤️",
+        "attire": "Light jacket advised",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": false
     },
     {
       "away_score": 26,
@@ -627,13 +715,23 @@
         "sjsu",
         "spartans",
         "cefcu stadium",
-        "san jose"
+        "san jose",
+        "south bay"
       ],
       "ticket_text": "Spartans Tickets",
       "ticket_url": "https://sjsuspartans.com/sports/football/schedule",
       "time": "4:30 PM",
       "venue": "CEFCU Stadium",
-      "week": 0
+      "week": 0,
+      "weather": {
+        "temp": "76°F",
+        "cond": "Sunny & Pleasant",
+        "icon": "☀️",
+        "attire": "Comfortable light layers",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": 7,
@@ -666,7 +764,16 @@
       "ticket_url": "https://gostanford.com/sports/football/schedule",
       "time": "7:00 PM",
       "venue": "Wallace Wade Stadium, Durham, NC",
-      "week": 0
+      "week": 0,
+      "weather": {
+        "temp": "62°F",
+        "cond": "Clear Autumn Night",
+        "icon": "🌙",
+        "attire": "Light jacket advised",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": false
     },
     {
       "away_score": 1,
@@ -698,7 +805,16 @@
       "ticket_url": "https://www.montereybayfc.com/schedule",
       "time": "7:00 PM",
       "venue": "Patriots Point, Mount Pleasant, SC",
-      "week": 0
+      "week": 0,
+      "weather": {
+        "temp": "63°F",
+        "cond": "Clear Autumn Night",
+        "icon": "🌙",
+        "attire": "Light jacket advised",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": false
     },
     {
       "away_score": 2,
@@ -730,7 +846,16 @@
       "ticket_url": "https://www.oaklandrootssc.com/schedule",
       "time": "7:00 PM",
       "venue": "IU Indianapolis Michael A. Carroll Track & Soccer Stadium, Indianapolis, IN",
-      "week": 0
+      "week": 0,
+      "weather": {
+        "temp": "60°F",
+        "cond": "Clear Autumn Night",
+        "icon": "🌙",
+        "attire": "Light jacket advised",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": false
     },
     {
       "away_score": 2,
@@ -758,13 +883,23 @@
         "earthquakes",
         "lafc",
         "rivalry",
-        "paypal park"
+        "paypal park",
+        "south bay"
       ],
       "ticket_text": "Quakes Tickets",
       "ticket_url": "https://www.sjearthquakes.com/schedule",
       "time": "7:30 PM",
       "venue": "PayPal Park",
-      "week": 0
+      "week": 0,
+      "weather": {
+        "temp": "61°F",
+        "cond": "Clear Autumn Night",
+        "icon": "🌙",
+        "attire": "Light jacket advised",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": 13,
@@ -792,13 +927,23 @@
         "49ers",
         "dolphins",
         "levis stadium",
-        "santa clara"
+        "santa clara",
+        "south bay"
       ],
       "ticket_text": "49ers Tickets",
       "ticket_url": "https://www.49ers.com/schedule",
       "time": "1:05 PM",
       "venue": "Levi's Stadium",
-      "week": 0
+      "week": 0,
+      "weather": {
+        "temp": "76°F",
+        "cond": "Sunny & Pleasant",
+        "icon": "☀️",
+        "attire": "Comfortable light layers",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": 2,
@@ -825,13 +970,23 @@
         "college",
         "sjsu",
         "spartans",
-        "san jose"
+        "san jose",
+        "south bay"
       ],
       "ticket_text": "Spartans Tickets",
       "ticket_url": "https://sjsuspartans.com/sports/mens-soccer/schedule",
       "time": "3:00 PM",
       "venue": "Spartan Soccer Complex",
-      "week": 0
+      "week": 0,
+      "weather": {
+        "temp": "72°F",
+        "cond": "Sunny & Pleasant",
+        "icon": "☀️",
+        "attire": "Comfortable light layers",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": 0,
@@ -859,13 +1014,23 @@
         "bay fc",
         "racing louisville",
         "womens sports",
-        "paypal park"
+        "paypal park",
+        "south bay"
       ],
       "ticket_text": "Bay FC Tickets",
       "ticket_url": "https://bayfc.com/schedule",
       "time": "5:00 PM",
       "venue": "PayPal Park",
-      "week": 0
+      "week": 0,
+      "weather": {
+        "temp": "70°F",
+        "cond": "Mild Twilight Sunset",
+        "icon": "🌅",
+        "attire": "Light layers advised",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -892,13 +1057,23 @@
         "college",
         "santa clara",
         "wcc",
-        "usfca"
+        "usfca",
+        "south bay"
       ],
       "ticket_text": "Bronco Athletics",
       "ticket_url": "https://santaclarabroncos.com/sports/mens-soccer/schedule",
       "time": "7:00 PM",
       "venue": "Stevens Stadium (Buck Shaw Field)",
-      "week": 1
+      "week": 1,
+      "weather": {
+        "temp": "62°F",
+        "cond": "Clear Autumn Night",
+        "icon": "🌙",
+        "attire": "Light jacket advised",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -925,13 +1100,23 @@
         "nhl",
         "sharks",
         "sap center",
-        "celebrini"
+        "celebrini",
+        "south bay"
       ],
       "ticket_text": "Sharks Tickets",
       "ticket_url": "https://www.nhl.com/sharks/schedule",
       "time": "7:00 PM",
       "venue": "SAP Center at San Jose",
-      "week": 1
+      "week": 1,
+      "weather": {
+        "temp": "68°F",
+        "cond": "Indoor Arena",
+        "icon": "🏟️",
+        "attire": "Comfortable indoor layers",
+        "indoor": true
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -957,13 +1142,23 @@
         "water polo",
         "sjsu",
         "santa clara",
-        "college"
+        "college",
+        "south bay"
       ],
       "ticket_text": "Spartan Aquatics",
       "ticket_url": "https://sjsuspartans.com/sports/mens-water-polo/schedule",
       "time": "6:00 PM",
       "venue": "SRAC Aquatics Center",
-      "week": 1
+      "week": 1,
+      "weather": {
+        "temp": "76°F",
+        "cond": "Heated Poolside",
+        "icon": "🏊",
+        "attire": "Casual poolside attire",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -991,13 +1186,24 @@
         "branham",
         "leigh",
         "friday night lights",
-        "bval"
+        "bval",
+        "cambrian",
+        "south bay"
       ],
       "ticket_text": "GoFan Tickets",
       "ticket_url": "https://gofan.co",
       "time": "7:00 PM",
       "venue": "Branham Stadium",
-      "week": 1
+      "week": 1,
+      "weather": {
+        "temp": "61°F",
+        "cond": "Clear Autumn Night",
+        "icon": "🌙",
+        "attire": "Light jacket advised",
+        "indoor": false
+      },
+      "is_cambrian": true,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -1025,13 +1231,23 @@
         "serra",
         "saint francis",
         "wcal",
-        "powerhouse"
+        "powerhouse",
+        "south bay"
       ],
       "ticket_text": "GoFan Tickets",
       "ticket_url": "https://gofan.co",
       "time": "7:00 PM",
       "venue": "Kevin Makley Field",
-      "week": 1
+      "week": 1,
+      "weather": {
+        "temp": "62°F",
+        "cond": "Clear Autumn Night",
+        "icon": "🌙",
+        "attire": "Light jacket advised",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -1064,7 +1280,16 @@
       "ticket_url": "https://gofan.co",
       "time": "7:30 PM",
       "venue": "Owen Owens Field",
-      "week": 1
+      "week": 1,
+      "weather": {
+        "temp": "63°F",
+        "cond": "Clear Autumn Night",
+        "icon": "🌙",
+        "attire": "Light jacket advised",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": false
     },
     {
       "away_score": null,
@@ -1091,13 +1316,24 @@
         "junior college",
         "sjcc",
         "jaguars",
-        "san jose"
+        "san jose",
+        "cambrian",
+        "south bay"
       ],
       "ticket_text": "SJCC Athletics",
       "ticket_url": "https://www.sjccjaguars.com/sports/fball/index",
       "time": "1:00 PM",
       "venue": "Jaguar Stadium",
-      "week": 1
+      "week": 1,
+      "weather": {
+        "temp": "73°F",
+        "cond": "Sunny & Pleasant",
+        "icon": "☀️",
+        "attire": "Comfortable light layers",
+        "indoor": false
+      },
+      "is_cambrian": true,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -1124,13 +1360,23 @@
         "college",
         "sjsu",
         "spartans",
-        "mountain west"
+        "mountain west",
+        "south bay"
       ],
       "ticket_text": "SJSU Tickets",
       "ticket_url": "https://sjsuspartans.com/sports/football/schedule",
       "time": "4:30 PM",
       "venue": "CEFCU Stadium",
-      "week": 1
+      "week": 1,
+      "weather": {
+        "temp": "74°F",
+        "cond": "Sunny & Pleasant",
+        "icon": "☀️",
+        "attire": "Comfortable light layers",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -1163,7 +1409,16 @@
       "ticket_url": "https://www.montereybayfc.com/schedule",
       "time": "7:00 PM",
       "venue": "Cardinale Stadium",
-      "week": 1
+      "week": 1,
+      "weather": {
+        "temp": "57°F",
+        "cond": "Coastal Breeze",
+        "icon": "🌊",
+        "attire": "Windbreaker & warm layers",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": false
     },
     {
       "away_score": null,
@@ -1189,13 +1444,23 @@
         "soccer",
         "mls",
         "earthquakes",
-        "paypal park"
+        "paypal park",
+        "south bay"
       ],
       "ticket_text": "Quakes Tickets",
       "ticket_url": "https://www.sjearthquakes.com/schedule",
       "time": "7:30 PM",
       "venue": "PayPal Park",
-      "week": 1
+      "week": 1,
+      "weather": {
+        "temp": "62°F",
+        "cond": "Clear Autumn Night",
+        "icon": "🌙",
+        "attire": "Light jacket advised",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -1222,13 +1487,23 @@
         "nfl",
         "49ers",
         "levis stadium",
-        "santa clara"
+        "santa clara",
+        "south bay"
       ],
       "ticket_text": "49ers Tickets",
       "ticket_url": "https://www.49ers.com/schedule",
       "time": "1:05 PM",
       "venue": "Levi's Stadium",
-      "week": 1
+      "week": 1,
+      "weather": {
+        "temp": "73°F",
+        "cond": "Sunny & Pleasant",
+        "icon": "☀️",
+        "attire": "Comfortable light layers",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -1255,13 +1530,23 @@
         "nwsl",
         "bay fc",
         "paypal park",
-        "womens sports"
+        "womens sports",
+        "south bay"
       ],
       "ticket_text": "Bay FC Tickets",
       "ticket_url": "https://bayfc.com/schedule",
       "time": "5:00 PM",
       "venue": "PayPal Park",
-      "week": 1
+      "week": 1,
+      "weather": {
+        "temp": "69°F",
+        "cond": "Mild Twilight Sunset",
+        "icon": "🌅",
+        "attire": "Light layers advised",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -1288,13 +1573,23 @@
         "college",
         "stanford",
         "cal",
-        "rivalry"
+        "rivalry",
+        "south bay"
       ],
       "ticket_text": "Stanford Tickets",
       "ticket_url": "https://gostanford.com/sports/mens-soccer/schedule",
       "time": "7:00 PM",
       "venue": "Cagan Stadium",
-      "week": 2
+      "week": 2,
+      "weather": {
+        "temp": "63°F",
+        "cond": "Clear Autumn Night",
+        "icon": "🌙",
+        "attire": "Light jacket advised",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -1320,13 +1615,23 @@
         "volleyball",
         "college",
         "stanford",
-        "maples pavilion"
+        "maples pavilion",
+        "south bay"
       ],
       "ticket_text": "Volleyball Tickets",
       "ticket_url": "https://gostanford.com/sports/womens-volleyball/schedule",
       "time": "7:00 PM",
       "venue": "Maples Pavilion",
-      "week": 2
+      "week": 2,
+      "weather": {
+        "temp": "69°F",
+        "cond": "Indoor Pavilion",
+        "icon": "🏟️",
+        "attire": "Comfortable indoor layers",
+        "indoor": true
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -1353,13 +1658,24 @@
         "high school",
         "branham",
         "bval",
-        "san jose"
+        "san jose",
+        "cambrian",
+        "south bay"
       ],
       "ticket_text": "GoFan Tickets",
       "ticket_url": "https://gofan.co",
       "time": "7:00 PM",
       "venue": "Branham Stadium",
-      "week": 2
+      "week": 2,
+      "weather": {
+        "temp": "54°F",
+        "cond": "Crisp Autumn Night",
+        "icon": "🌙",
+        "attire": "Warm jacket advised",
+        "indoor": false
+      },
+      "is_cambrian": true,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -1387,13 +1703,24 @@
         "bellarmine",
         "mitty",
         "wcal",
-        "san jose"
+        "san jose",
+        "cambrian",
+        "south bay"
       ],
       "ticket_text": "GoFan Tickets",
       "ticket_url": "https://gofan.co",
       "time": "7:00 PM",
       "venue": "Jaguar Stadium (SJCC)",
-      "week": 2
+      "week": 2,
+      "weather": {
+        "temp": "55°F",
+        "cond": "Crisp Autumn Night",
+        "icon": "🌙",
+        "attire": "Warm jacket advised",
+        "indoor": false
+      },
+      "is_cambrian": true,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -1419,13 +1746,23 @@
         "football",
         "junior college",
         "de anza",
-        "cupertino"
+        "cupertino",
+        "south bay"
       ],
       "ticket_text": "De Anza Sports",
       "ticket_url": "https://www.deanzasports.com/sports/fball/index",
       "time": "1:00 PM",
       "venue": "De Anza Stadium",
-      "week": 2
+      "week": 2,
+      "weather": {
+        "temp": "68°F",
+        "cond": "Sunny & Crisp",
+        "icon": "☀️",
+        "attire": "Comfortable light layers",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -1452,13 +1789,23 @@
         "college",
         "stanford",
         "acc",
-        "palo alto"
+        "palo alto",
+        "south bay"
       ],
       "ticket_text": "Cardinal Tickets",
       "ticket_url": "https://gostanford.com/sports/football/schedule",
       "time": "4:00 PM",
       "venue": "Stanford Stadium",
-      "week": 2
+      "week": 2,
+      "weather": {
+        "temp": "69°F",
+        "cond": "Sunny & Crisp",
+        "icon": "☀️",
+        "attire": "Comfortable light layers",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -1484,13 +1831,23 @@
         "soccer",
         "mls",
         "earthquakes",
-        "san jose"
+        "san jose",
+        "south bay"
       ],
       "ticket_text": "Quakes Tickets",
       "ticket_url": "https://www.sjearthquakes.com/schedule",
       "time": "7:30 PM",
       "venue": "PayPal Park",
-      "week": 2
+      "week": 2,
+      "weather": {
+        "temp": "58°F",
+        "cond": "Crisp Autumn Night",
+        "icon": "🌙",
+        "attire": "Warm jacket advised",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -1518,13 +1875,23 @@
         "49ers",
         "rams",
         "rivalry",
-        "santa clara"
+        "santa clara",
+        "south bay"
       ],
       "ticket_text": "49ers Tickets",
       "ticket_url": "https://www.49ers.com/schedule",
       "time": "1:25 PM",
       "venue": "Levi's Stadium",
-      "week": 2
+      "week": 2,
+      "weather": {
+        "temp": "71°F",
+        "cond": "Sunny & Crisp",
+        "icon": "☀️",
+        "attire": "Comfortable light layers",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -1556,7 +1923,16 @@
       "ticket_url": "https://www.oaklandrootssc.com/schedule",
       "time": "4:00 PM",
       "venue": "Oakland Coliseum",
-      "week": 2
+      "week": 2,
+      "weather": {
+        "temp": "72°F",
+        "cond": "Sunny & Crisp",
+        "icon": "☀️",
+        "attire": "Comfortable light layers",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": false
     },
     {
       "away_score": null,
@@ -1585,13 +1961,23 @@
         "home opener",
         "sap center",
         "celebrini",
-        "must-watch"
+        "must-watch",
+        "south bay"
       ],
       "ticket_text": "Sharks Opener Tickets",
       "ticket_url": "https://www.nhl.com/sharks/schedule",
       "time": "7:30 PM",
       "venue": "SAP Center at San Jose",
-      "week": 2
+      "week": 2,
+      "weather": {
+        "temp": "68°F",
+        "cond": "Indoor Arena",
+        "icon": "🏟️",
+        "attire": "Comfortable indoor layers",
+        "indoor": true
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -1618,13 +2004,23 @@
         "ahl",
         "barracuda",
         "tech cu arena",
-        "san jose"
+        "san jose",
+        "south bay"
       ],
       "ticket_text": "Barracuda Tickets",
       "ticket_url": "https://www.sjbarracuda.com/games",
       "time": "7:00 PM",
       "venue": "Tech CU Arena",
-      "week": 3
+      "week": 3,
+      "weather": {
+        "temp": "65°F",
+        "cond": "Indoor Ice Arena",
+        "icon": "⛸️",
+        "attire": "Warm fleece or hoodie",
+        "indoor": true
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -1651,13 +2047,24 @@
         "high school",
         "branham",
         "bval",
-        "san jose"
+        "san jose",
+        "cambrian",
+        "south bay"
       ],
       "ticket_text": "GoFan Tickets",
       "ticket_url": "https://gofan.co",
       "time": "7:00 PM",
       "venue": "Branham Stadium",
-      "week": 3
+      "week": 3,
+      "weather": {
+        "temp": "55°F",
+        "cond": "Crisp Autumn Night",
+        "icon": "🌙",
+        "attire": "Warm jacket advised",
+        "indoor": false
+      },
+      "is_cambrian": true,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -1690,7 +2097,16 @@
       "ticket_url": "https://gofan.co",
       "time": "7:00 PM",
       "venue": "Brady Family Stadium",
-      "week": 3
+      "week": 3,
+      "weather": {
+        "temp": "56°F",
+        "cond": "Crisp Autumn Night",
+        "icon": "🌙",
+        "attire": "Warm jacket advised",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": false
     },
     {
       "away_score": null,
@@ -1717,13 +2133,23 @@
         "college",
         "sjsu",
         "spartans",
-        "san jose"
+        "san jose",
+        "south bay"
       ],
       "ticket_text": "Spartans Tickets",
       "ticket_url": "https://sjsuspartans.com/sports/football/schedule",
       "time": "4:00 PM",
       "venue": "CEFCU Stadium",
-      "week": 3
+      "week": 3,
+      "weather": {
+        "temp": "69°F",
+        "cond": "Sunny & Crisp",
+        "icon": "☀️",
+        "attire": "Comfortable light layers",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -1756,7 +2182,16 @@
       "ticket_url": "https://www.montereybayfc.com/schedule",
       "time": "7:00 PM",
       "venue": "Cardinale Stadium",
-      "week": 3
+      "week": 3,
+      "weather": {
+        "temp": "57°F",
+        "cond": "Coastal Breeze",
+        "icon": "🌊",
+        "attire": "Windbreaker & warm layers",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": false
     },
     {
       "away_score": null,
@@ -1784,13 +2219,23 @@
         "bay fc",
         "angel city",
         "derby",
-        "san jose"
+        "san jose",
+        "south bay"
       ],
       "ticket_text": "Bay FC Tickets",
       "ticket_url": "https://bayfc.com/schedule",
       "time": "5:00 PM",
       "venue": "PayPal Park",
-      "week": 3
+      "week": 3,
+      "weather": {
+        "temp": "62°F",
+        "cond": "Cool Autumn Dusk",
+        "icon": "🌅",
+        "attire": "Light jacket advised",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -1817,13 +2262,23 @@
         "nhl",
         "sharks",
         "mcdavid",
-        "sap center"
+        "sap center",
+        "south bay"
       ],
       "ticket_text": "Sharks Tickets",
       "ticket_url": "https://www.nhl.com/sharks/schedule",
       "time": "7:30 PM",
       "venue": "SAP Center at San Jose",
-      "week": 4
+      "week": 4,
+      "weather": {
+        "temp": "68°F",
+        "cond": "Indoor Arena",
+        "icon": "🏟️",
+        "attire": "Comfortable indoor layers",
+        "indoor": true
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -1856,7 +2311,16 @@
       "ticket_url": "https://www.nba.com/warriors/schedule",
       "time": "7:00 PM",
       "venue": "Chase Center",
-      "week": 4
+      "week": 4,
+      "weather": {
+        "temp": "70°F",
+        "cond": "Indoor Arena",
+        "icon": "🏟️",
+        "attire": "Comfortable indoor layers",
+        "indoor": true
+      },
+      "is_cambrian": false,
+      "is_south_bay": false
     },
     {
       "away_score": null,
@@ -1884,13 +2348,24 @@
         "branham",
         "homecoming",
         "san jose",
-        "must-watch"
+        "must-watch",
+        "cambrian",
+        "south bay"
       ],
       "ticket_text": "GoFan Tickets",
       "ticket_url": "https://gofan.co",
       "time": "7:00 PM",
       "venue": "Branham Stadium",
-      "week": 4
+      "week": 4,
+      "weather": {
+        "temp": "56°F",
+        "cond": "Crisp Autumn Night",
+        "icon": "🌙",
+        "attire": "Warm jacket advised",
+        "indoor": false
+      },
+      "is_cambrian": true,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -1917,13 +2392,24 @@
         "high school",
         "westmont",
         "leigh",
-        "campbell"
+        "campbell",
+        "cambrian",
+        "south bay"
       ],
       "ticket_text": "GoFan Tickets",
       "ticket_url": "https://gofan.co",
       "time": "7:00 PM",
       "venue": "Westmont Stadium",
-      "week": 4
+      "week": 4,
+      "weather": {
+        "temp": "57°F",
+        "cond": "Crisp Autumn Night",
+        "icon": "🌙",
+        "attire": "Warm jacket advised",
+        "indoor": false
+      },
+      "is_cambrian": true,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -1956,7 +2442,16 @@
       "ticket_url": "https://calbears.com/sports/football/schedule",
       "time": "4:00 PM",
       "venue": "California Memorial Stadium",
-      "week": 4
+      "week": 4,
+      "weather": {
+        "temp": "61°F",
+        "cond": "East Bay Breeze",
+        "icon": "🌤️",
+        "attire": "Light jacket advised",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": false
     },
     {
       "away_score": null,
@@ -1982,13 +2477,23 @@
         "soccer",
         "mls",
         "earthquakes",
-        "san jose"
+        "san jose",
+        "south bay"
       ],
       "ticket_text": "Quakes Tickets",
       "ticket_url": "https://www.sjearthquakes.com/schedule",
       "time": "7:30 PM",
       "venue": "PayPal Park",
-      "week": 4
+      "week": 4,
+      "weather": {
+        "temp": "53°F",
+        "cond": "Crisp Autumn Night",
+        "icon": "🌙",
+        "attire": "Warm jacket advised",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -2016,13 +2521,23 @@
         "49ers",
         "cowboys",
         "marquee",
-        "santa clara"
+        "santa clara",
+        "south bay"
       ],
       "ticket_text": "49ers Tickets",
       "ticket_url": "https://www.49ers.com/schedule",
       "time": "1:25 PM",
       "venue": "Levi's Stadium",
-      "week": 4
+      "week": 4,
+      "weather": {
+        "temp": "72°F",
+        "cond": "Sunny & Crisp",
+        "icon": "☀️",
+        "attire": "Comfortable light layers",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -2055,7 +2570,16 @@
       "ticket_url": "https://www.nba.com/warriors/schedule",
       "time": "7:00 PM",
       "venue": "Chase Center",
-      "week": 5
+      "week": 5,
+      "weather": {
+        "temp": "70°F",
+        "cond": "Indoor Arena",
+        "icon": "🏟️",
+        "attire": "Comfortable indoor layers",
+        "indoor": true
+      },
+      "is_cambrian": false,
+      "is_south_bay": false
     },
     {
       "away_score": null,
@@ -2082,13 +2606,23 @@
         "nhl",
         "sharks",
         "kings",
-        "sap center"
+        "sap center",
+        "south bay"
       ],
       "ticket_text": "Sharks Tickets",
       "ticket_url": "https://www.nhl.com/sharks/schedule",
       "time": "7:30 PM",
       "venue": "SAP Center at San Jose",
-      "week": 5
+      "week": 5,
+      "weather": {
+        "temp": "68°F",
+        "cond": "Indoor Arena",
+        "icon": "🏟️",
+        "attire": "Comfortable indoor layers",
+        "indoor": true
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -2115,13 +2649,24 @@
         "high school",
         "branham",
         "leland",
-        "san jose"
+        "san jose",
+        "cambrian",
+        "south bay"
       ],
       "ticket_text": "GoFan Tickets",
       "ticket_url": "https://gofan.co",
       "time": "7:00 PM",
       "venue": "Branham Stadium",
-      "week": 5
+      "week": 5,
+      "weather": {
+        "temp": "57°F",
+        "cond": "Crisp Autumn Night",
+        "icon": "🌙",
+        "attire": "Warm jacket advised",
+        "indoor": false
+      },
+      "is_cambrian": true,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -2154,7 +2699,16 @@
       "ticket_url": "https://gofan.co",
       "time": "7:00 PM",
       "venue": "Brady Family Stadium",
-      "week": 5
+      "week": 5,
+      "weather": {
+        "temp": "58°F",
+        "cond": "Crisp Autumn Night",
+        "icon": "🌙",
+        "attire": "Warm jacket advised",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": false
     },
     {
       "away_score": null,
@@ -2182,13 +2736,23 @@
         "sjsu",
         "hawaii",
         "homecoming",
-        "san jose"
+        "san jose",
+        "south bay"
       ],
       "ticket_text": "SJSU Homecoming Tickets",
       "ticket_url": "https://sjsuspartans.com/sports/football/schedule",
       "time": "4:00 PM",
       "venue": "CEFCU Stadium",
-      "week": 5
+      "week": 5,
+      "weather": {
+        "temp": "71°F",
+        "cond": "Sunny & Crisp",
+        "icon": "☀️",
+        "attire": "Comfortable light layers",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -2216,13 +2780,23 @@
         "earthquakes",
         "decision day",
         "san jose",
-        "must-watch"
+        "must-watch",
+        "south bay"
       ],
       "ticket_text": "Decision Day Tickets",
       "ticket_url": "https://www.sjearthquakes.com/schedule",
       "time": "6:00 PM",
       "venue": "PayPal Park",
-      "week": 5
+      "week": 5,
+      "weather": {
+        "temp": "54°F",
+        "cond": "Crisp Autumn Night",
+        "icon": "🌙",
+        "attire": "Warm jacket advised",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -2249,13 +2823,23 @@
         "nwsl",
         "bay fc",
         "gotham fc",
-        "san jose"
+        "san jose",
+        "south bay"
       ],
       "ticket_text": "Bay FC Finale Tickets",
       "ticket_url": "https://bayfc.com/schedule",
       "time": "5:00 PM",
       "venue": "PayPal Park",
-      "week": 5
+      "week": 5,
+      "weather": {
+        "temp": "64°F",
+        "cond": "Cool Autumn Dusk",
+        "icon": "🌅",
+        "attire": "Light jacket advised",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -2282,13 +2866,23 @@
         "nhl",
         "sharks",
         "kraken",
-        "sap center"
+        "sap center",
+        "south bay"
       ],
       "ticket_text": "Sharks Tickets",
       "ticket_url": "https://www.nhl.com/sharks/schedule",
       "time": "7:30 PM",
       "venue": "SAP Center at San Jose",
-      "week": 6
+      "week": 6,
+      "weather": {
+        "temp": "68°F",
+        "cond": "Indoor Arena",
+        "icon": "🏟️",
+        "attire": "Comfortable indoor layers",
+        "indoor": true
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -2314,13 +2908,23 @@
         "basketball",
         "college",
         "santa clara",
-        "broncos"
+        "broncos",
+        "south bay"
       ],
       "ticket_text": "Leavey Center Tickets",
       "ticket_url": "https://santaclarabroncos.com/sports/mens-basketball/schedule",
       "time": "7:00 PM",
       "venue": "Leavey Center",
-      "week": 6
+      "week": 6,
+      "weather": {
+        "temp": "68°F",
+        "cond": "Indoor Arena",
+        "icon": "🏟️",
+        "attire": "Comfortable indoor layers",
+        "indoor": true
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -2349,13 +2953,24 @@
         "pioneer",
         "championship",
         "san jose",
-        "must-watch"
+        "must-watch",
+        "cambrian",
+        "south bay"
       ],
       "ticket_text": "GoFan Tickets",
       "ticket_url": "https://gofan.co",
       "time": "7:00 PM",
       "venue": "Branham Stadium",
-      "week": 6
+      "week": 6,
+      "weather": {
+        "temp": "58°F",
+        "cond": "Crisp Autumn Night",
+        "icon": "🌙",
+        "attire": "Warm jacket advised",
+        "indoor": false
+      },
+      "is_cambrian": true,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -2388,7 +3003,16 @@
       "ticket_url": "https://gofan.co",
       "time": "7:30 PM",
       "venue": "Owen Owens Field",
-      "week": 6
+      "week": 6,
+      "weather": {
+        "temp": "53°F",
+        "cond": "Crisp Autumn Night",
+        "icon": "🌙",
+        "attire": "Warm jacket advised",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": false
     },
     {
       "away_score": null,
@@ -2414,13 +3038,24 @@
         "football",
         "junior college",
         "sjcc",
-        "san jose"
+        "san jose",
+        "cambrian",
+        "south bay"
       ],
       "ticket_text": "SJCC Athletics",
       "ticket_url": "https://www.sjccjaguars.com/sports/fball/index",
       "time": "1:00 PM",
       "venue": "Jaguar Stadium",
-      "week": 6
+      "week": 6,
+      "weather": {
+        "temp": "72°F",
+        "cond": "Sunny & Crisp",
+        "icon": "☀️",
+        "attire": "Comfortable light layers",
+        "indoor": false
+      },
+      "is_cambrian": true,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -2448,13 +3083,23 @@
         "sharks",
         "flames",
         "sap center",
-        "halloween"
+        "halloween",
+        "south bay"
       ],
       "ticket_text": "Sharks Tickets",
       "ticket_url": "https://www.nhl.com/sharks/schedule",
       "time": "7:00 PM",
       "venue": "SAP Center at San Jose",
-      "week": 6
+      "week": 6,
+      "weather": {
+        "temp": "68°F",
+        "cond": "Indoor Arena",
+        "icon": "🏟️",
+        "attire": "Comfortable indoor layers",
+        "indoor": true
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "away_score": null,
@@ -2482,13 +3127,23 @@
         "49ers",
         "seahawks",
         "rivalry",
-        "santa clara"
+        "santa clara",
+        "south bay"
       ],
       "ticket_text": "49ers Tickets",
       "ticket_url": "https://www.49ers.com/schedule",
       "time": "1:25 PM",
       "venue": "Levi's Stadium",
-      "week": 6
+      "week": 6,
+      "weather": {
+        "temp": "69°F",
+        "cond": "Sunny & Crisp",
+        "icon": "☀️",
+        "attire": "Comfortable light layers",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "id": "w1-13",
@@ -2522,9 +3177,19 @@
         "paypal park",
         "ventura county",
         "la galaxy",
-        "san jose"
+        "san jose",
+        "south bay"
       ],
-      "importance": "high"
+      "importance": "high",
+      "weather": {
+        "temp": "75°F",
+        "cond": "Sunny & Pleasant",
+        "icon": "☀️",
+        "attire": "Comfortable light layers",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": true
     },
     {
       "id": "w3-10",
@@ -2558,7 +3223,16 @@
         "saint marys",
         "east bay"
       ],
-      "importance": "high"
+      "importance": "high",
+      "weather": {
+        "temp": "62°F",
+        "cond": "Cool Autumn Dusk",
+        "icon": "🌅",
+        "attire": "Light jacket advised",
+        "indoor": false
+      },
+      "is_cambrian": false,
+      "is_south_bay": false
     }
   ]
 }

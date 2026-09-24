@@ -1407,6 +1407,338 @@
       text-decoration: underline;
     }
 
+    /* Print Fridge Sheet Button */
+    .print-fridge-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-line);
+      color: var(--text-main);
+      padding: 7px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .print-fridge-btn:hover {
+      background: #eee3c8;
+      border-color: var(--text-main);
+    }
+
+    /* Local Cambrian Filter Pill */
+    .filter-btn.local-filter {
+      background: #faeed7;
+      border-color: #c9822a;
+      color: #7c440a;
+      font-weight: 800;
+    }
+    .filter-btn.local-filter.active {
+      background: #7c440a;
+      border-color: #5c3005;
+      color: #fff8e7;
+    }
+
+    /* Cambrian Neighborhood Tag on Event Chip */
+    .chip-cambrian-tag {
+      font-size: 0.62rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #7c440a;
+      background: #faeed7;
+      border: 1px solid #dcb680;
+      padding: 1px 5px;
+      border-radius: 3px;
+      display: inline-flex;
+      align-items: center;
+      margin-left: 4px;
+    }
+
+    /* Live Gameday Pulse Badge */
+    .live-pulse-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.65rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #c0292b;
+      background: rgba(192, 41, 43, 0.1);
+      border: 1px solid rgba(192, 41, 43, 0.35);
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      background-color: #c0292b;
+      border-radius: 50%;
+      display: inline-block;
+      animation: livePulse 1.6s infinite ease-in-out;
+    }
+    @keyframes livePulse {
+      0% { transform: scale(0.92); box-shadow: 0 0 0 0 rgba(192, 41, 43, 0.7); }
+      70% { transform: scale(1.15); box-shadow: 0 0 0 6px rgba(192, 41, 43, 0); }
+      100% { transform: scale(0.92); box-shadow: 0 0 0 0 rgba(192, 41, 43, 0); }
+    }
+
+    /* Weather Chip on Event Card */
+    .chip-weather {
+      margin-top: 5px;
+      padding: 3px 6px;
+      background: rgba(44, 36, 27, 0.04);
+      border: 1px dashed rgba(44, 36, 27, 0.2);
+      border-radius: 4px;
+      font-size: 0.67rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      line-height: 1.2;
+    }
+    .chip-weather .weather-icon {
+      font-size: 0.85rem;
+      line-height: 1;
+    }
+
+    /* Modal Weather Card */
+    .modal-weather-card {
+      background: #faf3e3;
+      border: 1px solid #dfcfb2;
+      border-left: 4px solid #b8782a;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .weather-card-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .weather-card-icon {
+      font-size: 1.6rem;
+      line-height: 1;
+    }
+    .weather-card-temp {
+      font-family: var(--font-headline);
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+    .weather-card-cond {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .weather-card-attire {
+      background: #fff9ed;
+      border: 1px solid #e2d2b5;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.76rem;
+      color: #633c0e;
+      font-weight: 600;
+    }
+
+    /* Front-Page "Lead Story" Headline Banner */
+    .lead-story-banner {
+      background: #fffef8;
+      border: 2px solid var(--text-main);
+      box-shadow: 0 4px 16px rgba(44, 36, 27, 0.08);
+      margin-bottom: 18px;
+      position: relative;
+    }
+    .lead-story-top-ribbon {
+      background: var(--text-main);
+      color: #faeed7;
+      padding: 5px 14px;
+      font-family: var(--font-headline);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .lead-story-grid {
+      display: grid;
+      grid-template-columns: 280px 1fr 220px;
+      gap: 18px;
+      padding: 16px 20px;
+      align-items: center;
+    }
+    @media (max-width: 1024px) {
+      .lead-story-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        padding: 14px;
+      }
+    }
+    .lead-matchup-col {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .lead-teams-display {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .lead-team-crest {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.12));
+    }
+    .lead-matchup-title {
+      font-family: var(--font-headline);
+      font-size: 1.15rem;
+      font-weight: 900;
+      line-height: 1.2;
+      color: var(--text-main);
+    }
+    .lead-meta-line {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .lead-dispatch-col {
+      border-left: 1px solid var(--border-line);
+      border-right: 1px solid var(--border-line);
+      padding: 0 16px;
+    }
+    @media (max-width: 1024px) {
+      .lead-dispatch-col {
+        border-left: none;
+        border-right: none;
+        border-top: 1px solid var(--border-line);
+        border-bottom: 1px solid var(--border-line);
+        padding: 12px 0;
+      }
+    }
+    .lead-pullquote {
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      line-height: 1.45;
+      color: var(--text-main);
+      font-style: italic;
+      margin-bottom: 8px;
+    }
+    .lead-weather-attire {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      background: #f7ede0;
+      border: 1px solid #dec3a5;
+      padding: 3px 8px;
+      border-radius: 4px;
+      color: #6d4110;
+    }
+    .lead-actions-col {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .btn-lead-read {
+      background: var(--text-main);
+      color: #fff;
+      border: none;
+      padding: 9px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      font-weight: 800;
+      cursor: pointer;
+      text-align: center;
+      transition: background 0.15s ease;
+    }
+    .btn-lead-read:hover {
+      background: #2a313d;
+    }
+    .btn-lead-secondary {
+      background: transparent;
+      border: 1px solid var(--border-line);
+      padding: 7px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      color: var(--text-main);
+      text-decoration: none;
+    }
+    .btn-lead-secondary:hover {
+      background: #eee3c8;
+    }
+
+    /* Modal Navigation & Share Buttons */
+    .btn-directions, .btn-share {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-line);
+      padding: 9px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.84rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-main);
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+    .btn-directions:hover, .btn-share:hover {
+      background: #eee3c8;
+      border-color: var(--text-main);
+    }
+
+    /* Toast Notification for Share / Copy */
+    .toast-notification {
+      position: fixed;
+      bottom: 74px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #1e293b;
+      color: #ffffff;
+      padding: 10px 18px;
+      border-radius: 6px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .toast-notification.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* Refrigerator Print Header (Hidden on screen) */
+    .print-fridge-masthead {
+      display: none;
+    }
+
     .plan-modal {
       max-width: 680px;
     }
@@ -2016,6 +2348,155 @@
       .day-column {
         min-height: auto;
       }
+      .modal-btn-group {
+        flex-wrap: wrap;
+        width: 100%;
+        gap: 8px;
+      }
+    }
+
+    /* Printable "Refrigerator Edition" Stylesheet */
+    @media print {
+      @page {
+        size: letter landscape;
+        margin: 5mm;
+      }
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        font-family: Georgia, serif !important;
+        font-size: 8pt !important;
+        line-height: 1.15 !important;
+      }
+      .masthead-tools,
+      .week-stepper,
+      .filter-bar,
+      .mobile-bottom-nav,
+      .mobile-day-picker,
+      .modal-backdrop,
+      .btn-star,
+      .chip-quick-star,
+      .toast-notification,
+      .lead-story-banner,
+      .lead-actions-col,
+      footer {
+        display: none !important;
+      }
+      .masthead {
+        display: none !important;
+      }
+      .week-nav-container {
+        display: none !important;
+      }
+      .week-headline-banner {
+        display: none !important;
+      }
+      .print-fridge-masthead {
+        display: block !important;
+        border: 2pt solid #000;
+        padding: 4px 8px;
+        margin: 0 0 4px 0;
+        text-align: center;
+        font-weight: 900;
+        font-size: 10pt;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        background: #f0f0f0 !important;
+      }
+      .container {
+        max-width: 100% !important;
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      .calendar-grid-wrapper {
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: visible !important;
+      }
+      .calendar-7day-grid {
+        display: grid !important;
+        grid-template-columns: repeat(7, 1fr) !important;
+        gap: 3px !important;
+        width: 100% !important;
+        overflow: visible !important;
+        break-inside: auto !important;
+      }
+      .day-column {
+        display: block !important;
+        min-height: 0 !important;
+        height: auto !important;
+        border: 1pt solid #222 !important;
+        background: #fff !important;
+        overflow: visible !important;
+        page-break-inside: auto !important;
+        break-inside: auto !important;
+        box-shadow: none !important;
+      }
+      .day-col-header {
+        background: #f0f0f0 !important;
+        color: #000 !important;
+        border-bottom: 1pt solid #222 !important;
+        padding: 2px 2px !important;
+        text-align: center;
+      }
+      .day-name-label {
+        font-size: 7.5pt !important;
+        font-weight: 800 !important;
+        color: #000 !important;
+      }
+      .day-num-label {
+        font-size: 7pt !important;
+        color: #444 !important;
+      }
+      .day-events-list {
+        padding: 2px !important;
+        gap: 2px !important;
+      }
+      .event-chip {
+        background: #fff !important;
+        border: 0.5pt solid #666 !important;
+        color: #000 !important;
+        box-shadow: none !important;
+        padding: 2px 3px !important;
+        margin-bottom: 2px !important;
+        page-break-inside: avoid;
+      }
+      .team-name-text, .team-name {
+        color: #000 !important;
+        font-weight: 800 !important;
+        font-size: 6.8pt !important;
+      }
+      .chip-time-sport, .chip-venue, .chip-weather {
+        font-size: 5.8pt !important;
+        color: #222 !important;
+      }
+      .chip-weather {
+        margin-top: 1px !important;
+        padding: 1px 2px !important;
+      }
+      .team-logo-img, .team-logo-inline img {
+        filter: grayscale(100%);
+        width: 13px !important;
+        height: 13px !important;
+      }
+      .lead-story-banner {
+        border: 1pt solid #000 !important;
+        background: #fff !important;
+        margin-bottom: 6px !important;
+        page-break-inside: avoid;
+      }
+      .lead-story-top-ribbon {
+        background: #000 !important;
+        color: #fff !important;
+        font-size: 7pt !important;
+        padding: 2px 8px !important;
+      }
+      .lead-story-grid {
+        grid-template-columns: 240px 1fr !important;
+        gap: 8px !important;
+        padding: 6px 8px !important;
+      }
     }
   </style>
 </head>
@@ -2034,6 +2515,9 @@
           <p class="publication-tagline">A curated 7-day weekly planner and results archive of local high school, collegiate, junior college, and professional sports.</p>
         </div>
         <div class="masthead-tools">
+          <button class="print-fridge-btn" id="printFridgeBtn" onclick="window.print()" title="Print Refrigerator Edition Schedule">
+            🖨️ Print Fridge Sheet
+          </button>
           <div class="search-wrapper">
             <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="11" cy="11" r="8"></circle>
@@ -2065,7 +2549,11 @@
 
   <main class="container">
     <div class="filter-bar">
-      <span style="font-weight: 700; color: var(--text-muted); text-transform: uppercase; font-size: 0.72rem; margin-right: 4px;">Sport:</span>
+      <button class="filter-btn local-filter" id="localFilterBtn" data-filter-type="local" data-filter-val="cambrian" title="Filter to neighborhood Cambrian Park and South Bay games">
+        📍 Cambrian & South Bay
+      </button>
+
+      <span style="font-weight: 700; color: var(--text-muted); text-transform: uppercase; font-size: 0.72rem; margin: 0 4px 0 6px;">Sport:</span>
       <button class="filter-btn active" data-filter-type="sport" data-filter-val="all">All</button>
       <button class="filter-btn" data-filter-type="sport" data-filter-val="Football">🏈 Football</button>
       <button class="filter-btn" data-filter-type="sport" data-filter-val="Hockey">🏒 Hockey</button>
@@ -2092,6 +2580,12 @@
     <div class="mobile-day-picker" id="mobileDayPicker"></div>
 
     <div class="calendar-grid-wrapper">
+      <div class="print-fridge-masthead" id="printFridgeMasthead">
+        CAMBRIAN PARK SPORTS GAZETTE — REFRIGERATOR EDITION
+      </div>
+
+      <div class="lead-story-banner" id="leadStoryBanner"></div>
+
       <div class="week-headline-banner">
         <h2 class="week-headline-text" id="weekHeadlineText">Week 1: Fall Kickoff & The Campbell District Derby</h2>
         <span class="week-date-span" id="weekDateSpan">Sep 21 – Sep 27, 2026</span>
@@ -2127,6 +2621,8 @@
         <div class="modal-btn-group">
           <a href="#" target="_blank" rel="noopener" class="btn-ticket" id="modalTicketBtn">Tickets & Admission ↗</a>
           <button class="btn-star" id="modalStarBtn">⭐ Add to My Plan</button>
+          <a href="#" target="_blank" rel="noopener" class="btn-directions" id="modalDirectionsBtn">🗺️ Get Directions</a>
+          <button class="btn-share" id="modalShareBtn">📤 Share Game</button>
         </div>
         <a href="#" target="_blank" rel="noopener" class="btn-gcal" id="modalGcalBtn">+ Google Calendar</a>
       </div>
@@ -2267,9 +2763,56 @@
     let activeLevel = 'all';
     let activeImportance = 'all';
     let activeStatus = 'all'; // 'all' or 'final'
+    let activeLocal = 'all'; // 'all' or 'cambrian'
     let searchQuery = '';
     let selectedGame = null;
     let activeMobileDay = null;
+
+    function isGameLive(game) {
+      if (!game) return false;
+      if (game.status === 'live' || game.is_live) return true;
+      const todayStr = new Date().toISOString().split('T')[0];
+      return game.date === todayStr && game.status !== 'final';
+    }
+
+    function showToast(msg) {
+      let toast = document.getElementById('toastNotification');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'toastNotification';
+        toast.className = 'toast-notification';
+        document.body.appendChild(toast);
+      }
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3500);
+    }
+
+    function shareGame(game) {
+      if (!game) return;
+      const isFinal = game.status === 'final';
+      const scoreSub = isFinal ? ` (Final: ${game.away_score}-${game.home_score})` : '';
+      const shareText = `🏆 ${game.away_team} at ${game.home_team}${scoreSub}\n📅 ${game.day_of_week}, ${game.date} • ${game.time}\n📍 ${game.venue} (${game.city})\n\nRead the full dispatch in the Cambrian Park Sports Gazette:`;
+      const shareUrl = window.location.origin + window.location.pathname + `?game=${encodeURIComponent(game.id)}`;
+
+      if (navigator.share) {
+        navigator.share({
+          title: `${game.away_team} at ${game.home_team} - Cambrian Park Sports Gazette`,
+          text: shareText,
+          url: shareUrl
+        }).catch(() => {});
+      } else if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(`${shareText}\n${shareUrl}`).then(() => {
+          showToast('📋 Gameday details & link copied for group chat!');
+        }).catch(() => {
+          showToast('📋 Gameday link: ' + shareUrl);
+        });
+      } else {
+        showToast('📋 Gameday link: ' + shareUrl);
+      }
+    }
 
     let myPlanIds = [];
     try {
@@ -2350,6 +2893,9 @@
           document.querySelectorAll('.filter-btn[data-filter-type="level"]').forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
           activeLevel = val;
+        } else if (type === 'local') {
+          btn.classList.toggle('active');
+          activeLocal = btn.classList.contains('active') ? val : 'all';
         } else if (type === 'importance') {
           btn.classList.toggle('active');
           activeImportance = btn.classList.contains('active') ? val : 'all';
@@ -2376,6 +2922,9 @@
     function filterMatches(g) {
       if (activeSport !== 'all' && g.sport !== activeSport) return false;
       if (activeLevel !== 'all' && g.level !== activeLevel && !(activeLevel === 'Pro' && g.level === 'Minor League')) return false;
+      if (activeLocal === 'cambrian') {
+        if (!g.is_cambrian && !g.is_south_bay) return false;
+      }
       if (activeImportance !== 'all' && g.importance !== activeImportance) return false;
       if (activeStatus !== 'all' && g.status !== activeStatus) return false;
       if (searchQuery) {
@@ -2451,6 +3000,14 @@
       const weekMeta = WEEKS_META.find(w => w.num === currentWeekNum);
       renderMobileDayPicker(weekMeta.days);
 
+      const printMasthead = document.getElementById('printFridgeMasthead');
+      if (printMasthead) {
+        printMasthead.textContent = `CAMBRIAN PARK SPORTS GAZETTE — REFRIGERATOR EDITION — ${weekMeta.label.toUpperCase()} (${weekMeta.dates})`;
+      }
+
+      const weekMatchingGames = ALL_GAMES.filter(g => g.week === currentWeekNum && filterMatches(g));
+      renderLeadStory(weekMatchingGames, weekMeta);
+
       const isMobile = window.innerWidth < 1024;
       let html = '';
 
@@ -2489,6 +3046,7 @@
             const isMarquee = game.importance === 'marquee';
             const isStarred = myPlanIds.includes(game.id);
             const isFinal = game.status === 'final';
+            const isLive = isGameLive(game);
             const sportClass = `is-${game.sport.toLowerCase().replace(' ', '')}`;
 
             let timeSportHtml = '';
@@ -2556,6 +3114,15 @@
               `;
             }
 
+            const liveBadgeHtml = isLive ? `<span class="live-pulse-badge"><span class="pulse-dot"></span> LIVE</span>` : '';
+            const cambrianTagHtml = game.is_cambrian ? `<span class="chip-cambrian-tag">📍 Cambrian</span>` : '';
+            const weatherChipHtml = game.weather ? `
+              <div class="chip-weather" title="${game.weather.cond} • Attire: ${game.weather.attire}">
+                <span class="weather-icon">${game.weather.icon}</span>
+                <span>${game.weather.temp} • ${game.weather.attire}</span>
+              </div>
+            ` : '';
+
             html += `
               <div class="event-chip ${sportClass} ${isMarquee ? 'is-marquee' : ''} ${isFinal ? 'is-final' : ''}" data-game-id="${game.id}">
                 <button class="chip-quick-star ${isStarred ? 'starred' : ''}" data-game-id="${game.id}" title="${isStarred ? 'Remove from Plan' : 'Save to Plan'}" aria-label="Toggle Star">
@@ -2563,8 +3130,9 @@
                 </button>
                 ${timeSportHtml}
                 ${matchupHtml}
-                <div class="chip-venue">${escHtml(game.venue)}</div>
-                <div class="chip-badge">${escHtml(game.badge.split(':')[0])}</div>
+                <div class="chip-venue">${escHtml(game.venue)} ${cambrianTagHtml}</div>
+                <div class="chip-badge">${escHtml(game.badge.split(':')[0])} ${liveBadgeHtml}</div>
+                ${weatherChipHtml}
               </div>
             `;
           });
@@ -2598,21 +3166,108 @@
       });
     }
 
+    function renderLeadStory(weekGames, weekMeta) {
+      const banner = document.getElementById('leadStoryBanner');
+      if (!banner) return;
+      if (!weekGames || weekGames.length === 0) {
+        banner.style.display = 'none';
+        return;
+      }
+      banner.style.display = 'block';
+
+      // Pick marquee or highest importance game
+      const marquee = weekGames.find(g => g.importance === 'marquee') 
+        || weekGames.find(g => g.importance === 'high') 
+        || weekGames[0];
+
+      const isFinal = marquee.status === 'final';
+      const isStarred = myPlanIds.includes(marquee.id);
+      const isLive = isGameLive(marquee);
+      const awayLogoHtml = marquee.away_logo ? `<img class="lead-team-crest" src="${marquee.away_logo}" alt="" onerror="this.style.display='none'"/>` : '';
+      const homeLogoHtml = marquee.home_logo ? `<img class="lead-team-crest" src="${marquee.home_logo}" alt="" onerror="this.style.display='none'"/>` : '';
+
+      const liveBadgeHtml = isLive ? `<span class="live-pulse-badge"><span class="pulse-dot"></span> LIVE GAMEDAY</span>` : '';
+      const finalBadgeHtml = isFinal ? `<span class="badge-final" style="font-size:0.7rem; padding:2px 6px;">FINAL: ${marquee.away_score}-${marquee.home_score}</span>` : '';
+      const cambrianTagHtml = marquee.is_cambrian ? `<span class="chip-cambrian-tag">📍 Cambrian Neighborhood</span>` : '';
+
+      const weatherHtml = marquee.weather ? `
+        <div class="lead-weather-attire">
+          <span>${marquee.weather.icon} ${marquee.weather.temp}</span> • <span>${marquee.weather.attire}</span>
+        </div>
+      ` : '';
+
+      const excerpt = isFinal ? (marquee.result_summary || marquee.context_reason) : marquee.context_reason;
+
+      banner.innerHTML = `
+        <div class="lead-story-top-ribbon">
+          <span>★ THE WEEK'S LEAD DISPATCH ★ ${cambrianTagHtml}</span>
+          <span style="display:flex; align-items:center; gap:8px;">${liveBadgeHtml} ${finalBadgeHtml} <span>Cambrian Park Sports Gazette Exclusive</span></span>
+        </div>
+        <div class="lead-story-grid">
+          <div class="lead-matchup-col">
+            <div class="lead-teams-display">
+              ${awayLogoHtml}
+              ${homeLogoHtml}
+            </div>
+            <div class="lead-matchup-title">${marquee.away_team} at ${marquee.home_team}</div>
+            <div class="lead-meta-line">${marquee.sport_icon} ${marquee.sport} • ${marquee.day_of_week}, ${marquee.date} • ${marquee.time}</div>
+            <div class="lead-meta-line">📍 ${marquee.venue} (${marquee.city})</div>
+          </div>
+          <div class="lead-dispatch-col">
+            <div class="lead-pullquote">“${escHtml(excerpt)}”</div>
+            ${weatherHtml}
+          </div>
+          <div class="lead-actions-col">
+            <button class="btn-lead-read" id="leadReadBtn">📰 Full Dispatch & Standings →</button>
+            <button class="btn-lead-secondary" id="leadStarBtn">${isStarred ? '★ In My Plan' : '☆ Save to Plan'}</button>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(marquee.venue + ', ' + marquee.city + ', CA')}" target="_blank" rel="noopener" class="btn-lead-secondary">🗺️ Directions</a>
+          </div>
+        </div>
+      `;
+
+      const leadReadBtn = document.getElementById('leadReadBtn');
+      if (leadReadBtn) leadReadBtn.addEventListener('click', () => openGameModal(marquee));
+      const leadStarBtn = document.getElementById('leadStarBtn');
+      if (leadStarBtn) leadStarBtn.addEventListener('click', () => {
+        toggleGamePlan(marquee.id);
+      });
+    }
+
     const gameModal = document.getElementById('gameModal');
     function openGameModal(game) {
       selectedGame = game;
       const isFinal = game.status === 'final';
+      const isLive = isGameLive(game);
+      const liveMeta = isLive ? ' • <span class="live-pulse-badge"><span class="pulse-dot"></span> LIVE GAMEDAY</span>' : '';
+      const cambrianMeta = game.is_cambrian ? ' • <span class="chip-cambrian-tag">📍 Cambrian</span>' : '';
 
       document.getElementById('modalSportTag').textContent = `${game.sport_icon} ${game.sport}`;
       document.getElementById('modalLeagueTag').textContent = game.league;
-      document.getElementById('modalDateTime').textContent = isFinal 
+      document.getElementById('modalDateTime').innerHTML = (isFinal 
         ? `${game.day_of_week}, ${game.date} • FINAL`
-        : `${game.day_of_week}, ${game.date} • ${game.time}`;
+        : `${game.day_of_week}, ${game.date} • ${game.time}`) + cambrianMeta + liveMeta;
       document.getElementById('modalMatchup').textContent = `${game.away_team} at ${game.home_team}`;
       document.getElementById('modalVenue').textContent = `${game.venue} • ${game.city}`;
 
       const modalBody = document.getElementById('modalBodyDynamic');
       let bodyHtml = '';
+
+      if (game.weather) {
+        bodyHtml += `
+          <div class="modal-weather-card">
+            <div class="weather-card-left">
+              <span class="weather-card-icon">${game.weather.icon}</span>
+              <div>
+                <div class="weather-card-temp">${game.weather.temp} <span class="weather-card-cond">• ${game.weather.cond}</span></div>
+                <div class="weather-card-attire">🧥 Advisory: ${game.weather.attire}</div>
+              </div>
+            </div>
+            <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">
+              ${game.weather.indoor ? '🏟️ Indoor Arena Climate' : '🌤️ Stadium Kickoff Forecast'}
+            </div>
+          </div>
+        `;
+      }
 
       if (isFinal) {
         const awayScore = parseInt(game.away_score);
@@ -2817,6 +3472,16 @@
       } else {
         ticketBtn.href = game.ticket_url;
         ticketBtn.textContent = `${game.ticket_text} ↗`;
+      }
+
+      const dirBtn = document.getElementById('modalDirectionsBtn');
+      if (dirBtn) {
+        dirBtn.href = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(game.venue + ', ' + game.city + ', CA')}`;
+      }
+
+      const shareBtn = document.getElementById('modalShareBtn');
+      if (shareBtn) {
+        shareBtn.onclick = () => shareGame(game);
       }
 
       const gcalBtn = document.getElementById('modalGcalBtn');
@@ -3207,7 +3872,22 @@ Link: ${game.recap_url || game.ticket_url}`;
         bestWeek = 1;
       }
       setWeek(bestWeek);
+
+      // Deep link support for 1-tap game sharing (?game=GAME_ID)
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const sharedGameId = urlParams.get('game');
+        if (sharedGameId) {
+          const target = ALL_GAMES.find(g => g.id === sharedGameId);
+          if (target) {
+            setWeek(target.week);
+            openGameModal(target);
+          }
+        }
+      } catch(e) {}
     })();
   </script>
+
+  <div class="toast-notification" id="toastNotification">📋 Gameday link copied!</div>
 </body>
 </html>
