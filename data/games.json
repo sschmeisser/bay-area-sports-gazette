@@ -1580,9 +1580,9 @@
       "venue": "Owen Owens Field",
       "city": "Concord",
       "badge": "🛡️ NorCal Powerhouse Collision",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
+      "home_score": 55,
+      "away_score": 9,
+      "status": "final",
       "context_reason": "Perennial NorCal juggernaut De La Salle hosts a physical St. Mary's squad in Concord.",
       "insider_tips": "De La Salle's famed veer offense is poetry in motion from the midfield general admission bleachers.",
       "importance": "high",
@@ -1603,7 +1603,8 @@
         "icon": "🌙",
         "attire": "Light jacket advised",
         "indoor": false
-      }
+      },
+      "result_summary": "De La Salle claimed a resounding 55-9 win over the St. Mary's Rams. The Spartans are now 4-0 for the season, averaging 46.5 points per game. St. Mary's is on a three-game losing streak, dropping to 1-3."
     },
     {
       "date": "2026-09-26",

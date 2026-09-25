@@ -946,7 +946,7 @@
       {
         "rank": 1,
         "team": "De La Salle Spartans",
-        "w": 11,
+        "w": 12,
         "l": 2,
         "col3": "5-0",
         "col4": "442",
@@ -965,16 +965,6 @@
       },
       {
         "rank": 3,
-        "team": "Clayton Valley Charter",
-        "w": 8,
-        "l": 3,
-        "col3": "4-1",
-        "col4": "330",
-        "col5": "210",
-        "note": "EBAL Contender"
-      },
-      {
-        "rank": 4,
         "team": "Clovis North Broncos",
         "w": 9,
         "l": 3,
@@ -982,6 +972,16 @@
         "col4": "340",
         "col5": "195",
         "note": "Central Section"
+      },
+      {
+        "rank": 4,
+        "team": "Clayton Valley Charter",
+        "w": 8,
+        "l": 3,
+        "col3": "4-1",
+        "col4": "330",
+        "col5": "210",
+        "note": "EBAL Contender"
       },
       {
         "rank": 5,
@@ -1007,7 +1007,7 @@
         "rank": 7,
         "team": "St. Mary's (Stockton)",
         "w": 7,
-        "l": 4,
+        "l": 5,
         "col3": "4-1",
         "col4": "310",
         "col5": "240",
