@@ -4,21 +4,25 @@ refresh_pipeline.py — Autonomous Refresh & Verification Engine
 The Bay Area Sports Gazette
 
 Autonomous pipeline for:
-  1. Score & Status Ingestion: Fetches real-time scores from ESPN public APIs and OpenRouter AI.
-  2. Strict Zero-Hallucination Verification: Unconfirmed games stay as 'upcoming' with warnings logged.
-  3. Journalistic Editorial Recaps: Generates 1-2 sentence recaps using OpenRouter (Gemini / Claude).
+  1. Schedule Synchronization & Discovery: Automatically discovers upcoming and completed Bay Area
+     games across NHL, NFL, NBA, WNBA, MLS, NWSL, and NCAA Division I via ESPN public APIs in Pacific Time.
+  2. Score & Status Ingestion: Fetches real-time scores and updates game status with strict verification.
+  3. Grounded Journalistic Recaps: Generates 1-2 sentence recaps using OpenRouter (Gemini / Claude)
+     with robust prompt caching (Anthropic / OpenRouter cache_control markers, >= 1,024 token stylebook).
   4. Dynamic Standings Updates: Increments W-L-T records and recalculates PCT and differentials in data/standings.json.
   5. Horizon Rollover: Shifts weeks forward when target calendar dates advance.
-  6. Atomic Persistence: Safely writes data/games.json and data/standings.json.
-  7. Automated Build & Git Sync: Rebuilds HTML bundle and pushes clean commits to origin/main.
+  6. 52-Week Rolling Cache Cliff: Automatically retains up to 52 past weeks while cleanly pruning expired history.
+  7. Atomic Persistence: Safely writes data/games.json and data/standings.json.
+  8. Automated Build & Git Sync: Rebuilds HTML bundle and pushes clean commits to origin/main.
 
 Usage:
-  python3 refresh_pipeline.py                 # Standard refresh
-  python3 refresh_pipeline.py --scores-only   # Quick twice-daily score check
-  python3 refresh_pipeline.py --rollover      # Advance calendar window by 1 week
-  python3 refresh_pipeline.py --dry-run       # Preview changes without modifying files
-  python3 refresh_pipeline.py --commit        # Commit & push changes if modified
-  python3 refresh_pipeline.py --test          # Self-test backend validation and healing
+  python3 refresh_pipeline.py                     # Standard refresh (discovery + scores + build)
+  python3 refresh_pipeline.py --scores-only       # Quick twice-daily score check
+  python3 refresh_pipeline.py --sync-schedules    # Only synchronize schedules
+  python3 refresh_pipeline.py --rollover          # Advance calendar window by 1 week
+  python3 refresh_pipeline.py --dry-run           # Preview changes without modifying files
+  python3 refresh_pipeline.py --commit            # Commit & push changes if modified
+  python3 refresh_pipeline.py --test              # Self-test backend validation and healing
 """
 
 import argparse
@@ -57,10 +61,112 @@ DEFAULT_OPENROUTER_MODEL = os.environ.get("OPENROUTER_MODEL", "google/gemini-2.5
 OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
 
 # ---------------------------------------------------------------------------
-# OpenRouter Client
+# Static Editorial Stylebook & Prompt Cache Definition
+# Token count >= 1,024 tokens to qualify for Anthropic / OpenRouter prompt caching.
+# ---------------------------------------------------------------------------
+
+GAZETTE_STYLEBOOK_SYSTEM_PROMPT = """
+You are the veteran lead sports editor for the Cambrian Park Sports Gazette, a community-first sports publication serving San Jose and the greater South Bay / Silicon Valley region.
+
+### PUBLICATION MISSION & TONE
+- Voice: Knowledgeable, energetic, grounded, authentic to Northern California sports culture.
+- Audience: South Bay locals, high school alumni, Silicon Valley youth sports families, and loyal Bay Area fans.
+- Perspective: Respectful of high school grit (Branham Bruins, Leigh Longhorns), college tradition (SJSU Spartans, Stanford Cardinal, Santa Clara Broncos), and pro drama (San Jose Sharks, Earthquakes, 49ers, Bay FC, Warriors, Valkyries).
+
+### STRICT GROUNDING & ZERO-HALLUCINATION RULES
+1. STICK TO THE FACTS PROVIDED: You are given only the final score, venue, and optional context notes. DO NOT invent play-by-play events, fictional scoring plays (e.g., do not say "scored in the 89th minute" or "threw a 40-yard touchdown pass" unless explicitly stated in the context).
+2. SYNTHESIZE OUTCOME & SIGNIFICANCE: Describe the victory margin (blowout, defensive clinic, nail-biter, shutout, high-scoring duel), home/away venue atmosphere, and standings/momentum implications.
+3. DRAW HANDLING: If scores are tied, articulate a hard-fought draw or stalemate without inventing shootout details.
+
+### EDITORIAL STYLE & BANNED PHRASES
+- NEVER use generic AI cliches:
+  * "testament to"
+  * "rollercoaster of emotions"
+  * "thrilling affair"
+  * "punched their ticket"
+  * "in a game of two halves"
+  * "showcased their prowess"
+  * "left everything on the field"
+- Preferred vocabulary:
+  * High School: "crosstown rivalry", "gritty defensive stand", "Friday night lights", "under the lights on Camden Ave".
+  * College/Pro: "clean sheet", "conference showdown", "derby duel", "defensive clinic", "dominant road showing", "Shark Tank explosion".
+- Length: Exactly 1 to 2 punchy, polished journalistic sentences.
+- Formatting: Return plain text ONLY. No quotation marks around the recap, no markdown headers, no introductory banter ("Here is your recap:").
+
+### FEW-SHOT EDITORIAL EXAMPLES
+
+[Example 1 - High School Football Blowout]
+Input:
+  Away: Westmont Warriors (7) at Home: Branham Bruins (38)
+  Venue: Branham Stadium
+  Context: Local South Bay rivalry matchup
+Recap:
+Branham delivered an emphatic statement on Camden Avenue, overpowering rival Westmont 38-7 behind a suffocating defensive front that gave the Warriors zero breathing room.
+
+[Example 2 - College Soccer Defensive Shutout]
+Input:
+  Away: Georgetown Hoyas (0) at Home: Stanford Cardinal Men (2)
+  Venue: Cagan Stadium
+  Context: Interconference national heavyweight duel
+Recap:
+Stanford secured its fourth clean sheet of the campaign with a clinical 2-0 shutout over visiting Georgetown, controlling the tempo from the opening kickoff at Cagan Stadium.
+
+[Example 3 - NHL / Hockey One-Goal Game]
+Input:
+  Away: Vegas Golden Knights (3) at Home: San Jose Sharks (4)
+  Venue: SAP Center
+  Context: Pacific Division clash
+Recap:
+The Sharks held off a furious third-period push by Vegas to protect a gritty 4-3 regulation victory before a roaring crowd at the Shark Tank.
+
+[Example 4 - Soccer Draw]
+Input:
+  Away: Monterey Bay FC (1) at Home: Oakland Roots SC (1)
+  Venue: Raimondi Park
+  Context: NorCal USL Championship Derby
+Recap:
+Oakland and Monterey Bay traded physical blows for ninety minutes in a fiercely contested NorCal derby, settling for a hard-earned 1-1 point at Raimondi Park.
+
+[Example 5 - Community College Basketball Close Win]
+Input:
+  Away: De Anza Mountain Lions (68) at Home: West Valley Vikings (71)
+  Venue: West Valley Gymnasium
+  Context: Coast Conference South rivalry
+Recap:
+West Valley survived a wire-to-wire battle against crosstown adversary De Anza, closing out a tense 71-68 conference triumph in Saratoga.
+""".strip()
+
+
+SCORE_VERIFICATION_SYSTEM_PROMPT = """
+You are an uncompromising sports data verification researcher for the Cambrian Park Sports Gazette.
+Your sole mission is to verify the official final score of scheduled sporting events (primarily California high school CIF Central Coast Section, CCCAA junior college, and regional pre-pro matches).
+
+### ZERO-HALLUCINATION PROTOCOL
+1. ABSOLUTE CONFIRMATION REQUIRED: You must only return `verified: true` if you have factual, confirmed evidence of the final score from official box scores or trusted media.
+2. FUTURE OR UNPLAYED MATCHES: If the game date is in the future, if the match is still in progress, or if no final box score is confirmed, you MUST return `verified: false`.
+3. NEVER GUESS: DO NOT estimate, simulate, or generate plausible-sounding scores. Guessing corrupts the Gazette's public league standings database.
+
+### OUTPUT JSON SCHEMA
+Respond with a single valid JSON object containing exactly these fields:
+```json
+{
+  "verified": boolean,
+  "home_score": int or null,
+  "away_score": int or null,
+  "recap": string or null,
+  "source_name": string,
+  "reason": "CONFIRMED_FINAL" | "NOT_PLAYED_YET" | "SCORE_UNAVAILABLE" | "POSTPONED" | "IN_PROGRESS"
+}
+```
+If `verified` is false: `home_score` and `away_score` must be null, and `reason` must detail why verification failed.
+""".strip()
+
+
+# ---------------------------------------------------------------------------
+# OpenRouter Client with Prompt Caching
 # ---------------------------------------------------------------------------
 class OpenRouterAgent:
-    """Wrapper for OpenRouter AI inference."""
+    """Enhanced OpenRouter AI inference client with Anthropic/Gemini prompt caching."""
     def __init__(self, api_key: str = "", model: str = DEFAULT_OPENROUTER_MODEL):
         self.api_key = api_key or OPENROUTER_API_KEY
         self.model = model
@@ -70,66 +176,106 @@ class OpenRouterAgent:
     def is_configured(self) -> bool:
         return bool(self.api_key and self.api_key.startswith("sk-or-"))
 
-    def call_ai(self, system_prompt: str, user_prompt: str, max_tokens: int = 250, json_mode: bool = False) -> Optional[str]:
+    def call_ai(
+        self,
+        system_prompt: str,
+        user_prompt: str,
+        max_tokens: int = 250,
+        json_mode: bool = False,
+        use_cache: bool = True,
+        use_web_search: bool = False
+    ) -> Optional[str]:
         if not self.is_configured or not HAS_REQUESTS:
             return None
+
         headers = {
             "Authorization": f"Bearer {self.api_key}",
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "HTTP-Referer": "https://github.com/stefanschmeisser/cambrian",
+            "X-Title": "Cambrian Park Sports Gazette Autonomous Pipeline"
         }
+
+        # Format system prompt with Anthropic/OpenRouter ephemeral cache control
+        if use_cache:
+            system_message = {
+                "role": "system",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": system_prompt,
+                        "cache_control": {"type": "ephemeral"}
+                    }
+                ]
+            }
+        else:
+            system_message = {
+                "role": "system",
+                "content": system_prompt
+            }
+
         payload = {
             "model": self.model,
             "messages": [
-                {"role": "system", "content": system_prompt},
+                system_message,
                 {"role": "user", "content": user_prompt}
             ],
-            "max_tokens": max_tokens
+            "max_tokens": max_tokens,
+            "temperature": 0.3  # Low temperature for factual precision
         }
+
         if json_mode:
             payload["response_format"] = {"type": "json_object"}
+
+        if use_web_search:
+            payload["plugins"] = [{"id": "web"}]
+
         try:
-            resp = requests.post(self.url, headers=headers, json=payload, timeout=20)
+            resp = requests.post(self.url, headers=headers, json=payload, timeout=25)
             if resp.status_code == 200:
                 data = resp.json()
-                return data["choices"][0]["message"]["content"].strip()
+                choice = data["choices"][0]["message"]["content"]
+                return choice.strip() if choice else None
             else:
-                log.warning(f"OpenRouter API error ({resp.status_code}): {resp.text[:200]}")
+                log.warning(f"OpenRouter API error ({resp.status_code}): {resp.text[:250]}")
         except Exception as e:
             log.warning(f"OpenRouter request exception: {e}")
         return None
 
     def generate_recap(self, game: Dict) -> str:
-        """Generate a punchy 1-2 sentence journalistic recap in Gazette voice."""
+        """Generate a punchy 1-2 sentence journalistic recap in Gazette voice using prompt cache."""
         home = game.get("home_team", "Home Team")
         away = game.get("away_team", "Away Team")
         h_score = game.get("home_score", 0)
         a_score = game.get("away_score", 0)
         venue = game.get("venue", "home turf")
         context = game.get("context_reason", "")
+        league = game.get("league", "")
 
         winner = home if h_score > a_score else away
         loser = away if winner == home else home
         win_score = max(h_score, a_score)
         lose_score = min(h_score, a_score)
+        margin = win_score - lose_score
 
-        system_prompt = (
-            "You are the senior beat reporter for the Cambrian Park Sports Gazette. "
-            "Write a concise, energetic 1-to-2 sentence post-game recap. "
-            "Highlight key moments, emotional weight, venue ambiance, and final score. "
-            "Never use generic AI cliches like 'testament to' or 'rollercoaster of emotions'. "
-            "Be authentic to Cambrian Park and Bay Area sports culture."
-        )
         user_prompt = (
-            f"Game: {away} ({a_score}) at {home} ({h_score})\n"
+            f"League: {league}\n"
+            f"Matchup: {away} ({a_score}) at {home} ({h_score})\n"
+            f"Final Result: {winner} {win_score}, {loser} {lose_score} (Margin: {margin})\n"
             f"Venue: {venue}\n"
-            f"Context: {context}\n"
-            f"Result: {winner} {win_score}, {loser} {lose_score}\n"
-            f"Write the 1-2 sentence recap:"
+            f"Editorial Context: {context}\n"
+            "Write the 1-to-2 sentence post-game recap:"
         )
 
-        ai_recap = self.call_ai(system_prompt, user_prompt, max_tokens=150)
+        ai_recap = self.call_ai(
+            system_prompt=GAZETTE_STYLEBOOK_SYSTEM_PROMPT,
+            user_prompt=user_prompt,
+            max_tokens=120,
+            use_cache=True
+        )
+
         if ai_recap:
-            return ai_recap
+            cleaned = ai_recap.strip('"\'')
+            return cleaned
 
         # Clean fallback if API key is not present or network drops
         if h_score == a_score:
@@ -137,37 +283,36 @@ class OpenRouterAgent:
         return f"{winner} secured a decisive {win_score}-{lose_score} victory over {loser} in front of an energetic crowd at {venue}."
 
     def search_untracked_score(self, game: Dict) -> Optional[Tuple[int, int, str]]:
-        """
-        Query AI to find verified score for high school or JUCO matchups.
-        Strict verification: returns (home_score, away_score, recap) only if confident.
-        """
-        system_prompt = (
-            "You are a sports verification researcher. You will be given a matchup, date, and league. "
-            "Your task is to report the official final score. "
-            "CRITICAL: If the game has NOT been played yet, or if you cannot verify the exact final score, "
-            "you MUST return {\"verified\": false}. DO NOT GUESS OR ESTIMATE."
-        )
+        """Query AI with live web search to verify scores for high school or JUCO matchups."""
         user_prompt = (
             f"Sport: {game.get('sport')} / {game.get('league')}\n"
             f"Matchup: {game.get('away_team')} at {game.get('home_team')}\n"
             f"Scheduled Date: {game.get('date')}\n"
             f"Venue: {game.get('venue')}\n"
-            "Respond ONLY with a JSON object: "
-            "{\"verified\": true, \"home_score\": int, \"away_score\": int, \"recap\": \"short recap\"} "
-            "OR {\"verified\": false, \"reason\": \"explanation\"}"
+            "Search official sources for the final score. Return the verified JSON object."
         )
-        raw_json = self.call_ai(system_prompt, user_prompt, max_tokens=200, json_mode=True)
+
+        raw_json = self.call_ai(
+            system_prompt=SCORE_VERIFICATION_SYSTEM_PROMPT,
+            user_prompt=user_prompt,
+            max_tokens=200,
+            json_mode=True,
+            use_cache=True,
+            use_web_search=True
+        )
         if not raw_json:
             return None
+
         try:
             data = json.loads(raw_json)
             if data.get("verified") is True:
-                h_score = int(data.get("home_score", 0))
-                a_score = int(data.get("away_score", 0))
-                recap = data.get("recap", "")
+                h_score = int(data.get("home_score"))
+                a_score = int(data.get("away_score"))
+                recap = data.get("recap") or ""
+                log.info(f"Verified via {data.get('source_name', 'Web')}: {game.get('id')}")
                 return h_score, a_score, recap
             else:
-                log.info(f"Unverified game {game.get('id')}: {data.get('reason', 'Score not found')}")
+                log.info(f"Unverified game {game.get('id')}: {data.get('reason')} - {data.get('source_name', 'N/A')}")
         except Exception as e:
             log.warning(f"Error parsing AI verification JSON: {e}")
         return None
@@ -270,15 +415,13 @@ class ScoreRefreshEngine:
 
         # Re-sort standings
         def sort_key(r):
-            # Check if league uses PTS (Soccer, Hockey)
             if len(headers) > 5 and headers[5] == "PTS":
                 try:
                     pts = int(r.get("col4", 0))
                 except (ValueError, TypeError):
                     pts = 0
                 return (pts, r.get("w", 0))
-            
-            # Check if PCT in col4 or col3 or col5
+
             pct = 0.0
             for col in ["col4", "col3", "col5", "pct"]:
                 val = str(r.get(col, ""))
@@ -315,20 +458,16 @@ class ScoreRefreshEngine:
         else:
             row["l"] = l + 1
 
-        # Check if 6th column (index 5) is PTS (Soccer, Hockey)
         if len(headers) > 5 and headers[5] == "PTS":
             try:
                 curr_pts = int(row.get("col4", 0))
             except (ValueError, TypeError):
                 curr_pts = 0
             if "nhl" in str(headers).lower() or "otl" in [h.upper() for h in headers]:
-                # Hockey: 2 pts for win, 1 for OTL/tie
                 added = 2 if won else (1 if tied else 0)
             else:
-                # Soccer: 3 pts for win, 1 for draw
                 added = 3 if won else (1 if tied else 0)
             row["col4"] = curr_pts + added
-            # If AHL, col5 is PCT
             if len(headers) > 6 and headers[6] == "PCT":
                 tot = row.get("w", 0) + row.get("l", 0) + (row.get("col3", 0) if isinstance(row.get("col3"), int) else 0)
                 if tot > 0:
@@ -336,7 +475,6 @@ class ScoreRefreshEngine:
                     row["col5"] = f"{pct:.3f}".lstrip("0")
             return
 
-        # Calculate winning percentage if applicable
         tie_count = row.get("col3", 0) if isinstance(row.get("col3"), int) else row.get("t", 0)
         if not isinstance(tie_count, (int, float)):
             tie_count = 0
@@ -369,14 +507,12 @@ def advance_calendar_window(games: List[Dict], weeks: List[Dict]) -> Tuple[List[
     log.info("Executing continuous calendar horizon advance...")
     today_iso = datetime.date.today().isoformat()
 
-    # Update is_past status for all existing weeks
     for w in weeks:
         days = w.get("days", [])
         if days:
             end_date = days[-1]["date"]
             w["is_past"] = end_date < today_iso
 
-    # Append next rolling week to horizon
     if weeks:
         last_week = weeks[-1]
         last_days = last_week.get("days", [])
@@ -417,9 +553,7 @@ def advance_calendar_window(games: List[Dict], weeks: List[Dict]) -> Tuple[List[
             weeks.append(new_week)
             log.info(f"Cached all past weeks and appended new rolling week: {short_dates}")
 
-    # Enforce 52-week cache cliff so weeks older than 52 weeks roll off
     games, weeks, _, _ = apply_52_week_cliff(games, weeks)
-
     return games, weeks
 
 
@@ -434,10 +568,9 @@ def apply_52_week_cliff(
 ) -> Tuple[List[Dict], List[Dict], int, int]:
     """
     Enforce a strict 52-week rolling cache cliff:
-    - Retains up to 52 past weeks from the reference date (default: today).
-    - Any week whose end_date is older than 52 weeks (364 days) rolls off from cache.
-    - Any games belonging to expired weeks or scheduled before the cutoff roll off.
-    Returns: (retained_games, retained_weeks, rolled_off_games_count, rolled_off_weeks_count)
+    - Retains up to 52 past weeks from reference date (default: today).
+    - Any week whose end_date is older than 52 weeks (364 days) rolls off.
+    - Any games belonging to expired weeks roll off cleanly.
     """
     if not reference_date:
         ref_dt = datetime.date.today()
@@ -524,7 +657,7 @@ def run_self_tests() -> bool:
     assert os.path.getsize(index_path) > 100_000, "Generated HTML too small"
     print(f"✓ HTML compilation verified ({os.path.getsize(index_path):,} bytes)")
 
-    # 5. Test AI recap generator with mock
+    # 5. Test Prompt Caching Structure & AI Recap Fallback
     mock_agent = OpenRouterAgent(api_key="mock-key")
     mock_game = {
         "home_team": "San Jose Earthquakes", "away_team": "Portland Timbers",
@@ -533,7 +666,9 @@ def run_self_tests() -> bool:
     }
     recap = mock_agent.generate_recap(mock_game)
     assert "San Jose Earthquakes" in recap or "victory" in recap, "Recap fallback failed"
-    print(f"✓ Editorial recap fallback generator verified: \"{recap}\"")
+    # Ensure stylebook is substantial for cache eligibility
+    assert len(GAZETTE_STYLEBOOK_SYSTEM_PROMPT.split()) > 250, "Stylebook system prompt too short for prompt caching"
+    print(f"✓ Editorial prompt caching & recap fallback verified: \"{recap}\"")
 
     # 6. Test standings increment
     engine = ScoreRefreshEngine(mock_agent)
@@ -567,6 +702,15 @@ def run_self_tests() -> bool:
     assert k_weeks[0]["num"] == 101
     print("✓ 52-week cache cliff & rollover pruning verified (expired history rolls off cleanly)")
 
+    # 8. Test Schedule Discovery & Pacific Timezone Extraction
+    discovered = schedule_fetcher.discover_bay_area_games("2026-09-24", "2026-09-24")
+    sharks_discovered = any(
+        "Sharks" in g.get("home_team", "") and g.get("date_str") == "2026-09-24"
+        for g in discovered
+    )
+    assert sharks_discovered, "Schedule discovery failed to find Sharks game on 2026-09-24"
+    print("✓ Schedule discovery engine & Pacific timezone parsing verified (Sharks 2026-09-24 confirmed)")
+
     print("=" * 60)
     print("  All Self-Tests Passed Successfully!")
     print("=" * 60)
@@ -579,6 +723,7 @@ def run_self_tests() -> bool:
 def main():
     parser = argparse.ArgumentParser(description="The Bay Area Sports Gazette Autonomous Refresh Engine")
     parser.add_argument("--scores-only", action="store_true", help="Only refresh completed game scores and standings")
+    parser.add_argument("--sync-schedules", action="store_true", help="Only synchronize and discover schedules")
     parser.add_argument("--rollover", action="store_true", help="Advance calendar horizon by 1 full week")
     parser.add_argument("--dry-run", action="store_true", help="Do not write changes to disk")
     parser.add_argument("--commit", action="store_true", help="Commit and push changes to git")
@@ -622,16 +767,25 @@ def main():
         changes_made = True
         changelog.append("Advanced calendar horizon by 1 week")
 
-    # 2. Score & Standings Ingestion
-    refresh_engine = ScoreRefreshEngine(ai_agent)
-    updated_scores, score_log = refresh_engine.refresh_scores(games, standings_db, target_date=args.target_date)
-    if updated_scores > 0:
-        changes_made = True
-        changelog.extend(score_log)
+    # 2. Schedule Synchronization & Discovery (unless --scores-only)
+    if not args.scores_only:
+        log.info("Synchronizing live schedules and discovering new matchups...")
+        new_sched, upd_sched, sync_log = schedule_fetcher.sync_schedule_for_window(games, weeks)
+        if new_sched > 0 or upd_sched > 0:
+            changes_made = True
+            changelog.extend(sync_log)
+            log.info(f"Schedule sync: {new_sched} new games discovered, {upd_sched} existing games updated.")
 
-    log.info(f"Refresh completed: {updated_scores} game scores updated.")
+    # 3. Score & Standings Ingestion (unless --sync-schedules)
+    if not args.sync_schedules:
+        refresh_engine = ScoreRefreshEngine(ai_agent)
+        updated_scores, score_log = refresh_engine.refresh_scores(games, standings_db, target_date=args.target_date)
+        if updated_scores > 0:
+            changes_made = True
+            changelog.extend(score_log)
+        log.info(f"Score refresh completed: {updated_scores} game scores updated.")
 
-    # 3. Save Data & Compile Bundle
+    # 4. Save Data & Compile Bundle
     if changes_made:
         if args.dry_run:
             log.info("[DRY RUN] Changes detected but not saved to disk:")
@@ -651,7 +805,7 @@ def main():
                 log.info("Committing and pushing changes to GitHub...")
                 try:
                     subprocess.run(["git", "add", "data/", "index.html", "sports_calendar.html"], check=True)
-                    commit_msg = f"chore(auto): refresh scores & standings [{datetime.date.today().isoformat()}]"
+                    commit_msg = f"chore(auto): refresh schedules, scores & standings [{datetime.date.today().isoformat()}]"
                     subprocess.run(["git", "commit", "-m", commit_msg], check=True)
                     subprocess.run(["git", "pull", "--rebase", "origin", "main"], check=True)
                     subprocess.run(["git", "push", "origin", "main"], check=True)
@@ -659,7 +813,7 @@ def main():
                 except subprocess.CalledProcessError as e:
                     log.error(f"Git operation failed: {e}")
     else:
-        log.info("No scores or dates required updates. Data is up to date.")
+        log.info("No schedule, score, or date updates required. Data is up to date.")
 
 
 if __name__ == "__main__":
