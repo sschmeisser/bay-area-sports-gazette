@@ -532,6 +532,10 @@ def discover_bay_area_games(start_date: str, end_date: str, home_only: bool = Tr
                     h_team = g.get("home_team", "")
                     a_team = g.get("away_team", "")
 
+                    # Exclude non-Bay Area false positives
+                    if "Baptist" in h_team or "Baptist" in a_team:
+                        continue
+
                     # Check Bay Area hosting or participation
                     is_home_bay = any(k.lower() in h_team.lower() for k in keywords)
                     is_away_bay = any(k.lower() in a_team.lower() for k in keywords)
