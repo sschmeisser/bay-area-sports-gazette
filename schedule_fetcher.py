@@ -41,12 +41,7 @@ ESPN_ENDPOINTS = {
 
 # HTTP headers that avoid 403 blocks from ESPN
 _HEADERS = {
-    "User-Agent": (
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
-    ),
     "Accept": "application/json",
-    "Referer": "https://www.espn.com/",
 }
 
 # ---------------------------------------------------------------------------
@@ -137,16 +132,23 @@ def _extract_games(events: list) -> list:
             venue_obj = comp.get("venue", {})
             links = ev.get("links", [])
             source_url = links[0].get("href", "") if links else ""
+            status_obj = comp.get("status", {}) or ev.get("status", {})
+            status_type = status_obj.get("type", {})
+            is_completed = bool(status_type.get("completed", False) or status_type.get("name") == "STATUS_FINAL")
+            status_detail = status_type.get("shortDetail") or status_type.get("detail") or status_type.get("description") or ""
+
             out.append({
-                "home_team":  home["team"].get("displayName", ""),
-                "away_team":  away["team"].get("displayName", ""),
-                "home_score": home.get("score"),
-                "away_score": away.get("score"),
-                "venue":      venue_obj.get("fullName", ""),
-                "venue_city": (venue_obj.get("address") or {}).get("city", ""),
-                "date_str":   ev.get("date", "")[:10],
-                "source_url": source_url,
-                "season_type": ev.get("season", {}).get("type"),  # 1=pre, 2=regular, 3=post
+                "home_team":    home["team"].get("displayName", ""),
+                "away_team":    away["team"].get("displayName", ""),
+                "home_score":   home.get("score"),
+                "away_score":   away.get("score"),
+                "venue":        venue_obj.get("fullName", ""),
+                "venue_city":   (venue_obj.get("address") or {}).get("city", ""),
+                "date_str":     ev.get("date", "")[:10],
+                "source_url":   source_url,
+                "season_type":  ev.get("season", {}).get("type"),  # 1=pre, 2=regular, 3=post
+                "is_completed": is_completed,
+                "status_detail": status_detail,
             })
     return out
 
@@ -295,15 +297,19 @@ def verify_game(game: dict) -> dict:
     if espn_venue and listed_venue and _name_match_score(listed_venue, espn_venue) < 0.4:
         corrections["venue"] = espn_venue
 
-    # Score corrections (only for final games)
-    if game.get("status") == "final":
+    # Score corrections (for final games, or when ESPN indicates match is completed)
+    is_espn_completed = match.get("is_completed", False)
+    if match.get("home_score") is not None and match.get("away_score") is not None:
         try:
-            espn_home_score = int(match.get("home_score") or 0)
-            espn_away_score = int(match.get("away_score") or 0)
-            if game.get("home_score") != espn_home_score:
+            espn_home_score = int(match.get("home_score"))
+            espn_away_score = int(match.get("away_score"))
+            if is_espn_completed or game.get("status") == "final":
                 corrections["home_score"] = espn_home_score
-            if game.get("away_score") != espn_away_score:
                 corrections["away_score"] = espn_away_score
+                if is_espn_completed:
+                    corrections["status"] = "final"
+                if match.get("status_detail"):
+                    corrections["status_detail"] = match.get("status_detail")
         except (TypeError, ValueError):
             pass
 

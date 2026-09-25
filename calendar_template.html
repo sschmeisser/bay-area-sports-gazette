@@ -277,8 +277,8 @@
 
     /* Special style for Past/Scores Week Pill */
     .week-pill.week-pill-past {
-      border: 1px solid #d1d5db;
-      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      background: #f1f5f9;
       color: #334155;
     }
 
@@ -293,11 +293,113 @@
       color: #ffffff;
     }
 
+    /* Special style for Current Week Pill */
+    .week-pill.week-pill-current {
+      border: 1px solid rgba(46, 125, 50, 0.4);
+      background: rgba(46, 125, 50, 0.08);
+      color: var(--ink-forest);
+    }
+
+    .week-pill.week-pill-current:hover {
+      background: rgba(46, 125, 50, 0.16);
+      color: var(--ink-forest);
+    }
+
+    .week-pill.week-pill-current.active {
+      background: var(--ink-forest);
+      border-color: var(--ink-forest);
+      color: #ffffff;
+    }
+
+    .pill-dot {
+      color: #2e7d32;
+      font-size: 0.65rem;
+      margin-right: 3px;
+      vertical-align: middle;
+    }
+
+    .week-pill.active .pill-dot {
+      color: #a7f3d0;
+    }
+
+    .pill-date-sub {
+      font-size: 0.72rem;
+      opacity: 0.85;
+      font-weight: 500;
+      margin-left: 2px;
+    }
+
+    .pill-archive-icon {
+      font-size: 0.75rem;
+      margin-right: 3px;
+    }
+
+    .current-week-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
     .current-week-title {
       font-family: 'Newsreader', Georgia, serif;
       font-size: 1.15rem;
       font-weight: 600;
       color: var(--text-main);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .week-badge {
+      display: inline-block;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 4px;
+      vertical-align: middle;
+      line-height: 1.4;
+    }
+
+    .week-badge.current-badge {
+      background: #e8f5e9;
+      color: #1b5e20;
+      border: 1px solid #c8e6c9;
+    }
+
+    .week-badge.past-badge {
+      background: #f1f5f9;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+    }
+
+    .week-badge.upcoming-badge {
+      background: #f8fafc;
+      color: #64748b;
+      border: 1px solid #e2e8f0;
+    }
+
+    .return-this-week-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--ink-forest);
+      border-radius: var(--radius-sm);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--ink-forest);
+      padding: 3px 10px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s ease;
+    }
+
+    .return-this-week-btn:hover {
+      background: var(--ink-forest);
+      color: #ffffff;
     }
 
     /* Filter Bar */
@@ -1977,14 +2079,22 @@
         flex-wrap: nowrap;
         flex-shrink: 0;
       }
+      .print-btn-text {
+        display: none;
+      }
+      .print-fridge-btn {
+        padding: 5px 8px;
+        font-size: 0.85rem;
+        height: 32px;
+      }
       .search-wrapper {
-        flex: 0 1 130px;
-        min-width: 80px;
-        max-width: 135px;
+        flex: 0 1 105px;
+        min-width: 65px;
+        max-width: 115px;
       }
       .search-input {
-        padding: 4px 8px 4px 24px;
-        font-size: 0.75rem;
+        padding: 4px 6px 4px 22px;
+        font-size: 0.72rem;
         height: 32px;
       }
       .search-icon {
@@ -2516,7 +2626,7 @@
         </div>
         <div class="masthead-tools">
           <button class="print-fridge-btn" id="printFridgeBtn" onclick="window.print()" title="Print Refrigerator Edition Schedule">
-            🖨️ Print Fridge Sheet
+            🖨️ <span class="print-btn-text">Print Fridge Sheet</span>
           </button>
           <div class="search-wrapper">
             <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -2541,8 +2651,13 @@
         <div class="week-pills-list" id="weekPillsList"></div>
         <button class="step-btn" id="nextWeekBtn" title="Next Week" aria-label="Next Week">→</button>
       </div>
-      <div class="current-week-title" id="currentWeekTitle">
-        Week 1: Sep 21 – Sep 27, 2026
+      <div class="current-week-wrapper">
+        <div class="current-week-title" id="currentWeekTitle">
+          <span class="week-badge current-badge">THIS WEEK</span> Sep 21 – Sep 27, 2026
+        </div>
+        <button class="return-this-week-btn" id="returnThisWeekBtn" style="display: none;" title="Return to current week">
+          ↩ This Week
+        </button>
       </div>
     </div>
   </div>
@@ -2587,7 +2702,7 @@
       <div class="lead-story-banner" id="leadStoryBanner"></div>
 
       <div class="week-headline-banner">
-        <h2 class="week-headline-text" id="weekHeadlineText">Week 1: Fall Kickoff & The Campbell District Derby</h2>
+        <h2 class="week-headline-text" id="weekHeadlineText">This Week: Fall Kickoff & The Campbell District Derby</h2>
         <span class="week-date-span" id="weekDateSpan">Sep 21 – Sep 27, 2026</span>
       </div>
 
@@ -2834,50 +2949,157 @@
       counter.textContent = myPlanIds.length;
     }
 
+    // Determine client's today in YYYY-MM-DD
+    function getClientTodayIso() {
+      const d = new Date();
+      const yr = d.getFullYear();
+      const mo = String(d.getMonth() + 1).padStart(2, '0');
+      const da = String(d.getDate()).padStart(2, '0');
+      return `${yr}-${mo}-${da}`;
+    }
+    const todayIso = getClientTodayIso();
+
+    // Resolve "This Week" (the week containing today)
+    function resolveThisWeekNum() {
+      for (const w of WEEKS_META) {
+        const s = w.start_date || (w.days && w.days[0] && w.days[0].date);
+        const e = w.end_date || (w.days && w.days[w.days.length - 1] && w.days[w.days.length - 1].date);
+        if (s && e && todayIso >= s && todayIso <= e) {
+          return w.num;
+        }
+      }
+      const first = WEEKS_META[0];
+      const firstStart = first.start_date || (first.days && first.days[0] && first.days[0].date);
+      if (firstStart && todayIso < firstStart) {
+        return first.num;
+      }
+      const cur = WEEKS_META.find(w => w.is_current);
+      if (cur) return cur.num;
+      const w1 = WEEKS_META.find(w => w.num === 1);
+      return w1 ? w1.num : WEEKS_META[0].num;
+    }
+
+    const thisWeekNum = resolveThisWeekNum();
+    currentWeekNum = thisWeekNum;
+
     const weekPillsList = document.getElementById('weekPillsList');
     WEEKS_META.forEach(w => {
       const pill = document.createElement('button');
-      const isPast = w.num === 0 || w.is_past;
-      pill.className = `week-pill ${w.num === currentWeekNum ? 'active' : ''} ${isPast ? 'week-pill-past' : ''}`;
+      const s = w.start_date || (w.days && w.days[0] && w.days[0].date);
+      const e = w.end_date || (w.days && w.days[w.days.length - 1] && w.days[w.days.length - 1].date);
+      const isPast = e ? (todayIso > e) : (w.is_past || w.num < thisWeekNum);
+      const isCurrent = (w.num === thisWeekNum) || (s && e && todayIso >= s && todayIso <= e);
+
+      const pillClasses = ['week-pill'];
+      if (w.num === currentWeekNum) pillClasses.push('active');
+      if (isPast) pillClasses.push('week-pill-past');
+      if (isCurrent) pillClasses.push('week-pill-current');
+
+      pill.className = pillClasses.join(' ');
       pill.dataset.week = w.num;
-      pill.textContent = w.label;
+
+      const shortDates = w.short_dates || (w.dates ? w.dates.split(',')[0] : '');
+      if (isCurrent) {
+        pill.innerHTML = `<span class="pill-dot">●</span> This Week <span class="pill-date-sub">${shortDates}</span>`;
+      } else if (isPast) {
+        pill.innerHTML = `<span class="pill-archive-icon">📋</span> ${shortDates}`;
+        pill.title = `Cached scores archive: ${w.dates}`;
+      } else {
+        pill.textContent = shortDates;
+      }
+
       pill.addEventListener('click', () => {
         setWeek(w.num);
       });
       weekPillsList.appendChild(pill);
     });
 
-    const minWeekNum = WEEKS_META[0].num;
-    const maxWeekNum = WEEKS_META[WEEKS_META.length - 1].num;
-
     document.getElementById('prevWeekBtn').addEventListener('click', () => {
-      if (currentWeekNum > minWeekNum) setWeek(currentWeekNum - 1);
+      const idx = WEEKS_META.findIndex(w => w.num === currentWeekNum);
+      if (idx > 0) setWeek(WEEKS_META[idx - 1].num);
     });
     document.getElementById('nextWeekBtn').addEventListener('click', () => {
-      if (currentWeekNum < maxWeekNum) setWeek(currentWeekNum + 1);
+      const idx = WEEKS_META.findIndex(w => w.num === currentWeekNum);
+      if (idx < WEEKS_META.length - 1) setWeek(WEEKS_META[idx + 1].num);
     });
+
+    const returnBtn = document.getElementById('returnThisWeekBtn');
+    if (returnBtn) {
+      returnBtn.addEventListener('click', () => {
+        setWeek(thisWeekNum);
+      });
+    }
 
     function setWeek(num) {
       currentWeekNum = num;
       document.querySelectorAll('.week-pill').forEach(p => {
         p.classList.toggle('active', parseInt(p.dataset.week) === currentWeekNum);
       });
+
       const meta = WEEKS_META.find(w => w.num === currentWeekNum);
-      document.getElementById('currentWeekTitle').textContent = `${meta.label}: ${meta.dates}`;
-      document.getElementById('weekHeadlineText').textContent = `${meta.label}: ${meta.title}`;
-      document.getElementById('weekDateSpan').textContent = meta.dates;
-      activeMobileDay = meta.days[0].date;
+      if (!meta) return;
 
-      document.getElementById('prevWeekBtn').style.opacity = currentWeekNum <= minWeekNum ? '0.35' : '1';
-      document.getElementById('nextWeekBtn').style.opacity = currentWeekNum >= maxWeekNum ? '0.35' : '1';
+      const s = meta.start_date || (meta.days && meta.days[0] && meta.days[0].date);
+      const e = meta.end_date || (meta.days && meta.days[meta.days.length - 1] && meta.days[meta.days.length - 1].date);
+      const isPast = e ? (todayIso > e) : (meta.is_past || meta.num < thisWeekNum);
+      const isCurrent = (meta.num === thisWeekNum) || (s && e && todayIso >= s && todayIso <= e);
 
-      // Auto-scroll active week pill into view smoothly on mobile
+      const titleEl = document.getElementById('currentWeekTitle');
+      if (titleEl) {
+        if (isCurrent) {
+          titleEl.innerHTML = `<span class="week-badge current-badge">THIS WEEK</span> ${meta.dates}`;
+        } else if (isPast) {
+          titleEl.innerHTML = `<span class="week-badge past-badge">CACHED ARCHIVE</span> ${meta.dates} • Final Scores & Recaps`;
+        } else {
+          titleEl.innerHTML = `<span class="week-badge upcoming-badge">UPCOMING</span> ${meta.dates}`;
+        }
+      }
+
+      if (returnBtn) {
+        returnBtn.style.display = isCurrent ? 'none' : 'inline-flex';
+      }
+
+      const headlineEl = document.getElementById('weekHeadlineText');
+      if (headlineEl) {
+        if (isCurrent) {
+          headlineEl.textContent = `This Week: ${meta.title}`;
+        } else if (isPast) {
+          headlineEl.textContent = `Scores Archive: ${meta.title}`;
+        } else {
+          headlineEl.textContent = meta.title;
+        }
+      }
+
+      const dateSpanEl = document.getElementById('weekDateSpan');
+      if (dateSpanEl) {
+        dateSpanEl.textContent = meta.dates;
+      }
+
+      // Default active day on mobile: if current week and today is in week, pick today!
+      if (isCurrent && meta.days.some(d => d.date === todayIso)) {
+        activeMobileDay = todayIso;
+      } else {
+        activeMobileDay = meta.days[0].date;
+      }
+
+      const currIdx = WEEKS_META.findIndex(w => w.num === currentWeekNum);
+      document.getElementById('prevWeekBtn').style.opacity = currIdx <= 0 ? '0.35' : '1';
+      document.getElementById('nextWeekBtn').style.opacity = currIdx >= WEEKS_META.length - 1 ? '0.35' : '1';
+
+      // Auto-scroll active week pill into view smoothly
       const activePill = weekPillsList.querySelector(`.week-pill[data-week="${num}"]`);
       if (activePill) {
         activePill.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
       }
 
       render();
+    }
+
+    function viewClosestScoresArchive() {
+      const weekWithFinal = [...WEEKS_META].reverse().find(w => w.num !== currentWeekNum && ALL_GAMES.some(g => g.week === w.num && g.status === 'final'));
+      if (weekWithFinal) {
+        setWeek(weekWithFinal.num);
+      }
     }
 
     document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -2905,8 +3127,11 @@
           if (activeStatus === 'final') {
             const hasFinalInCurrent = ALL_GAMES.some(g => g.week === currentWeekNum && g.status === 'final');
             if (!hasFinalInCurrent) {
-              setWeek(0);
-              return;
+              const weekWithFinal = [...WEEKS_META].reverse().find(w => ALL_GAMES.some(g => g.week === w.num && g.status === 'final'));
+              if (weekWithFinal) {
+                setWeek(weekWithFinal.num);
+                return;
+              }
             }
           }
         }
@@ -3002,7 +3227,9 @@
 
       const printMasthead = document.getElementById('printFridgeMasthead');
       if (printMasthead) {
-        printMasthead.textContent = `CAMBRIAN PARK SPORTS GAZETTE — REFRIGERATOR EDITION — ${weekMeta.label.toUpperCase()} (${weekMeta.dates})`;
+        const isCurrent = (weekMeta.num === thisWeekNum);
+        const prefix = isCurrent ? 'THIS WEEK — ' : (weekMeta.is_past ? 'ARCHIVE — ' : '');
+        printMasthead.textContent = `CAMBRIAN PARK SPORTS GAZETTE — REFRIGERATOR EDITION — ${prefix}${weekMeta.dates.toUpperCase()}`;
       }
 
       const weekMatchingGames = ALL_GAMES.filter(g => g.week === currentWeekNum && filterMatches(g));
@@ -3033,8 +3260,8 @@
             html += `
               <div class="day-no-events">
                 <span>No final games</span><br/>
-                <button onclick="setWeek(0)" style="margin-top:6px; background:none; border:none; color:var(--ink-forest); text-decoration:underline; font-size:0.72rem; font-weight:700; cursor:pointer;">
-                  View Last Week (Scores) →
+                <button onclick="viewClosestScoresArchive()" style="margin-top:6px; background:none; border:none; color:var(--ink-forest); text-decoration:underline; font-size:0.72rem; font-weight:700; cursor:pointer;">
+                  View Cached Scores Archive →
                 </button>
               </div>
             `;
@@ -3279,21 +3506,23 @@
         const homeLogoHtml = game.home_logo ? `<img class="scoreboard-logo" src="${game.home_logo}" alt="" onerror="this.style.display='none'"/>` : '';
 
         bodyHtml += `
-          <div class="scoreboard-banner">
-            <div class="scoreboard-team ${isAwayWin ? 'is-winner' : ''}">
-              ${awayLogoHtml}
-              <div class="score-team-name">${game.away_team}</div>
-              <div class="score-team-points">${game.away_score}</div>
-              ${isAwayWin ? '<span class="score-winner-pill">🏆 WINNER</span>' : ''}
-            </div>
-            <div class="scoreboard-divider">
-              <span class="score-final-tag">FINAL</span>
-            </div>
-            <div class="scoreboard-team ${isHomeWin ? 'is-winner' : ''}">
-              ${homeLogoHtml}
-              <div class="score-team-name">${game.home_team}</div>
-              <div class="score-team-points">${game.home_score}</div>
-              ${isHomeWin ? '<span class="score-winner-pill">🏆 WINNER</span>' : ''}
+          <div class="modal-scoreboard-banner">
+            <div class="scoreboard-matchup">
+              <div class="scoreboard-team ${isAwayWin ? 'winner' : ''}">
+                ${awayLogoHtml}
+                <div class="scoreboard-team-name">${game.away_team}</div>
+                <div class="scoreboard-score">${game.away_score}</div>
+                ${isAwayWin ? '<span class="scoreboard-winner-badge">🏆 WINNER</span>' : ''}
+              </div>
+              <div class="scoreboard-divider">
+                <span class="scoreboard-final-pill">FINAL</span>
+              </div>
+              <div class="scoreboard-team ${isHomeWin ? 'winner' : ''}">
+                ${homeLogoHtml}
+                <div class="scoreboard-team-name">${game.home_team}</div>
+                <div class="scoreboard-score">${game.home_score}</div>
+                ${isHomeWin ? '<span class="scoreboard-winner-badge">🏆 WINNER</span>' : ''}
+              </div>
             </div>
           </div>
 
@@ -3832,59 +4061,28 @@ Link: ${game.recap_url || game.ticket_url}`;
     enableSheetDismiss(gameModal);
     enableSheetDismiss(myPlanModal);
     updatePlanCounter();
-    // Auto-select current week: find week containing today, first upcoming, or last week
+    // Auto-select current week: always land on "This Week" while caching all previous weeks
     (function() {
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      // Try to find a week whose date range contains today or is the first upcoming week
-      let bestWeek = WEEKS_META[WEEKS_META.length - 1].num; // fallback: last week
-      // First pass: find week containing today
-      for (const w of WEEKS_META) {
-        if (w.start_date && w.end_date) {
-          const start = new Date(w.start_date + 'T00:00:00');
-          const end = new Date(w.end_date + 'T00:00:00');
-          if (today >= start && today <= end) {
-            bestWeek = w.num;
-            break;
-          }
-        }
-      }
-      // Second pass: if today is past all weeks, use last upcoming or week 1
-      // Find first week that hasn't ended yet
-      let foundUpcoming = false;
-      for (const w of WEEKS_META) {
-        if (w.num >= 1) {
-          if (w.end_date) {
-            const end = new Date(w.end_date + 'T00:00:00');
-            if (end >= today) {
-              bestWeek = w.num;
-              foundUpcoming = true;
-              break;
-            }
-          } else {
-            bestWeek = w.num;
-            foundUpcoming = true;
-            break;
-          }
-        }
-      }
-      if (!foundUpcoming && WEEKS_META.some(w => w.num === 1)) {
-        bestWeek = 1;
-      }
-      setWeek(bestWeek);
-
-      // Deep link support for 1-tap game sharing (?game=GAME_ID)
+      let targetWeek = thisWeekNum;
       try {
         const urlParams = new URLSearchParams(window.location.search);
+        const reqWeek = urlParams.get('week');
         const sharedGameId = urlParams.get('game');
         if (sharedGameId) {
           const target = ALL_GAMES.find(g => g.id === sharedGameId);
           if (target) {
             setWeek(target.week);
             openGameModal(target);
+            return;
+          }
+        } else if (reqWeek !== null && !isNaN(parseInt(reqWeek))) {
+          const wNum = parseInt(reqWeek);
+          if (WEEKS_META.some(w => w.num === wNum)) {
+            targetWeek = wNum;
           }
         }
       } catch(e) {}
+      setWeek(targetWeek);
     })();
   </script>
 

@@ -299,11 +299,87 @@ def get_standings_data():
         st_data[k] = v_copy
     return st_data
 
+def normalize_weeks(weeks):
+    import datetime
+    normalized = []
+    today = datetime.date.today()
+    today_iso = today.isoformat()
+    for w in weeks:
+        item = dict(w)
+        days = item.get("days", [])
+        if days:
+            start_date = days[0]["date"]
+            end_date = days[-1]["date"]
+            item["start_date"] = start_date
+            item["end_date"] = end_date
+            try:
+                s_d = datetime.date.fromisoformat(start_date)
+                e_d = datetime.date.fromisoformat(end_date)
+                s_fmt = s_d.strftime("%b %d").replace(" 0", " ")
+                if s_d.month == e_d.month:
+                    item["short_dates"] = f"{s_fmt} – {e_d.day}"
+                else:
+                    e_fmt = e_d.strftime("%b %d").replace(" 0", " ")
+                    item["short_dates"] = f"{s_fmt} – {e_fmt}"
+            except Exception:
+                item["short_dates"] = item.get("dates", "").split(",")[0]
+
+        start_d_str = item.get("start_date", "")
+        end_d_str = item.get("end_date", "")
+        item["is_past"] = bool(end_d_str and end_d_str < today_iso)
+        item["is_current"] = bool(start_d_str and end_d_str and start_d_str <= today_iso <= end_d_str)
+
+        # Label: continuous rolling week without "Week 1", "Week 2", "Last Week"
+        short = item.get("short_dates") or item.get("dates", "").split(",")[0]
+        if item["is_current"]:
+            item["label"] = f"This Week ({short})"
+        else:
+            item["label"] = short
+
+        normalized.append(item)
+    return normalized
+
+CACHE_RETENTION_WEEKS = 52
+
+def prune_expired_cache(games, weeks, retention_weeks=CACHE_RETENTION_WEEKS, reference_date=None):
+    """
+    Enforce 52-week cache cliff:
+    - Retain up to 52 past weeks from reference date (default: today).
+    - Older weeks and games roll off cleanly.
+    """
+    import datetime
+    if not reference_date:
+        ref_dt = datetime.date.today()
+    elif isinstance(reference_date, str):
+        ref_dt = datetime.date.fromisoformat(reference_date)
+    else:
+        ref_dt = reference_date
+
+    cutoff_date = ref_dt - datetime.timedelta(weeks=retention_weeks)
+    cutoff_iso = cutoff_date.isoformat()
+
+    retained_weeks = []
+    for w in weeks:
+        end_d = w.get("end_date")
+        if not end_d and w.get("days"):
+            end_d = w["days"][-1]["date"]
+        if not end_d or end_d >= cutoff_iso:
+            retained_weeks.append(w)
+
+    retained_week_nums = set(w.get("num") for w in retained_weeks)
+    retained_games = [
+        g for g in games
+        if g.get("date", "9999-99-99") >= cutoff_iso and (g.get("week") is None or g.get("week") in retained_week_nums)
+    ]
+    return retained_games, retained_weeks
+
 def generate_html():
     reload_data()
-    normalized = normalize_games(GAMES_DATA)
-    games_str = json.dumps(normalized)
-    weeks_str = json.dumps(WEEKS_META)
+    active_games, active_weeks = prune_expired_cache(GAMES_DATA, WEEKS_META)
+    normalized_games = normalize_games(active_games)
+    normalized_weeks = normalize_weeks(active_weeks)
+    games_str = json.dumps(normalized_games)
+    weeks_str = json.dumps(normalized_weeks)
     standings_str = json.dumps(get_standings_data())
 
     tmpl_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "calendar_template.html")

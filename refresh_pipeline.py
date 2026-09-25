@@ -248,6 +248,8 @@ class ScoreRefreshEngine:
 
     def _update_standings(self, standings_db: Dict, game: Dict):
         """Update standings record for participating teams in standings_db."""
+        if "preseason" in str(game.get("league", "")).lower():
+            return
         league_key = league_standings.classify_game(game)
         table = standings_db.get(league_key)
         if not table or "rows" not in table:
@@ -355,63 +357,126 @@ class ScoreRefreshEngine:
 
 
 # ---------------------------------------------------------------------------
-# Calendar Rollover Engine
+# Calendar Rollover Engine (Continuous Rolling Weeks with Caching)
 # ---------------------------------------------------------------------------
 def advance_calendar_window(games: List[Dict], weeks: List[Dict]) -> Tuple[List[Dict], List[Dict]]:
     """
-    Advance the 7-week calendar horizon by 1 week:
-    - Week 1 games transition into Week 0 (Past Week Scores).
-    - Week 2 -> Week 1, ..., Week 6 -> Week 5.
-    - Dates in WEEKS_META advance by 7 days.
+    Advance the continuous rolling calendar horizon:
+    - Retains ALL previous weeks in cache (never drops past weeks).
+    - Automatically marks elapsed weeks as is_past=True.
+    - Appends the next rolling 7-day week to the schedule horizon.
     """
-    log.info("Executing calendar horizon advance (1 week forward)...")
+    log.info("Executing continuous calendar horizon advance...")
+    today_iso = datetime.date.today().isoformat()
 
-    # Shift week numbers
-    new_games = []
-    for g in games:
-        w = g.get("week", 1)
-        if w == 0:
-            # Drop older archives from active grid (or archive them)
-            continue
-        elif w == 1:
-            # Becomes past week
-            g["week"] = 0
-            if g.get("status") != "final":
-                g["status"] = "final"
-                if not g.get("result_summary"):
-                    g["result_summary"] = "Game concluded."
-            new_games.append(g)
-        else:
-            g["week"] = w - 1
-            new_games.append(g)
+    # Update is_past status for all existing weeks
+    for w in weeks:
+        days = w.get("days", [])
+        if days:
+            end_date = days[-1]["date"]
+            w["is_past"] = end_date < today_iso
 
-    # Shift weeks metadata
-    new_weeks = []
-    for wmeta in weeks:
-        wnum = wmeta.get("num", 0)
-        new_wmeta = dict(wmeta)
-        new_days = []
-        for d in wmeta.get("days", []):
-            try:
-                curr_date = datetime.date.fromisoformat(d["date"])
-                next_date = curr_date + datetime.timedelta(days=7)
-                next_date_str = next_date.isoformat()
-                short_name = f"{d['name'][:3]} {next_date.strftime('%b %d').lstrip('0')}"
-                new_days.append({
-                    "date": next_date_str,
-                    "name": d["name"],
-                    "short": short_name
+    # Append next rolling week to horizon
+    if weeks:
+        last_week = weeks[-1]
+        last_days = last_week.get("days", [])
+        if last_days:
+            last_date = datetime.date.fromisoformat(last_days[-1]["date"])
+            next_start = last_date + datetime.timedelta(days=1)
+            next_days = []
+            day_names = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+            for i in range(7):
+                curr = next_start + datetime.timedelta(days=i)
+                iso_str = curr.isoformat()
+                short_str = f"{day_names[curr.weekday()][:3]} {curr.strftime('%b %d').lstrip('0')}"
+                next_days.append({
+                    "date": iso_str,
+                    "name": day_names[curr.weekday()],
+                    "short": short_str
                 })
-            except Exception:
-                new_days.append(d)
-        new_wmeta["days"] = new_days
-        if new_days:
-            start_fmt = datetime.date.fromisoformat(new_days[0]["date"]).strftime("%b %d")
-            end_fmt = datetime.date.fromisoformat(new_days[-1]["date"]).strftime("%b %d, %Y")
-            new_wmeta["dates"] = f"{start_fmt} – {end_fmt}"
-        new_weeks.append(new_wmeta)
+            next_end = next_start + datetime.timedelta(days=6)
+            s_fmt = next_start.strftime("%b %d").replace(" 0", " ")
+            if next_start.month == next_end.month:
+                short_dates = f"{s_fmt} – {next_end.day}"
+            else:
+                short_dates = f"{s_fmt} – {next_end.strftime('%b %d').replace(' 0', ' ')}"
+            dates_fmt = f"{s_fmt} – {next_end.strftime('%b %d, %Y').replace(' 0', ' ')}"
+            next_num = max(w.get("num", 0) for w in weeks) + 1
 
-    return new_games, new_weeks
+            new_week = {
+                "num": next_num,
+                "label": short_dates,
+                "dates": dates_fmt,
+                "short_dates": short_dates,
+                "start_date": next_start.isoformat(),
+                "end_date": next_end.isoformat(),
+                "title": f"Mid-Season Action & Regional Showcases ({short_dates})",
+                "is_past": False,
+                "days": next_days
+            }
+            weeks.append(new_week)
+            log.info(f"Cached all past weeks and appended new rolling week: {short_dates}")
+
+    # Enforce 52-week cache cliff so weeks older than 52 weeks roll off
+    games, weeks, _, _ = apply_52_week_cliff(games, weeks)
+
+    return games, weeks
+
+
+CACHE_RETENTION_WEEKS = 52
+
+
+def apply_52_week_cliff(
+    games: List[Dict],
+    weeks: List[Dict],
+    retention_weeks: int = CACHE_RETENTION_WEEKS,
+    reference_date: Optional[str] = None
+) -> Tuple[List[Dict], List[Dict], int, int]:
+    """
+    Enforce a strict 52-week rolling cache cliff:
+    - Retains up to 52 past weeks from the reference date (default: today).
+    - Any week whose end_date is older than 52 weeks (364 days) rolls off from cache.
+    - Any games belonging to expired weeks or scheduled before the cutoff roll off.
+    Returns: (retained_games, retained_weeks, rolled_off_games_count, rolled_off_weeks_count)
+    """
+    if not reference_date:
+        ref_dt = datetime.date.today()
+    else:
+        ref_dt = datetime.date.fromisoformat(reference_date)
+
+    cutoff_date = ref_dt - datetime.timedelta(weeks=retention_weeks)
+    cutoff_iso = cutoff_date.isoformat()
+
+    retained_weeks = []
+    rolled_off_weeks = 0
+    for w in weeks:
+        end_d = w.get("end_date")
+        if not end_d and w.get("days"):
+            end_d = w["days"][-1]["date"]
+
+        if end_d and end_d < cutoff_iso:
+            rolled_off_weeks += 1
+        else:
+            retained_weeks.append(w)
+
+    retained_week_nums = set(w.get("num") for w in retained_weeks)
+    retained_games = []
+    rolled_off_games = 0
+    for g in games:
+        g_date = g.get("date", "9999-99-99")
+        g_week = g.get("week")
+        if g_date < cutoff_iso or (g_week is not None and g_week not in retained_week_nums):
+            rolled_off_games += 1
+        else:
+            retained_games.append(g)
+
+    if rolled_off_weeks > 0 or rolled_off_games > 0:
+        log.info(
+            f"52-week cache cliff enforced (cutoff: {cutoff_iso}): "
+            f"rolled off {rolled_off_weeks} weeks and {rolled_off_games} games."
+        )
+
+    return retained_games, retained_weeks, rolled_off_games, rolled_off_weeks
 
 
 # ---------------------------------------------------------------------------
@@ -482,6 +547,26 @@ def run_self_tests() -> bool:
     assert test_db["mls_west"]["rows"][0]["w"] == 2
     print("✓ Standings math & W-L increment logic verified")
 
+    # 7. Test 52-week cache cliff roll-off
+    today = datetime.date.today()
+    mock_weeks = [
+        {"num": 100, "label": "53 Weeks Ago", "end_date": (today - datetime.timedelta(weeks=53)).isoformat(), "days": []},
+        {"num": 101, "label": "51 Weeks Ago", "end_date": (today - datetime.timedelta(weeks=51)).isoformat(), "days": []},
+        {"num": 102, "label": "This Week", "end_date": today.isoformat(), "days": []}
+    ]
+    mock_games = [
+        {"id": "expired-01", "week": 100, "date": (today - datetime.timedelta(weeks=53)).isoformat()},
+        {"id": "kept-01", "week": 101, "date": (today - datetime.timedelta(weeks=51)).isoformat()},
+        {"id": "kept-02", "week": 102, "date": today.isoformat()}
+    ]
+    k_games, k_weeks, r_games, r_weeks = apply_52_week_cliff(mock_games, mock_weeks, retention_weeks=52)
+    assert r_weeks == 1, f"Expected 1 week to roll off, got {r_weeks}"
+    assert r_games == 1, f"Expected 1 game to roll off, got {r_games}"
+    assert len(k_weeks) == 2, f"Expected 2 retained weeks, got {len(k_weeks)}"
+    assert len(k_games) == 2, f"Expected 2 retained games, got {len(k_games)}"
+    assert k_weeks[0]["num"] == 101
+    print("✓ 52-week cache cliff & rollover pruning verified (expired history rolls off cleanly)")
+
     print("=" * 60)
     print("  All Self-Tests Passed Successfully!")
     print("=" * 60)
@@ -516,6 +601,9 @@ def main():
     with open(STANDINGS_FILE, "r", encoding="utf-8") as f:
         standings_db = json.load(f)
 
+    # Enforce 52-week cache cliff on load
+    games, weeks, pruned_g, pruned_w = apply_52_week_cliff(games, weeks)
+
     # Initialize AI Agent
     ai_agent = OpenRouterAgent()
     if ai_agent.is_configured:
@@ -523,8 +611,10 @@ def main():
     else:
         log.info("OpenRouter API key not detected; running in deterministic mode with standard fallbacks.")
 
-    changes_made = False
+    changes_made = (pruned_g > 0 or pruned_w > 0)
     changelog = []
+    if changes_made:
+        changelog.append(f"52-week cliff: rolled off {pruned_w} expired weeks and {pruned_g} games")
 
     # 1. Calendar Horizon Rollover (if requested)
     if args.rollover:

@@ -40,9 +40,12 @@
         }
       ],
       "is_past": true,
-      "label": "Last Week (Scores)",
+      "label": "Sep 14 – 20",
       "num": 0,
-      "title": "Previous Week Final Scores & Game Recaps"
+      "title": "Season Warmups & Final Scores Archive",
+      "short_dates": "Sep 14 – 20",
+      "start_date": "2026-09-14",
+      "end_date": "2026-09-20"
     },
     {
       "dates": "Sep 21 – Sep 27, 2026",
@@ -83,9 +86,12 @@
           "short": "Sun Sep 27"
         }
       ],
-      "label": "Week 1",
+      "label": "Sep 21 – 27",
       "num": 1,
-      "title": "Fall Kickoff & The Campbell District Derby"
+      "title": "Fall Kickoff & The Campbell District Derby",
+      "short_dates": "Sep 21 – 27",
+      "start_date": "2026-09-21",
+      "end_date": "2026-09-27"
     },
     {
       "dates": "Sep 28 – Oct 4, 2026",
@@ -126,9 +132,12 @@
           "short": "Sun Oct 4"
         }
       ],
-      "label": "Week 2",
+      "label": "Sep 28 – Oct 4",
       "num": 2,
-      "title": "NFC West Rams Clash & Stanford Big Classico"
+      "title": "NFC West Rams Clash & Stanford Big Classico",
+      "short_dates": "Sep 28 – Oct 4",
+      "start_date": "2026-09-28",
+      "end_date": "2026-10-04"
     },
     {
       "dates": "Oct 5 – Oct 11, 2026",
@@ -169,9 +178,12 @@
           "short": "Sun Oct 11"
         }
       ],
-      "label": "Week 3",
+      "label": "Oct 5 – 11",
       "num": 3,
-      "title": "Sharks Regular Season Opener & NorCal Soccer Derby"
+      "title": "Sharks Regular Season Opener & NorCal Soccer Derby",
+      "short_dates": "Oct 5 – 11",
+      "start_date": "2026-10-05",
+      "end_date": "2026-10-11"
     },
     {
       "dates": "Oct 12 – Oct 18, 2026",
@@ -212,9 +224,12 @@
           "short": "Sun Oct 18"
         }
       ],
-      "label": "Week 4",
+      "label": "Oct 12 – 18",
       "num": 4,
-      "title": "Branham Homecoming & 49ers vs. Cowboys Rivalry"
+      "title": "Branham Homecoming & 49ers vs. Cowboys Rivalry",
+      "short_dates": "Oct 12 – 18",
+      "start_date": "2026-10-12",
+      "end_date": "2026-10-18"
     },
     {
       "dates": "Oct 19 – Oct 25, 2026",
@@ -255,9 +270,12 @@
           "short": "Sun Oct 25"
         }
       ],
-      "label": "Week 5",
+      "label": "Oct 19 – 25",
       "num": 5,
-      "title": "Warriors NBA Opening Night & MLS Decision Day"
+      "title": "Warriors NBA Opening Night & MLS Decision Day",
+      "short_dates": "Oct 19 – 25",
+      "start_date": "2026-10-19",
+      "end_date": "2026-10-25"
     },
     {
       "dates": "Oct 26 – Nov 1, 2026",
@@ -298,9 +316,12 @@
           "short": "Sun Nov 1"
         }
       ],
-      "label": "Week 6",
+      "label": "Oct 26 – Nov 1",
       "num": 6,
-      "title": "Branham League Title Decider & 49ers vs. Seahawks"
+      "title": "Branham League Title Decider & 49ers vs. Seahawks",
+      "short_dates": "Oct 26 – Nov 1",
+      "start_date": "2026-10-26",
+      "end_date": "2026-11-01"
     }
   ],
   "games": [
@@ -1076,25 +1097,25 @@
       "is_south_bay": true
     },
     {
-      "away_score": null,
+      "away_score": 2,
       "away_team": "Vegas Golden Knights",
       "badge": "⭐ First Look: Celebrini & Youth Core vs Vegas",
       "city": "San Jose",
       "context_reason": "Preseason hockey returns to the Shark Tank! Home preseason test against the Vegas Golden Knights at SAP Center — a first chance to watch Macklin Celebrini and Will Smith link up against a tough Western rival in low-pressure, fast-paced action.",
       "date": "2026-09-22",
       "day_of_week": "Tuesday",
-      "home_score": null,
+      "home_score": 1,
       "home_team": "San Jose Sharks",
       "id": "w1-02",
       "importance": "high",
       "insider_tips": "Diridon Station is literally across Autumn Street from the arena — take Caltrain or VTA Light Rail to dodge downtown parking fees. Grab pregame pints and tacos at San Pedro Square Market, then walk the short Guadalupe River trail over to the Tank.",
       "league": "NHL Preseason",
       "level": "Pro",
-      "recap_url": null,
-      "result_summary": null,
+      "recap_url": "https://www.espn.com/nhl/game/_/gameId/401879413/golden-knights-sharks",
+      "result_summary": "The Vegas Golden Knights edged the Sharks 2-1 in a shootout at SAP Center, holding off a spirited third-period push from San Jose's young core led by Macklin Celebrini.",
       "sport": "Hockey",
       "sport_icon": "🏒",
-      "status": "upcoming",
+      "status": "final",
       "tags": [
         "hockey",
         "nhl",
