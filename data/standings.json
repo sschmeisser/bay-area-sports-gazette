@@ -1306,9 +1306,9 @@
         "rank": 1,
         "team": "Stanford Cardinal Men",
         "w": 12,
-        "l": 2,
-        "col3": 4,
-        "col4": "40",
+        "l": 3,
+        "col3": 5,
+        "col4": 41,
         "col5": "+24",
         "note": "NCAA Contender"
       },
@@ -1344,6 +1344,16 @@
       },
       {
         "rank": 5,
+        "team": "California Golden Bears Men",
+        "w": 9,
+        "l": 5,
+        "col3": 4,
+        "col4": 31,
+        "col5": "+8",
+        "note": "ACC"
+      },
+      {
+        "rank": 6,
         "team": "UC Santa Barbara Gauchos",
         "w": 9,
         "l": 6,
@@ -1351,16 +1361,6 @@
         "col4": "30",
         "col5": "+8",
         "note": "Big West"
-      },
-      {
-        "rank": 6,
-        "team": "California Golden Bears Men",
-        "w": 8,
-        "l": 5,
-        "col3": 4,
-        "col4": "28",
-        "col5": "+8",
-        "note": "ACC"
       },
       {
         "rank": 7,
