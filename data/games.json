@@ -1502,9 +1502,9 @@
       "venue": "Kevin Makley Field",
       "city": "Mountain View",
       "badge": "⚔️ The Holy War: WCAL League Opener",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
+      "home_score": 9,
+      "away_score": 28,
+      "status": "final",
       "context_reason": "The most intense high school rivalry in Northern California. Serra travels to Mountain View for a ferocious opening night in the West Catholic Athletic League.",
       "insider_tips": "Expect overflow standing-room crowds. Grab hot chocolate and churros from the Lancer booster shed near the scoreboard.",
       "importance": "marquee",
@@ -1525,7 +1525,8 @@
         "icon": "🌙",
         "attire": "Light jacket advised",
         "indoor": false
-      }
+      },
+      "result_summary": "On Friday, September 25, 2026, Archbishop Riordan defeated Saint Francis 28-9. The Saint Francis varsity football team lost their game against Archbishop Riordan High School by a score of 28-9."
     },
     {
       "date": "2026-09-25",
@@ -1537,9 +1538,9 @@
       "level": "College",
       "home_team": "California Golden Bears",
       "away_team": "Clemson Tigers",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
+      "home_score": 10,
+      "away_score": 24,
+      "status": "final",
       "venue": "California Memorial Stadium",
       "city": "Berkeley",
       "badge": "🐻 Cal Football: Clemson Tigers at Memorial Stadium",
@@ -1549,7 +1550,7 @@
       "ticket_text": "Cal Tickets",
       "ticket_url": "https://calbears.com/tickets",
       "recap_url": "https://www.espn.com/college-football/game/_/gameId/401858234/clemson-california",
-      "result_summary": null,
+      "result_summary": "Clemson defeated California 24-10. California scored first with a 35-yard fumble return. Clemson took the lead in the second quarter with a field goal and a 1-yard rush. California tied the game in the third quarter with a 30-yard field goal, but Clemson pulled ahead with a 65-yard punt return touchdown. Clemson sealed the victory with a 75-yard rushing touchdown in the fourth quarter. The game was played at California Memorial Stadium in Berkeley, California, with an attendance of 41,778.",
       "is_cambrian": false,
       "is_south_bay": false,
       "tags": [

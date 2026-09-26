@@ -724,7 +724,7 @@
       {
         "rank": 1,
         "team": "Junípero Serra Padres",
-        "w": 12,
+        "w": 13,
         "l": 1,
         "col3": "7-0",
         "col4": "422",
@@ -735,7 +735,7 @@
         "rank": 2,
         "team": "Saint Francis Lancers",
         "w": 9,
-        "l": 3,
+        "l": 4,
         "col3": "5-2",
         "col4": "318",
         "col5": "185",
@@ -763,6 +763,16 @@
       },
       {
         "rank": 5,
+        "team": "Saint Ignatius Wildcats",
+        "w": 6,
+        "l": 5,
+        "col3": "2-5",
+        "col4": "220",
+        "col5": "265",
+        "note": ""
+      },
+      {
+        "rank": 6,
         "team": "Bellarmine College Prep Bells",
         "w": 5,
         "l": 6,
@@ -772,23 +782,13 @@
         "note": "CCS D1 Qualifier"
       },
       {
-        "rank": 6,
+        "rank": 7,
         "team": "Valley Christian Warriors",
         "w": 5,
         "l": 6,
         "col3": "2-5",
         "col4": "198",
         "col5": "238",
-        "note": ""
-      },
-      {
-        "rank": 7,
-        "team": "Saint Ignatius Wildcats",
-        "w": 6,
-        "l": 5,
-        "col3": "2-5",
-        "col4": "220",
-        "col5": "265",
         "note": ""
       },
       {
@@ -1060,16 +1060,6 @@
       },
       {
         "rank": 2,
-        "team": "Clemson Tigers",
-        "w": 9,
-        "l": 3,
-        "col3": "7-1",
-        "col4": "412",
-        "col5": "+166",
-        "note": "ACC Championship"
-      },
-      {
-        "rank": 3,
         "team": "SMU Mustangs",
         "w": 10,
         "l": 2,
@@ -1079,23 +1069,33 @@
         "note": "Top 15"
       },
       {
-        "rank": 4,
-        "team": "California Golden Bears",
-        "w": 8,
-        "l": 4,
-        "col3": "5-3",
-        "col4": "345",
-        "col5": "+75",
-        "note": "Bowl Eligible"
+        "rank": 3,
+        "team": "Clemson Tigers",
+        "w": 10,
+        "l": 3,
+        "col3": "7-1",
+        "col4": "412",
+        "col5": "+166",
+        "note": "ACC Championship"
       },
       {
-        "rank": 5,
+        "rank": 4,
         "team": "Pitt Panthers",
         "w": 8,
         "l": 4,
         "col3": "5-3",
         "col4": "360",
         "col5": "+80",
+        "note": "Bowl Eligible"
+      },
+      {
+        "rank": 5,
+        "team": "California Golden Bears",
+        "w": 8,
+        "l": 5,
+        "col3": "5-3",
+        "col4": "345",
+        "col5": "+75",
         "note": "Bowl Eligible"
       },
       {
@@ -1120,6 +1120,16 @@
       },
       {
         "rank": 8,
+        "team": "North Carolina Tar Heels",
+        "w": 6,
+        "l": 6,
+        "col3": "3-5",
+        "col4": "325",
+        "col5": "-15",
+        "note": ""
+      },
+      {
+        "rank": 9,
         "team": "Virginia Cavaliers",
         "w": 5,
         "l": 7,
@@ -1129,23 +1139,13 @@
         "note": ""
       },
       {
-        "rank": 9,
+        "rank": 10,
         "team": "Stanford Cardinal",
         "w": 5,
         "l": 7,
         "col3": "3-5",
         "col4": "260",
         "col5": "-75",
-        "note": ""
-      },
-      {
-        "rank": 10,
-        "team": "North Carolina Tar Heels",
-        "w": 6,
-        "l": 6,
-        "col3": "3-5",
-        "col4": "325",
-        "col5": "-15",
         "note": ""
       }
     ],
